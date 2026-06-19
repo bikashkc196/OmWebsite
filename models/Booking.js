@@ -57,7 +57,7 @@ const bookingSchema = new mongoose.Schema(
     },
     estimatedCost: { type: Number, default: 0 },
     adminNote: { type: String },
-    repairImages: [{ type: String }], // URLS from Cloudinary
+    repairImages: [{ type: String }], // URLS from Cloudinary base
   },
   { timestamps: true },
 );

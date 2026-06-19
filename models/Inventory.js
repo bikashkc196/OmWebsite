@@ -31,7 +31,7 @@ const inventorySchema = new mongoose.Schema(
   },
 );
 
-// Auto-calcualtion low stock status
+// Auto-calcualtion low stock status in save
 inventorySchema.pre("save", function (next) {
   this.isLowStock = this.quantity <= this.lowStickThreshold;
   next();
