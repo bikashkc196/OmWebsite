@@ -1,9 +1,23 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const connectDB = require("./config/db");
 
 const app = express();
 connectDB();
+
+// Middlewares
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(express.json());
+
+//Routes
+
+// Health Check
+app.get("/api/health", (req, res) => res.json({ status: "✅ API Running" }));
 
 // Global error handler
 app.use((err, req, res, next) => {
