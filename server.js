@@ -15,6 +15,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //Routes
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/bookings", require("./routes/bookingRoutes"));
+app.use("/api/inventory", require("./routes/inventoryRoutes"));
 
 // Health Check
 app.get("/api/health", (req, res) => res.json({ status: "✅ API Running" }));

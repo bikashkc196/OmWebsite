@@ -12,7 +12,18 @@ const createBooking = async (req, res) => {
 };
 
 // @GET /api/booking/my - Get user's own bookings
-const getMyBooking = async (req, res) => {
+const getMyBookings = async (req, res) => {
+  try {
+    const bookings = (await Booking.find({ user: req.user._id })).toSorted({
+      createdAt: -1,
+    });
+    res.json({ success: true, bookings });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+// @GET /api/bookings - All bookings (admin)
+const getAllBookings = async (req, res) => {
   try {
     const { status, page = 1, limit = 10 } = req.query;
     const filter = status ? { status } : {};
@@ -51,6 +62,6 @@ const updateBookingStatus = async (req, res) => {
 module.exports = {
   createBooking,
   getMyBookings,
-  getAlBookings,
+  getAllBookings,
   updateBookingStatus,
 };
