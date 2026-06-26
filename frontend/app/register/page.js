@@ -26,11 +26,9 @@ export default function RegisterPage() {
 
   const update = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-    // Clear error on edit
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  // Client-side validation
   const validate = () => {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = "Full name is required";
@@ -55,7 +53,8 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       const { confirmPassword, ...payload } = form;
-      const user = await register(payload);
+      // ✅ role is always "user" on register — admin is DB-only
+      const user = await register({ ...payload, role: "user" });
       toast.success(`Welcome to OM Mobile Repair, ${user.name}! 🎉`);
       router.push("/");
     } catch (err) {
@@ -97,25 +96,16 @@ export default function RegisterPage() {
       flex items-center justify-center px-4 py-12 relative overflow-hidden"
     >
       {/* Animated blobs */}
-      <div
-        className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full
-        filter blur-3xl animate-blob"
-      />
-      <div
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full
-        filter blur-3xl animate-blob animation-delay-2000"
-      />
-      <div
-        className="absolute top-1/2 left-0 w-64 h-64 bg-indigo-500/20 rounded-full
-        filter blur-3xl animate-blob animation-delay-4000"
-      />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full filter blur-3xl animate-blob" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-blob animation-delay-2000" />
+      <div className="absolute top-1/2 left-0 w-64 h-64 bg-indigo-500/20 rounded-full filter blur-3xl animate-blob animation-delay-4000" />
 
       <div className="relative w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-20 h-20
-            bg-white rounded-2xl shadow-2xl mb-4 group hover:scale-110 transition-transform"
+            bg-white rounded-2xl shadow-2xl mb-4 hover:scale-110 transition-transform"
           >
             <span className="text-4xl">🔧</span>
           </div>
@@ -127,6 +117,24 @@ export default function RegisterPage() {
 
         {/* Card */}
         <div className="glass-card p-8">
+          {/* ✅ Role Badge — read only, always "user" */}
+          <div
+            className="flex items-center justify-center gap-2 mb-5 py-2.5 px-4
+            bg-blue-500/20 border border-blue-400/30 rounded-xl"
+          >
+            <span>👤</span>
+            <span className="text-blue-100 text-sm font-medium">
+              Registering as{" "}
+              <span className="text-white font-bold">Customer</span>
+            </span>
+            <span
+              className="ml-auto text-xs bg-blue-500/40 text-blue-100
+              px-2 py-0.5 rounded-full border border-blue-400/30"
+            >
+              User
+            </span>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Standard Fields */}
             {inputFields.map(({ id, label, type, placeholder, icon }) => (
@@ -275,10 +283,9 @@ export default function RegisterPage() {
               disabled={loading}
               className="w-full py-3.5 bg-gradient-to-r from-blue-500 to-indigo-500
                 text-white font-semibold rounded-xl shadow-lg
-                hover:shadow-blue-500/30 hover:scale-[1.02]
-                active:scale-[0.98] transition-all duration-200
-                disabled:opacity-60 disabled:cursor-not-allowed
-                flex items-center justify-center gap-2 mt-2"
+                hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98]
+                transition-all duration-200 disabled:opacity-60
+                disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
             >
               {loading ? (
                 <>
