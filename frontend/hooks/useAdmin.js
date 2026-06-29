@@ -1,7 +1,7 @@
 // frontend/hooks/useAdmin.js
 "use client";
 import { useState, useCallback } from "react";
-import api from "../lib/axios";
+import api from "../lib/api";
 
 export const useAdmin = () => {
   const [loading, setLoading] = useState(false);

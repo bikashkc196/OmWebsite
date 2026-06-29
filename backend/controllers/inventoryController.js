@@ -4,7 +4,7 @@ const getInventory = async (req, res) => {
   try {
     const { lowStock } = req.query;
     const filter = lowStock === "true" ? { isLowStock: true } : {};
-    const items = (await Inventory.find(filter)).toSorted({ updatedAt: -1 });
+    const items = (await Inventory.find(filter)).sort({ updatedAt: -1 });
     res.json({ success: true, items });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -27,6 +27,7 @@ const updateItem = async (req, res) => {
       runValidators: true,
     });
     if (!item) return res.status(404).json({ message: "Item not found" });
+    await item.save();
     res.json({ success: true, item });
   } catch (error) {
     res.status(500).json({ message: error.message });

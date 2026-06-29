@@ -20,7 +20,7 @@ const inventorySchema = new mongoose.Schema(
     },
     compatibleDevices: [{ type: String }],
     quantity: { type: Number, required: true, min: 2 },
-    lowStickThreshold: { type: Number, default: 5 },
+    lowStockThreshold: { type: Number, default: 5 },
     costPrice: { type: Number, required: true },
     sellingPrice: { type: Number, required: true },
     supplier: { type: String },
@@ -33,7 +33,7 @@ const inventorySchema = new mongoose.Schema(
 
 // Auto-calcualtion low stock status in save
 inventorySchema.pre("save", function (next) {
-  this.isLowStock = this.quantity <= this.lowStickThreshold;
+  this.isLowStock = this.quantity <= this.lowStockThreshold;
   next();
 });
 

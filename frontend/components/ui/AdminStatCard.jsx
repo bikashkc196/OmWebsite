@@ -5,7 +5,7 @@ export default function AdminStatCard({
   title,
   value,
   icon,
-  color = "blue",
+  color = "skyblue",
   trend = null,
   suffix = "",
   prefix = "",
