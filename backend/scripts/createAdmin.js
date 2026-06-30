@@ -1,35 +1,41 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const User = require("../models/User");
 
 dotenv.config();
+
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@ommobile.com";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Admin@1234";
 
 const createAdmin = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("✅ MongoDB connected");
 
-    // Check if admin already exists
-    const existing = await User.findOne({ email: "admin@ommobile.com" });
-    if (existing) {
-      console.log("⚠️  Admin already exists. Skipping.");
-      process.exit(0);
+    let admin = await User.findOne({ email: ADMIN_EMAIL });
+
+    if (!admin) {
+      admin = await User.create({
+        name: process.env.ADMIN_NAME || "Super Admin",
+        email: ADMIN_EMAIL,
+        phone: process.env.ADMIN_PHONE || "9999999999",
+        password: ADMIN_PASSWORD,
+        role: "admin",
+        isActive: true,
+      });
+      console.log("🎉 Admin account created successfully!");
+    } else {
+      admin.name = process.env.ADMIN_NAME || admin.name || "Super Admin";
+      admin.phone = process.env.ADMIN_PHONE || admin.phone || "9999999999";
+      admin.role = "admin";
+      admin.isActive = true;
+      admin.password = ADMIN_PASSWORD;
+      await admin.save();
+      console.log("🔄 Existing admin account updated successfully!");
     }
 
-    const hashedPassword = await bcrypt.hash("Admin@1234", 10);
-
-    await User.create({
-      name: "Super Admin",
-      email: "admin@ommobile.com",
-      phone: "9999999999",
-      password: "ommobile@1234",
-      role: "admin",
-    });
-
-    console.log("🎉 Admin account created successfully!");
-    console.log("📧 Email   : admin@ommobile.com");
-    console.log("🔑 Password: Admin@1234");
+    console.log(`📧 Email   : ${ADMIN_EMAIL}`);
+    console.log(`🔑 Password: ${ADMIN_PASSWORD}`);
     process.exit(0);
   } catch (err) {
     console.error("❌ Error:", err.message);
