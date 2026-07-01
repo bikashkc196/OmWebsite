@@ -6,6 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const userNavLinks = [
   { href: "/", label: "Home", icon: "🏠" },
+  { href: "/products", label: "Shop", icon: "🛒" },
   { href: "/book", label: "Book Repair", icon: "📅" },
   { href: "/my-repairs", label: "My Repairs", icon: "🔧" },
 ];
@@ -15,6 +16,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  // const { cartCount } = useCart();
 
   return (
     <nav
@@ -130,6 +132,24 @@ export default function Navbar() {
                       >
                         🔧 My Repairs
                       </Link>
+                      {/* Cart Icon — add before the user dropdown */}
+                      {user && (
+                        <Link
+                          href="/cart"
+                          className="relative p-2 hover:bg-gray-100 rounded-xl transition"
+                        >
+                          <span className="text-xl">🛒</span>
+                          {cartCount > 0 && (
+                            <span
+                              className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white
+      text-xs font-bold rounded-full flex items-center justify-center"
+                            >
+                              {cartCount > 9 ? "9+" : cartCount}
+                            </span>
+                          )}
+                        </Link>
+                      )}
+
                       {user.role === "admin" && (
                         <Link
                           href="/admin"
