@@ -1,0 +1,259 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/* ── Custom Base Styles ── */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-gray-800 bg-gray-50;
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+}
+/* ── Reusable Component Classes ── */
+@layer components {
+  /* Input Fields */
+  .input-style {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white
+    text-gray-800 placeholder-gray-400
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+    transition-all duration-200 text-sm;
+  }
+  /* Labels */
+  .label-style {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  /* Primary Button */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600
+    text-white font-semibold rounded-xl shadow-lg
+    hover:shadow-blue-300 hover:scale-[1.02] active:scale-[0.98]
+    transition-all duration-200 disabled:opacity-60
+    disabled:cursor-not-allowed disabled:scale-100;
+  }
+  /* Secondary Button */
+  .btn-secondary {
+    @apply px-6 py-3 border-2 border-gray-200 text-gray-700
+    font-semibold rounded-xl hover:border-blue-400 hover:text-blue-600
+    transition-all duration-200;
+  }
+  /* Card */
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
+  }
+  /* Glass Card */
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-xl rounded-3xl
+    border border-white/20 shadow-2xl;
+  }
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full
+    text-xs font-semibold;
+  }
+  /* Danger Button */
+  .btn-danger {
+    @apply px-6 py-3 bg-gradient-to-r from-red-600 to-rose-600
+    text-white font-semibold rounded-xl shadow-lg
+    hover:shadow-red-300 hover:scale-[1.02] active:scale-[0.98]
+    transition-all duration-200 disabled:opacity-60
+    disabled:cursor-not-allowed disabled:scale-100;
+  }
+  /* Input with a validation error */
+  .input-error {
+    @apply border-red-400 focus:ring-red-400 bg-red-50/40;
+  }
+  /* Admin shell background — subtle, professional, not distracting */
+  .admin-shell {
+    @apply bg-gradient-to-br from-slate-50 via-white to-slate-100;
+  }
+}
+/* ── Custom Animations ── */
+@layer utilities {
+  /* Fade in from bottom */
+  .animate-fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+  /* Fade in */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  /* Slide in from right */
+  .animate-slide-in {
+    animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  /* Slide in from left */
+  .animate-slide-left {
+    animation: slideLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  /* Blob animation */
+  .animate-blob {
+    animation: blob 8s infinite ease-in-out;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  /* Scale in — good for modals & cards popping into view */
+  .animate-scale-in {
+    animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  /* Gentle up/down float, useful for icons & hero art */
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  /* Shimmer sweep for skeleton loaders */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  /* Soft pulsing glow — great for "live"/status indicators */
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  /* Slow moving gradient background, used on hero/CTA sections */
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradientX 6s ease infinite;
+  }
+  /* Subtle hover lift for cards */
+  .hover-lift {
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.25);
+  }
+}
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.15);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+@keyframes gradientX {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
