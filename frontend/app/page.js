@@ -1,7 +1,7 @@
 import Link from "next/link";
-import StatsCounter from "../../components/ui/StatsCounter";
-import TestimonialCarousel from "../../components/ui/TestimonialCarousel";
-import FAQAccordion from "../../components/ui/FAQAccordion";
+import StatsCounter from "../components/ui/StatsCounter";
+import TestimonialCarousel from "../components/ui/TestimonialCarousel";
+import FAQAccordion from "../components/ui/FAQAccordion";
 // ── SEO Metadata ───────────────────────────────────────────
 export const metadata = {
   title: "OM Mobile Repair Center — Expert Phone & Device Repair",
