@@ -4,21 +4,30 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 require("dotenv").config();
 const connectDB = require("./config/db");
+
 const app = express();
+
+// ── Database Connection ──────────────────
 connectDB();
+
+// ── CORS Configuration ───────────────────
 const allowedOrigins = [
   process.env.CLIENT_URL,
+  "https://om-website-umber.vercel.app", // Hardcoded fallback for absolute safety
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "http://0.0.0.0:3000",
 ].filter(Boolean);
+
 // ── Core Middleware ──────────────────────
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, postman, or curl)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.warn(`⚠️ Blocked by CORS: ${origin}`);
         callback(new Error("Not allowed by CORS"));
       }
     },
@@ -27,10 +36,12 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
+
 // ── Routes ───────────────────────────────
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
@@ -41,6 +52,7 @@ app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/cart", require("./routes/cartRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
+
 // ── Health Check ─────────────────────────
 app.get("/api/health", (req, res) =>
   res.json({
@@ -49,13 +61,15 @@ app.get("/api/health", (req, res) =>
     environment: process.env.NODE_ENV || "development",
   }),
 );
+
 // ── 404 Handler ──────────────────────────
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: `Route ${req.method} ${req.originalUrl} not found`,
+    message: `Route ${req.method} ${req.originalUrl} not found. Did you forget to prepend '/api'?`,
   });
 });
+
 // ── Global Error Handler ─────────────────
 app.use((err, req, res, next) => {
   console.error("❌ Global Error:", err.stack);
@@ -64,6 +78,8 @@ app.use((err, req, res, next) => {
     message: err.message || "Internal Server Error",
   });
 });
+
+// ── Server Initialization ────────────────
 const requestedPort = Number(process.env.PORT) || 5000;
 
 const startServer = (port) => {
@@ -83,10 +99,8 @@ const startServer = (port) => {
   });
 };
 
-// Only bind a real port for local/traditional hosting. On Vercel, @vercel/node
-// invokes the exported app directly per-request — listening here is unnecessary
-// and would just re-run the port-fallback dance on every cold start.
 if (!process.env.VERCEL) {
   startServer(requestedPort);
 }
+
 module.exports = app;
