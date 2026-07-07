@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const User = require("../models/User");
 dotenv.config();
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@ommobile.com";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Admin@1234";
+const ADMIN_EMAIL = process.env.ADMIN_EMAI;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const createAdmin = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);

@@ -10,7 +10,8 @@ const STATUS_FILTERS = [
   { label: "All", value: "" },
   { label: "Pending", value: "pending" },
   { label: "Confirmed", value: "confirmed" },
-  { label: "In Progress", value: "in-progress" },
+  { label: "In Progress", value: "in_progress" },
+  { label: "Waiting for Parts", value: "waiting_for_parts" },
   { label: "Completed", value: "completed" },
   { label: "Cancelled", value: "cancelled" },
 ];
@@ -37,6 +38,12 @@ export default function AdminBookingsPage() {
   const [partQty, setPartQty] = useState(1);
   const [addingPart, setAddingPart] = useState(false);
   const [removingPartId, setRemovingPartId] = useState(null);
+  // ── Repair Price ──
+  const [priceForm, setPriceForm] = useState({
+    estimatedCost: "",
+    finalCost: "",
+  });
+  const [savingPrice, setSavingPrice] = useState(false);
   // ── Fetch All Bookings ──
   const fetchBookings = useCallback(async () => {
     setPageLoading(true);
@@ -89,10 +96,40 @@ export default function AdminBookingsPage() {
     }
     setRemovingPartId(null);
   };
+  // ── Save Repair Price (works even on a completed/cancelled booking) ──
+  const handleSavePrice = async () => {
+    setSavingPrice(true);
+    const res = await updateBookingStatus(
+      selectedBooking._id,
+      selectedBooking.status,
+      {
+        estimatedCost:
+          priceForm.estimatedCost === ""
+            ? undefined
+            : Number(priceForm.estimatedCost),
+        finalCost:
+          priceForm.finalCost === "" ? undefined : Number(priceForm.finalCost),
+      },
+    );
+    if (res?.booking) {
+      setSelectedBooking(res.booking);
+      setBookings((prev) =>
+        prev.map((b) => (b._id === res.booking._id ? res.booking : b)),
+      );
+      toast.success("Repair price updated ✅");
+    } else {
+      toast.error("Failed to update price ❌");
+    }
+    setSavingPrice(false);
+  };
   // ── Open Booking Detail Modal ──
   const openBookingDetail = (booking) => {
     setSelectedPartId("");
     setPartQty(1);
+    setPriceForm({
+      estimatedCost: booking.estimatedCost || "",
+      finalCost: booking.finalCost || "",
+    });
     setSelectedBooking(booking);
   };
   // ── Search & Filter ──
@@ -310,16 +347,73 @@ export default function AdminBookingsPage() {
                       : "N/A"
                   }
                 />
-                <DetailRow
-                  label="Estimated Cost"
-                  value={`Rs. ${
-                    selectedBooking.estimatedCost?.toLocaleString("en-NP") ||
-                    "—"
-                  }`}
-                />
                 {selectedBooking.notes && (
                   <DetailRow label="Notes" value={selectedBooking.notes} />
                 )}
+              </div>
+              {/* Repair Price (editable — can be set/corrected at any time, even after completion) */}
+              <div className="bg-gray-50 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  💰 Repair Price
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-medium text-gray-500 mb-1">
+                      Estimated Cost (Rs)
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={priceForm.estimatedCost}
+                      onChange={(e) =>
+                        setPriceForm({
+                          ...priceForm,
+                          estimatedCost: e.target.value,
+                        })
+                      }
+                      placeholder="e.g. 2500"
+                      className="w-full border border-gray-200 rounded-lg px-2.5
+                      py-1.5 text-sm bg-white focus:outline-none focus:ring-2
+                      focus:ring-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-medium text-gray-500 mb-1">
+                      Final Cost (Rs)
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={priceForm.finalCost}
+                      onChange={(e) =>
+                        setPriceForm({
+                          ...priceForm,
+                          finalCost: e.target.value,
+                        })
+                      }
+                      placeholder="e.g. 2200"
+                      className="w-full border border-gray-200 rounded-lg px-2.5
+                      py-1.5 text-sm bg-white focus:outline-none focus:ring-2
+                      focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+                <button
+                  onClick={handleSavePrice}
+                  disabled={savingPrice}
+                  className="w-full py-2 bg-blue-600 text-white rounded-lg
+                  text-xs font-semibold hover:bg-blue-700 transition
+                  disabled:opacity-50 disabled:cursor-not-allowed flex
+                  items-center justify-center gap-2"
+                >
+                  {savingPrice ? (
+                    <>
+                      <Spinner size="sm" color="white" /> Saving...
+                    </>
+                  ) : (
+                    "Save Price"
+                  )}
+                </button>
               </div>
               {/* Parts Used (deducted from Inventory) */}
               <div className="bg-gray-50 rounded-xl p-4 space-y-3">

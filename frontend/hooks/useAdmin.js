@@ -33,13 +33,14 @@ export const useAdmin = () => {
       setLoading(false);
     }
   }, []);
-  // ─── Update Booking Status ─────────────────────────────────────
-  const updateBookingStatus = useCallback(async (bookingId, status) => {
+  // ─── Update Booking Status / Cost / Notes ───────────────────────
+  const updateBookingStatus = useCallback(async (bookingId, status, extra = {}) => {
     setLoading(true);
     setError(null);
     try {
       const res = await api.put(`/admin/bookings/${bookingId}/status`, {
         status,
+        ...extra,
       });
       return res.data;
     } catch (err) {

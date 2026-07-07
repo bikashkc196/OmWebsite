@@ -6,10 +6,16 @@ import Spinner from "../../components/ui/Spinner";
 const STATUS_OPTIONS = [
   "pending",
   "confirmed",
-  "in-progress",
+  "in_progress",
+  "waiting_for_parts",
   "completed",
   "cancelled",
 ];
+const formatStatusLabel = (s) =>
+  s
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 export default function BookingTable({
   bookings = [],
   onStatusChange,
@@ -158,7 +164,7 @@ export default function BookingTable({
                     >
                       {STATUS_OPTIONS.map((s) => (
                         <option key={s} value={s}>
-                          {s.charAt(0).toUpperCase() + s.slice(1)}
+                          {formatStatusLabel(s)}
                         </option>
                       ))}
                     </select>

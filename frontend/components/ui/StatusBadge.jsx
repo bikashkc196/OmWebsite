@@ -11,10 +11,15 @@ const STATUS_CONFIG = {
     classes: "bg-blue-100 text-blue-800 border-blue-200",
     dot: "bg-blue-500",
   },
-  "in-progress": {
+  in_progress: {
     label: "In Progress",
     classes: "bg-purple-100 text-purple-800 border-purple-200",
     dot: "bg-purple-500",
+  },
+  waiting_for_parts: {
+    label: "Waiting for Parts",
+    classes: "bg-orange-100 text-orange-800 border-orange-200",
+    dot: "bg-orange-500",
   },
   completed: {
     label: "Completed",

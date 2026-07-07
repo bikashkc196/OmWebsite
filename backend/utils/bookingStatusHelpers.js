@@ -22,9 +22,11 @@ class BookingClosedError extends Error {
   }
 }
 
-// Single source of truth for admin-driven status changes, used by both the booking
+// Single source of truth for admin-driven status/cost changes, used by both the booking
 // controller and the admin controller so the two code paths can't drift out of sync.
-// Mutates and saves `booking`; throws on invalid status or an already-closed booking.
+// Mutates and saves `booking`. Cost/note/technician fields can always be edited (e.g.
+// correcting the final invoice after a repair is marked complete) — only an actual
+// transition to a *different* status is blocked once a booking is closed.
 const applyStatusChange = async (
   booking,
   { status, adminNote, estimatedCost, finalCost, technicianName, changedBy },
@@ -34,26 +36,32 @@ const applyStatusChange = async (
       `Invalid status. Must be one of: ${VALID_STATUSES.join(", ")}`,
     );
   }
-  if (["completed", "cancelled"].includes(booking.status)) {
+  const previousStatus = booking.status;
+  const isStatusChanging = status !== previousStatus;
+  if (isStatusChanging && ["completed", "cancelled"].includes(previousStatus)) {
     throw new BookingClosedError(
-      `Cannot update a booking that is already "${booking.status}"`,
+      `Cannot change the status of a booking that is already "${previousStatus}". ` +
+        `You can still edit its cost or notes.`,
     );
   }
-  const previousStatus = booking.status;
   booking.status = status;
   if (adminNote !== undefined) booking.adminNote = adminNote;
   if (estimatedCost !== undefined) booking.estimatedCost = estimatedCost;
   if (finalCost !== undefined) booking.finalCost = finalCost;
   if (technicianName !== undefined) booking.technicianName = technicianName;
-  booking.statusHistory.push({
-    status,
-    changedBy,
-    note: adminNote || `Status changed from ${previousStatus} to ${status}`,
-  });
-  // Cancelling a booking that already had parts deducted must put that stock back —
-  // otherwise inventory silently drifts from what's actually on the shelf.
-  if (status === "cancelled" && previousStatus !== "cancelled") {
-    await restockPartsForBooking(booking);
+  if (isStatusChanging) {
+    booking.statusHistory.push({
+      status,
+      changedBy,
+      note: adminNote || `Status changed from ${previousStatus} to ${status}`,
+    });
+    // Cancelling a booking that already had parts deducted must put that stock back —
+    // otherwise inventory silently drifts from what's actually on the shelf.
+    if (status === "cancelled") {
+      await restockPartsForBooking(booking);
+    }
+  } else if (adminNote) {
+    booking.statusHistory.push({ status, changedBy, note: adminNote });
   }
   await booking.save();
   return booking;
