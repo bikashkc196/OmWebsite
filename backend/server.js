@@ -84,3 +84,4 @@ const startServer = (port) => {
 };
 
 startServer(requestedPort);
+module.exports = app;
