@@ -83,5 +83,10 @@ const startServer = (port) => {
   });
 };
 
-startServer(requestedPort);
+// Only bind a real port for local/traditional hosting. On Vercel, @vercel/node
+// invokes the exported app directly per-request — listening here is unnecessary
+// and would just re-run the port-fallback dance on every cold start.
+if (!process.env.VERCEL) {
+  startServer(requestedPort);
+}
 module.exports = app;
