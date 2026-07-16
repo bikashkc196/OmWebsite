@@ -25,12 +25,12 @@ import {
 } from "lucide-react";
 
 const STATUS_BADGE = {
-  pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  confirmed: "bg-blue-100 text-blue-800 border-blue-200",
-  in_progress: "bg-purple-100 text-purple-800 border-purple-200",
-  waiting_for_parts: "bg-orange-100 text-orange-800 border-orange-200",
-  completed: "bg-emerald-100 text-emerald-800 border-emerald-200",
-  cancelled: "bg-red-100 text-red-800 border-red-200",
+  pending: "bg-yellow-500/15 text-yellow-300 border-yellow-500/30",
+  confirmed: "bg-sky-500/15 text-sky-300 border-sky-500/30",
+  in_progress: "bg-brand-purple/15 text-brand-purple border-brand-purple/30",
+  waiting_for_parts: "bg-brand-orange/15 text-brand-orange border-brand-orange/30",
+  completed: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+  cancelled: "bg-red-500/15 text-red-300 border-red-500/30",
 };
 const STATUS_ICON = {
   pending: Clock,
@@ -67,14 +67,14 @@ export default function BookingCard({ booking, onCancelled }) {
   return (
     <>
       <div
-        className={`bg-white rounded-2xl border transition-all duration-300
+        className={`bg-surface rounded-2xl border transition-all duration-300
         shadow-sm hover:shadow-md overflow-hidden hover-lift
         ${
           booking.status === "cancelled"
-            ? "border-red-100 opacity-80"
+            ? "border-red-500/20 opacity-80"
             : booking.status === "completed"
-              ? "border-emerald-100"
-              : "border-gray-100"
+              ? "border-emerald-500/20"
+              : "border-line"
         }`}
       >
         {/* ── Card Header ── */}
@@ -87,19 +87,19 @@ export default function BookingCard({ booking, onCancelled }) {
                 justify-center flex-shrink-0
                 ${
                   booking.status === "completed"
-                    ? "bg-emerald-50 text-emerald-600"
+                    ? "bg-emerald-500/15 text-emerald-300"
                     : booking.status === "cancelled"
-                      ? "bg-red-50 text-red-500"
-                      : "bg-blue-50 text-blue-600"
+                      ? "bg-red-500/15 text-red-400"
+                      : "bg-brand-purple/15 text-brand-purple"
                 }`}
               >
                 <DeviceIcon size={22} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 text-base">
+                <h3 className="font-bold text-ink text-base">
                   {booking.deviceBrand} {booking.deviceModel}
                 </h3>
-                <p className="text-gray-500 text-xs mt-0.5 capitalize">
+                <p className="text-ink-soft text-xs mt-0.5 capitalize">
                   {booking.issueCategory?.replace(/_/g, " ")}
                 </p>
               </div>
@@ -114,11 +114,11 @@ export default function BookingCard({ booking, onCancelled }) {
           </div>
           {/* Booking Meta Info */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
-            <div className="bg-gray-50 rounded-xl p-3">
-              <p className="text-xs text-gray-400 font-medium flex items-center gap-1">
+            <div className="bg-surface2 rounded-xl p-3">
+              <p className="text-xs text-ink-soft font-medium flex items-center gap-1">
                 <Calendar size={12} /> Date
               </p>
-              <p className="text-sm font-semibold text-gray-800 mt-0.5">
+              <p className="text-sm font-semibold text-ink mt-0.5">
                 {new Date(booking.bookingDate).toLocaleDateString("en-IN", {
                   day: "numeric",
                   month: "short",
@@ -126,19 +126,19 @@ export default function BookingCard({ booking, onCancelled }) {
                 })}
               </p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-3">
-              <p className="text-xs text-gray-400 font-medium flex items-center gap-1">
+            <div className="bg-surface2 rounded-xl p-3">
+              <p className="text-xs text-ink-soft font-medium flex items-center gap-1">
                 <Clock size={12} /> Slot
               </p>
-              <p className="text-sm font-semibold text-gray-800 mt-0.5">
+              <p className="text-sm font-semibold text-ink mt-0.5">
                 {booking.timeSlot}
               </p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-3">
-              <p className="text-xs text-gray-400 font-medium flex items-center gap-1">
+            <div className="bg-surface2 rounded-xl p-3">
+              <p className="text-xs text-ink-soft font-medium flex items-center gap-1">
                 <Hash size={12} /> Ref
               </p>
-              <p className="text-sm font-semibold text-gray-800 mt-0.5 font-mono">
+              <p className="text-sm font-semibold text-ink mt-0.5 font-mono">
                 {booking.bookingRef}
               </p>
             </div>
@@ -146,10 +146,10 @@ export default function BookingCard({ booking, onCancelled }) {
           {/* Estimated Cost — Nepali Rupees */}
           {booking.estimatedCost > 0 && (
             <div className="mt-3 flex items-center gap-2 text-sm">
-              <span className="text-gray-500 flex items-center gap-1">
+              <span className="text-ink-soft flex items-center gap-1">
                 <Wallet size={14} /> Estimated Cost:
               </span>
-              <span className="font-bold text-gray-900">
+              <span className="font-bold text-ink">
                 {formatNPR(booking.estimatedCost)}
               </span>
             </div>
@@ -157,25 +157,25 @@ export default function BookingCard({ booking, onCancelled }) {
           {/* Admin Note */}
           {booking.adminNote && (
             <div
-              className="mt-3 bg-blue-50 border border-blue-100
+              className="mt-3 bg-brand-purple/10 border border-brand-purple/20
               rounded-xl px-4 py-3"
             >
-              <p className="text-xs text-blue-600 font-semibold mb-1 flex items-center gap-1">
+              <p className="text-xs text-brand-purple font-semibold mb-1 flex items-center gap-1">
                 <MessageSquare size={12} /> Technician Note
               </p>
-              <p className="text-sm text-blue-800">{booking.adminNote}</p>
+              <p className="text-sm text-ink">{booking.adminNote}</p>
             </div>
           )}
           {/* Cancellation Reason */}
           {booking.status === "cancelled" && booking.cancellationReason && (
             <div
-              className="mt-3 bg-red-50 border border-red-100
+              className="mt-3 bg-red-500/10 border border-red-500/20
               rounded-xl px-4 py-3"
             >
-              <p className="text-xs text-red-500 font-semibold mb-1">
+              <p className="text-xs text-red-400 font-semibold mb-1">
                 Cancellation Reason
               </p>
-              <p className="text-sm text-red-700">
+              <p className="text-sm text-red-300">
                 {booking.cancellationReason}
               </p>
             </div>
@@ -183,21 +183,21 @@ export default function BookingCard({ booking, onCancelled }) {
         </div>
         {/* ── Card Footer ── */}
         <div
-          className="border-t border-gray-50 px-5 py-3 flex items-center
+          className="border-t border-line px-5 py-3 flex items-center
           justify-between gap-3 flex-wrap"
         >
           {/* Expand Toggle */}
           <button
             onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-1.5 text-sm text-blue-600
-              font-medium hover:text-blue-800 transition"
+            className="flex items-center gap-1.5 text-sm text-brand-purple
+              font-medium hover:text-brand-orange transition"
           >
             {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
             {expanded ? "Hide" : "Show"} Status Timeline
           </button>
           <div className="flex gap-2 items-center">
             {/* Booked At */}
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-ink-soft">
               Booked{" "}
               {new Date(booking.createdAt).toLocaleDateString("en-IN", {
                 day: "numeric",
@@ -208,7 +208,7 @@ export default function BookingCard({ booking, onCancelled }) {
             {canCancel && (
               <button
                 onClick={() => setShowCancel(true)}
-                className="text-xs text-red-500 hover:text-red-700
+                className="text-xs text-red-400 hover:text-red-300
                   font-medium transition ml-2"
               >
                 Cancel Booking
@@ -219,7 +219,7 @@ export default function BookingCard({ booking, onCancelled }) {
         {/* ── Expandable Timeline ── */}
         {expanded && (
           <div
-            className="px-5 pb-5 border-t border-gray-50 pt-4
+            className="px-5 pb-5 border-t border-line pt-4
             animate-fade-in"
           >
             <StatusTimeline status={booking.status} />

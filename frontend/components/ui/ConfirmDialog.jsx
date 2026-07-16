@@ -22,34 +22,34 @@ export default function ConfirmDialog({
   };
   if (!isOpen) return null;
   const confirmColors = {
-    danger: "bg-red-500 hover:bg-red-600 shadow-red-200",
-    warning: "bg-amber-500 hover:bg-amber-600 shadow-amber-200",
-    primary: "bg-blue-600 hover:bg-blue-700 shadow-blue-200",
+    danger: "bg-red-500 hover:bg-red-600 shadow-red-900/30",
+    warning: "bg-amber-500 hover:bg-amber-600 shadow-amber-900/30",
+    primary: "bg-gradient-to-r from-brand-purple to-brand-orange shadow-brand-purple/30",
   };
   return (
     <div className="fixed inset-0 z-[9998] flex items-center justify-center px-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onCancel}
       />
       {/* Dialog */}
       <div
-        className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl
+        className="relative w-full max-w-md bg-surface border border-line rounded-3xl shadow-2xl
         p-6 animate-fade-up z-10"
       >
         {/* Icon */}
         <div
           className={`w-14 h-14 rounded-2xl flex items-center justify-center
           text-3xl mx-auto mb-4
-          ${confirmStyle === "danger" ? "bg-red-50" : "bg-amber-50"}`}
+          ${confirmStyle === "danger" ? "bg-red-500/15" : "bg-amber-500/15"}`}
         >
           {confirmStyle === "danger" ? "🗑️" : "⚠️"}
         </div>
-        <h3 className="text-xl font-bold text-gray-900 text-center mb-2">
+        <h3 className="text-xl font-display text-ink text-center mb-2 tracking-wide">
           {title}
         </h3>
-        <p className="text-gray-500 text-sm text-center leading-relaxed mb-5">
+        <p className="text-ink-soft text-sm text-center leading-relaxed mb-5">
           {message}
         </p>
         {/* Optional reason field */}
@@ -57,7 +57,7 @@ export default function ConfirmDialog({
           <div className="mb-5">
             <label className="label-style">
               Reason for cancellation{" "}
-              <span className="text-gray-400 font-normal">(optional)</span>
+              <span className="text-ink-soft/70 font-normal">(optional)</span>
             </label>
             <textarea
               value={reason}
@@ -73,8 +73,8 @@ export default function ConfirmDialog({
           <button
             onClick={onCancel}
             disabled={loading}
-            className="flex-1 py-3 rounded-xl border-2 border-gray-200
-              text-gray-700 font-semibold text-sm hover:bg-gray-50
+            className="flex-1 py-3 rounded-xl border-2 border-line
+              text-ink font-semibold text-sm hover:bg-surface2
               transition disabled:opacity-50"
           >
             {cancelLabel}

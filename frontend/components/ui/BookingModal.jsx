@@ -51,23 +51,23 @@ export default function BookingModal({ booking, onClose }) {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-gray-900/70 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
       />
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl
+        className="relative w-full max-w-2xl bg-surface border border-line rounded-3xl shadow-2xl
         max-h-[90vh] overflow-y-auto animate-fade-up z-10"
       >
         {/* Header */}
         <div
-          className="sticky top-0 bg-white border-b border-gray-100
+          className="sticky top-0 bg-surface border-b border-line
           px-6 py-4 flex items-center justify-between rounded-t-3xl z-10"
         >
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 bg-blue-50 rounded-xl
-              flex items-center justify-center text-blue-600"
+              className="w-10 h-10 bg-brand-purple/15 rounded-xl
+              flex items-center justify-center text-brand-purple"
             >
               {(() => {
                 const Icon = DEVICE_ICON[booking.deviceType] || Smartphone;
@@ -75,8 +75,8 @@ export default function BookingModal({ booking, onClose }) {
               })()}
             </div>
             <div>
-              <h2 className="font-bold text-gray-900">Booking Details</h2>
-              <p className="text-xs text-gray-500 font-mono">
+              <h2 className="font-display text-ink tracking-wide">Booking Details</h2>
+              <p className="text-xs text-ink-soft font-mono">
                 {booking.bookingRef}
               </p>
             </div>
@@ -84,8 +84,8 @@ export default function BookingModal({ booking, onClose }) {
           <button
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center
-              rounded-full bg-gray-100 hover:bg-gray-200 transition
-              text-gray-600"
+              rounded-full bg-surface2 hover:bg-line transition
+              text-ink-soft"
           >
             <X size={16} />
           </button>
@@ -95,19 +95,19 @@ export default function BookingModal({ booking, onClose }) {
           <div>
             <h3
               className="text-sm font-semibold mb-3 uppercase
-              tracking-wider text-gray-400"
+              tracking-wider text-ink-soft"
             >
               Booking Information
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {details.map(({ label, value, mono }) => (
-                <div key={label} className="bg-gray-50 rounded-xl p-3.5">
-                  <p className="text-xs text-gray-400 font-medium mb-1">
+                <div key={label} className="bg-surface2 rounded-xl p-3.5">
+                  <p className="text-xs text-ink-soft font-medium mb-1">
                     {label}
                   </p>
                   <p
-                    className={`text-sm font-semibold text-gray-800 capitalize
-                    ${mono ? "font-mono text-blue-700" : ""}`}
+                    className={`text-sm font-semibold text-ink capitalize
+                    ${mono ? "font-mono text-brand-purple" : ""}`}
                   >
                     {value || "—"}
                   </p>
@@ -118,44 +118,44 @@ export default function BookingModal({ booking, onClose }) {
           {/* Issue Description */}
           <div>
             <h3
-              className="text-xs font-semibold text-gray-400 uppercase
+              className="text-xs font-semibold text-ink-soft uppercase
               tracking-wider mb-2"
             >
               Issue Description
             </h3>
-            <div className="bg-gray-50 rounded-xl p-4">
-              <p className="text-sm text-gray-700 leading-relaxed">
+            <div className="bg-surface2 rounded-xl p-4">
+              <p className="text-sm text-ink-soft leading-relaxed">
                 {booking.issueDescription}
               </p>
             </div>
           </div>
           {/* Admin Note */}
           {booking.adminNote && (
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
-              <p className="text-xs font-semibold text-blue-600 mb-1.5 flex items-center gap-1">
+            <div className="bg-brand-purple/10 border border-brand-purple/20 rounded-xl p-4">
+              <p className="text-xs font-semibold text-brand-purple mb-1.5 flex items-center gap-1">
                 <MessageSquare size={12} /> Technician Note
               </p>
-              <p className="text-sm text-blue-800">{booking.adminNote}</p>
+              <p className="text-sm text-ink">{booking.adminNote}</p>
             </div>
           )}
           {/* Cost Breakdown */}
           {(booking.estimatedCost > 0 || booking.finalCost > 0) && (
             <div>
               <h3
-                className="text-xs font-semibold text-gray-400 uppercase
+                className="text-xs font-semibold text-ink-soft uppercase
                 tracking-wider mb-3"
               >
                 Cost Breakdown
               </h3>
-              <div className="bg-gray-50 rounded-xl overflow-hidden">
+              <div className="bg-surface2 rounded-xl overflow-hidden">
                 {costs.map(({ label, value }) => (
                   <div
                     key={label}
                     className="flex justify-between items-center
-                      px-4 py-3 border-b border-gray-100 last:border-0"
+                      px-4 py-3 border-b border-line last:border-0"
                   >
-                    <span className="text-sm text-gray-600">{label}</span>
-                    <span className="font-bold text-gray-900">
+                    <span className="text-sm text-ink-soft">{label}</span>
+                    <span className="font-bold text-brand-orange">
                       {value > 0 ? formatNPR(value) : "—"}
                     </span>
                   </div>
@@ -166,7 +166,7 @@ export default function BookingModal({ booking, onClose }) {
           {/* Status Timeline */}
           <div>
             <h3
-              className="text-xs font-semibold text-gray-400 uppercase
+              className="text-xs font-semibold text-ink-soft uppercase
               tracking-wider mb-4"
             >
               Repair Progress
@@ -177,7 +177,7 @@ export default function BookingModal({ booking, onClose }) {
           {booking.statusHistory?.length > 0 && (
             <div>
               <h3
-                className="text-xs font-semibold text-gray-400 uppercase
+                className="text-xs font-semibold text-ink-soft uppercase
                 tracking-wider mb-3"
               >
                 Activity Log
@@ -187,9 +187,9 @@ export default function BookingModal({ booking, onClose }) {
                   <div
                     key={i}
                     className="flex items-start gap-3 text-sm
-                      bg-gray-50 rounded-xl px-4 py-3"
+                      bg-surface2 rounded-xl px-4 py-3"
                   >
-                    <span className="text-gray-400 font-mono text-xs mt-0.5 shrink-0">
+                    <span className="text-ink-soft font-mono text-xs mt-0.5 shrink-0">
                       {new Date(h.changedAt).toLocaleString("en-IN", {
                         day: "2-digit",
                         month: "short",
@@ -198,11 +198,11 @@ export default function BookingModal({ booking, onClose }) {
                       })}
                     </span>
                     <div>
-                      <span className="capitalize font-semibold text-gray-800">
+                      <span className="capitalize font-semibold text-ink">
                         {h.status.replace(/_/g, " ")}
                       </span>
                       {h.note && (
-                        <p className="text-gray-500 text-xs mt-0.5">{h.note}</p>
+                        <p className="text-ink-soft text-xs mt-0.5">{h.note}</p>
                       )}
                     </div>
                   </div>

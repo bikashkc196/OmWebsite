@@ -194,53 +194,53 @@ export default function CheckoutPage() {
   // ── Success Screen ──
   if (placed && placedOrder) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+      <div className="min-h-screen bg-bg flex items-center justify-center p-4">
+        <div className="bg-surface border border-line rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
           <div className="text-7xl mb-4 animate-bounce">🎉</div>
-          <h1 className="text-2xl font-extrabold text-gray-800 mb-2">
+          <h1 className="text-2xl text-ink mb-2 tracking-wide">
             Order Placed!
           </h1>
-          <p className="text-gray-500 text-sm mb-4">
+          <p className="text-ink-soft text-sm mb-4">
             Your order has been successfully placed.
           </p>
-          <div className="bg-blue-50 rounded-xl p-4 border border-blue-100 mb-5">
-            <p className="text-xs text-blue-500 font-semibold uppercase tracking-wider mb-1">
+          <div className="bg-brand-purple/10 rounded-xl p-4 border border-brand-purple/20 mb-5">
+            <p className="text-xs text-brand-purple font-semibold uppercase tracking-wider mb-1">
               Order Reference
             </p>
-            <p className="text-lg font-extrabold text-blue-700 font-mono">
+            <p className="text-lg font-extrabold text-brand-purple font-mono">
               {placedOrder.orderRef}
             </p>
           </div>
-          <div className="space-y-2 text-sm text-left bg-gray-50 rounded-xl p-4 mb-6">
+          <div className="space-y-2 text-sm text-left bg-surface2 rounded-xl p-4 mb-6">
             <div className="flex justify-between">
-              <span className="text-gray-500">Total Amount</span>
-              <span className="font-bold text-blue-700">
+              <span className="text-ink-soft">Total Amount</span>
+              <span className="font-bold text-brand-orange">
                 Rs. {placedOrder.totalAmount?.toLocaleString("en-NP")}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Payment</span>
-              <span className="font-semibold capitalize">
+              <span className="text-ink-soft">Payment</span>
+              <span className="font-semibold capitalize text-ink">
                 {placedOrder.paymentMethod?.replace("_", " ")}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Status</span>
-              <span className="text-yellow-600 font-semibold">⏳ Pending</span>
+              <span className="text-ink-soft">Status</span>
+              <span className="text-yellow-400 font-semibold">⏳ Pending</span>
             </div>
           </div>
           <div className="flex flex-col gap-3">
             <Link
               href="/my-orders"
-              className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold
-              text-sm hover:bg-blue-700 transition text-center"
+              className="w-full py-3 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl font-bold
+              text-sm hover:scale-[1.02] transition text-center"
             >
               📦 View My Orders
             </Link>
             <Link
               href="/products"
-              className="w-full py-3 border border-gray-200 text-gray-700
-              rounded-xl font-medium text-sm hover:bg-gray-50 transition text-center"
+              className="w-full py-3 border border-line text-ink
+              rounded-xl font-medium text-sm hover:bg-surface2 transition text-center"
             >
               🛒 Continue Shopping
             </Link>
@@ -252,7 +252,7 @@ export default function CheckoutPage() {
 
   if (cartLoading) {
     return (
-      <div className="min-h-screen flex justify-center items-center bg-gray-50">
+      <div className="min-h-screen flex justify-center items-center bg-bg">
         <Spinner size="xl" color="blue" />
       </div>
     );
@@ -260,16 +260,16 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-bg">
         <div className="text-center">
           <p className="text-6xl mb-4">🛒</p>
-          <h2 className="text-xl font-bold text-gray-700 mb-3">
+          <h2 className="text-xl text-ink mb-3 tracking-wide">
             Your cart is empty
           </h2>
           <Link
             href="/products"
-            className="bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm
-            font-semibold hover:bg-blue-700 transition"
+            className="bg-gradient-to-r from-brand-purple to-brand-orange text-white px-6 py-2.5 rounded-xl text-sm
+            font-semibold hover:scale-105 transition"
           >
             Shop Now
           </Link>
@@ -279,12 +279,12 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-bg py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-extrabold text-gray-800">🏷️ Checkout</h1>
-          <p className="text-gray-400 text-sm mt-1">Complete your order</p>
+          <h1 className="text-2xl text-ink tracking-wide">🏷️ Checkout</h1>
+          <p className="text-ink-soft text-sm mt-1">Complete your order</p>
         </div>
 
         {/* Step Indicator */}
@@ -294,17 +294,17 @@ export default function CheckoutPage() {
             return (
               <div key={label} className="flex items-center gap-2 flex-1">
                 <div
-                  className={`flex items-center gap-2 ${stepNum <= step ? "text-blue-600" : "text-gray-400"}`}
+                  className={`flex items-center gap-2 ${stepNum <= step ? "text-brand-purple" : "text-ink-soft/50"}`}
                 >
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center
                   text-sm font-bold border-2 transition
                   ${
                     step === stepNum
-                      ? "bg-blue-600 border-blue-600 text-white"
+                      ? "bg-gradient-to-br from-brand-purple to-brand-orange border-transparent text-white"
                       : stepNum < step
                         ? "bg-green-500 border-green-500 text-white"
-                        : "border-gray-300 text-gray-400"
+                        : "border-line text-ink-soft/50"
                   }`}
                   >
                     {stepNum < step ? "✓" : stepNum}
@@ -316,7 +316,7 @@ export default function CheckoutPage() {
                 {idx < 2 && (
                   <div
                     className={`flex-1 h-0.5 rounded mx-2 transition
-                  ${stepNum < step ? "bg-blue-500" : "bg-gray-200"}`}
+                  ${stepNum < step ? "bg-brand-purple" : "bg-line"}`}
                   />
                 )}
               </div>
@@ -329,14 +329,14 @@ export default function CheckoutPage() {
           <div className="lg:col-span-2">
             {/* STEP 1 — Shipping Address */}
             {step === 1 && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <h2 className="text-base font-bold text-gray-800 mb-5">
+              <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+                <h2 className="text-base font-bold text-ink mb-5">
                   📍 Shipping Address
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Full Name */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    <label className="block text-xs font-semibold text-ink-soft mb-1">
                       Full Name *
                     </label>
                     <input
@@ -346,12 +346,12 @@ export default function CheckoutPage() {
                         setForm({ ...form, fullName: e.target.value })
                       }
                       placeholder="e.g. Ram Bahadur Thapa"
-                      className={`w-full border rounded-xl px-3 py-2.5 text-sm
-                      focus:outline-none focus:ring-2 focus:ring-blue-500
-                      ${errors.fullName ? "border-red-400" : "border-gray-200"}`}
+                      className={`w-full border rounded-xl px-3 py-2.5 text-sm bg-surface2 text-ink
+                      focus:outline-none focus:ring-2 focus:ring-brand-purple
+                      ${errors.fullName ? "border-red-400" : "border-line"}`}
                     />
                     {errors.fullName && (
-                      <p className="text-red-500 text-xs mt-1">
+                      <p className="text-red-400 text-xs mt-1">
                         ⚠️ {errors.fullName}
                       </p>
                     )}
@@ -359,7 +359,7 @@ export default function CheckoutPage() {
 
                   {/* Phone */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    <label className="block text-xs font-semibold text-ink-soft mb-1">
                       Phone Number *
                     </label>
                     <input
@@ -369,12 +369,12 @@ export default function CheckoutPage() {
                         setForm({ ...form, phone: e.target.value })
                       }
                       placeholder="e.g. 9841234567"
-                      className={`w-full border rounded-xl px-3 py-2.5 text-sm
-                      focus:outline-none focus:ring-2 focus:ring-blue-500
-                      ${errors.phone ? "border-red-400" : "border-gray-200"}`}
+                      className={`w-full border rounded-xl px-3 py-2.5 text-sm bg-surface2 text-ink
+                      focus:outline-none focus:ring-2 focus:ring-brand-purple
+                      ${errors.phone ? "border-red-400" : "border-line"}`}
                     />
                     {errors.phone && (
-                      <p className="text-red-500 text-xs mt-1">
+                      <p className="text-red-400 text-xs mt-1">
                         ⚠️ {errors.phone}
                       </p>
                     )}
@@ -382,7 +382,7 @@ export default function CheckoutPage() {
 
                   {/* Street Address */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    <label className="block text-xs font-semibold text-ink-soft mb-1">
                       Street Address *
                     </label>
                     <input
@@ -392,12 +392,12 @@ export default function CheckoutPage() {
                         setForm({ ...form, address: e.target.value })
                       }
                       placeholder="e.g. Thamel, House No. 23"
-                      className={`w-full border rounded-xl px-3 py-2.5 text-sm
-                      focus:outline-none focus:ring-2 focus:ring-blue-500
-                      ${errors.address ? "border-red-400" : "border-gray-200"}`}
+                      className={`w-full border rounded-xl px-3 py-2.5 text-sm bg-surface2 text-ink
+                      focus:outline-none focus:ring-2 focus:ring-brand-purple
+                      ${errors.address ? "border-red-400" : "border-line"}`}
                     />
                     {errors.address && (
-                      <p className="text-red-500 text-xs mt-1">
+                      <p className="text-red-400 text-xs mt-1">
                         ⚠️ {errors.address}
                       </p>
                     )}
@@ -405,7 +405,7 @@ export default function CheckoutPage() {
 
                   {/* City */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    <label className="block text-xs font-semibold text-ink-soft mb-1">
                       City / Settlement *
                     </label>
                     <input
@@ -415,12 +415,12 @@ export default function CheckoutPage() {
                         setForm({ ...form, city: e.target.value })
                       }
                       placeholder="e.g. Koteshwor"
-                      className={`w-full border rounded-xl px-3 py-2.5 text-sm
-                      focus:outline-none focus:ring-2 focus:ring-blue-500
-                      ${errors.city ? "border-red-400" : "border-gray-200"}`}
+                      className={`w-full border rounded-xl px-3 py-2.5 text-sm bg-surface2 text-ink
+                      focus:outline-none focus:ring-2 focus:ring-brand-purple
+                      ${errors.city ? "border-red-400" : "border-line"}`}
                     />
                     {errors.city && (
-                      <p className="text-red-500 text-xs mt-1">
+                      <p className="text-red-400 text-xs mt-1">
                         ⚠️ {errors.city}
                       </p>
                     )}
@@ -428,14 +428,14 @@ export default function CheckoutPage() {
 
                   {/* Province Selection */}
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    <label className="block text-xs font-semibold text-ink-soft mb-1">
                       Province *
                     </label>
                     <select
                       value={form.province}
                       onChange={handleProvinceChange}
-                      className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                      text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                      className="w-full border border-line rounded-xl px-3 py-2.5
+                      text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
                     >
                       {Object.keys(NEPAL_PROVINCES_AND_DISTRICTS).map(
                         (prov) => (
@@ -449,7 +449,7 @@ export default function CheckoutPage() {
 
                   {/* District Selection */}
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    <label className="block text-xs font-semibold text-ink-soft mb-1">
                       District *
                     </label>
                     <select
@@ -457,8 +457,8 @@ export default function CheckoutPage() {
                       onChange={(e) =>
                         setForm({ ...form, district: e.target.value })
                       }
-                      className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                      text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                      className="w-full border border-line rounded-xl px-3 py-2.5
+                      text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
                     >
                       {availableDistricts.map((dist) => (
                         <option key={dist} value={dist}>
@@ -471,8 +471,8 @@ export default function CheckoutPage() {
 
                 <button
                   onClick={handleNextStep}
-                  className="w-full mt-6 py-3 bg-blue-600 text-white rounded-xl
-                  font-bold text-sm hover:bg-blue-700 transition shadow-md shadow-blue-200"
+                  className="w-full mt-6 py-3 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl
+                  font-bold text-sm hover:scale-[1.02] transition shadow-md shadow-brand-purple/20"
                 >
                   Continue to Payment →
                 </button>
@@ -481,8 +481,8 @@ export default function CheckoutPage() {
 
             {/* STEP 2 — Payment */}
             {step === 2 && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <h2 className="text-base font-bold text-gray-800 mb-5">
+              <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+                <h2 className="text-base font-bold text-ink mb-5">
                   💳 Payment Method
                 </h2>
                 <div className="space-y-3">
@@ -493,8 +493,8 @@ export default function CheckoutPage() {
                       cursor-pointer transition
                       ${
                         paymentMethod === pm.value
-                          ? "border-blue-500 bg-blue-50"
-                          : "border-gray-200 hover:border-blue-200"
+                          ? "border-brand-purple bg-brand-purple/10"
+                          : "border-line hover:border-brand-purple/30"
                       }`}
                     >
                       <input
@@ -503,26 +503,26 @@ export default function CheckoutPage() {
                         value={pm.value}
                         checked={paymentMethod === pm.value}
                         onChange={() => setPayment(pm.value)}
-                        className="accent-blue-600 w-4 h-4"
+                        className="accent-brand-purple w-4 h-4"
                       />
                       <div className="flex-1">
-                        <p className="font-semibold text-sm text-gray-800">
+                        <p className="font-semibold text-sm text-ink">
                           {pm.label}
                         </p>
-                        <p className="text-xs text-gray-400 mt-0.5">
+                        <p className="text-xs text-ink-soft mt-0.5">
                           {pm.desc}
                         </p>
                       </div>
                       {paymentMethod === pm.value && (
-                        <span className="text-blue-600 text-lg">✓</span>
+                        <span className="text-brand-purple text-lg">✓</span>
                       )}
                     </label>
                   ))}
                 </div>
 
                 {(paymentMethod === "esewa" || paymentMethod === "khalti") && (
-                  <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-xl p-3">
-                    <p className="text-xs text-yellow-700 font-medium">
+                  <div className="mt-4 bg-yellow-500/10 border border-yellow-500/25 rounded-xl p-3">
+                    <p className="text-xs text-yellow-300 font-medium">
                       ⚠️ {paymentMethod === "esewa" ? "eSewa" : "Khalti"}{" "}
                       gateway integration coming soon. For now, your order will
                       be processed as Cash on Delivery.
@@ -533,15 +533,15 @@ export default function CheckoutPage() {
                 <div className="flex gap-3 mt-6">
                   <button
                     onClick={() => setStep(1)}
-                    className="flex-1 py-3 border border-gray-200 text-gray-700
-                    rounded-xl font-medium text-sm hover:bg-gray-50 transition"
+                    className="flex-1 py-3 border border-line text-ink
+                    rounded-xl font-medium text-sm hover:bg-surface2 transition"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={() => setStep(3)}
-                    className="flex-1 py-3 bg-blue-600 text-white rounded-xl
-                    font-bold text-sm hover:bg-blue-700 transition shadow-md shadow-blue-200"
+                    className="flex-1 py-3 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl
+                    font-bold text-sm hover:scale-[1.02] transition shadow-md shadow-brand-purple/20"
                   >
                     Review Order →
                   </button>
@@ -553,20 +553,20 @@ export default function CheckoutPage() {
             {step === 3 && (
               <div className="space-y-4">
                 {/* Shipping Summary */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="bg-surface rounded-2xl border border-line shadow-sm p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-gray-800 text-sm">
+                    <h3 className="font-bold text-ink text-sm">
                       📍 Shipping To
                     </h3>
                     <button
                       onClick={() => setStep(1)}
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-brand-purple hover:underline"
                     >
                       Edit
                     </button>
                   </div>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p className="font-semibold text-gray-800">
+                  <div className="text-sm text-ink-soft space-y-1">
+                    <p className="font-semibold text-ink">
                       {form.fullName}
                     </p>
                     <p>{form.phone}</p>
@@ -578,19 +578,19 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Payment Summary */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="bg-surface rounded-2xl border border-line shadow-sm p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-gray-800 text-sm">
+                    <h3 className="font-bold text-ink text-sm">
                       💳 Payment
                     </h3>
                     <button
                       onClick={() => setStep(2)}
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-brand-purple hover:underline"
                     >
                       Edit
                     </button>
                   </div>
-                  <p className="text-sm text-gray-700 font-medium capitalize">
+                  <p className="text-sm text-ink font-medium capitalize">
                     {
                       PAYMENT_METHODS.find((p) => p.value === paymentMethod)
                         ?.label
@@ -599,16 +599,16 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Items Summary */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                  <h3 className="font-bold text-gray-800 text-sm mb-3">
+                <div className="bg-surface rounded-2xl border border-line shadow-sm p-5">
+                  <h3 className="font-bold text-ink text-sm mb-3">
                     🛒 Items ({items.length})
                   </h3>
                   <div className="space-y-3">
                     {items.map((item) => (
                       <div key={item._id} className="flex items-center gap-3">
                         <div
-                          className="w-12 h-12 rounded-xl overflow-hidden bg-gray-50
-                        border border-gray-100 flex-shrink-0"
+                          className="w-12 h-12 rounded-xl overflow-hidden bg-surface2
+                        border border-line flex-shrink-0"
                         >
                           {item.product?.images?.[0]?.url ? (
                             <img
@@ -623,14 +623,14 @@ export default function CheckoutPage() {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-gray-800 truncate">
+                          <p className="text-sm font-semibold text-ink truncate">
                             {item.product?.name}
                           </p>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-ink-soft">
                             Qty: {item.quantity}
                           </p>
                         </div>
-                        <p className="text-sm font-bold text-blue-700 flex-shrink-0">
+                        <p className="text-sm font-bold text-brand-orange flex-shrink-0">
                           Rs.{" "}
                           {(item.priceAtAdd * item.quantity).toLocaleString(
                             "en-NP",
@@ -645,17 +645,17 @@ export default function CheckoutPage() {
                 <div className="flex gap-3">
                   <button
                     onClick={() => setStep(3)}
-                    className="flex-1 py-3 border border-gray-200 text-gray-700
-                    rounded-xl font-medium text-sm hover:bg-gray-50 transition"
+                    className="flex-1 py-3 border border-line text-ink
+                    rounded-xl font-medium text-sm hover:bg-surface2 transition"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={handlePlaceOrder}
                     disabled={orderLoading}
-                    className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600
+                    className="flex-1 py-3 bg-gradient-to-r from-brand-purple to-brand-orange
                     text-white rounded-xl font-bold text-sm hover:shadow-lg
-                    hover:shadow-blue-200 transition disabled:opacity-60
+                    hover:shadow-brand-purple/30 transition disabled:opacity-60
                     flex items-center justify-center gap-2"
                   >
                     {orderLoading ? (
@@ -673,20 +673,20 @@ export default function CheckoutPage() {
 
           {/* ── Order Summary Sidebar ── */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sticky top-24">
-              <h2 className="font-bold text-gray-800 text-sm mb-4">
+            <div className="bg-surface rounded-2xl border border-line shadow-sm p-5 sticky top-24">
+              <h2 className="font-bold text-ink text-sm mb-4">
                 📋 Order Summary
               </h2>
               <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
                 {items.map((item) => (
                   <div
                     key={item._id}
-                    className="flex justify-between text-xs text-gray-500"
+                    className="flex justify-between text-xs text-ink-soft"
                   >
                     <span className="truncate max-w-[140px]">
                       {item.product?.name} × {item.quantity}
                     </span>
-                    <span className="font-semibold text-gray-700 ml-2">
+                    <span className="font-semibold text-ink ml-2">
                       Rs.{" "}
                       {(item.priceAtAdd * item.quantity).toLocaleString(
                         "en-NP",
@@ -695,35 +695,35 @@ export default function CheckoutPage() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-gray-100 pt-3 space-y-2 mb-4">
-                <div className="flex justify-between text-sm text-gray-600">
+              <div className="border-t border-line pt-3 space-y-2 mb-4">
+                <div className="flex justify-between text-sm text-ink-soft">
                   <span>Subtotal</span>
-                  <span className="font-semibold">
+                  <span className="font-semibold text-ink">
                     Rs. {subtotal.toLocaleString("en-NP")}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-ink-soft">
                   <span>Delivery</span>
                   <span
-                    className={`font-semibold ${deliveryCharge === 0 ? "text-green-600" : ""}`}
+                    className={`font-semibold ${deliveryCharge === 0 ? "text-green-400" : "text-ink"}`}
                   >
                     {deliveryCharge === 0 ? "FREE" : `Rs. ${deliveryCharge}`}
                   </span>
                 </div>
                 {deliveryCharge === 0 && (
-                  <p className="text-xs text-green-500">
+                  <p className="text-xs text-green-400">
                     🎉 Free delivery on orders over Rs. 2,000!
                   </p>
                 )}
               </div>
-              <div className="border-t border-gray-100 pt-3">
+              <div className="border-t border-line pt-3">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-gray-800">Total</span>
-                  <span className="text-xl font-extrabold text-blue-700">
+                  <span className="font-bold text-ink">Total</span>
+                  <span className="text-xl font-display text-brand-orange tracking-wide">
                     Rs. {totalAmount.toLocaleString("en-NP")}
                   </span>
                 </div>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs text-ink-soft mt-1">
                   All prices in Nepali Rupees
                 </p>
               </div>

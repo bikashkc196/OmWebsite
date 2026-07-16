@@ -5,13 +5,20 @@ import api from "../../../lib/api";
 import Spinner from "../../../components/ui/Spinner";
 import Link from "next/link";
 const MONTH_COLORS = [
-  "bg-blue-500",
+  "bg-sky-500",
   "bg-indigo-500",
-  "bg-purple-500",
+  "bg-brand-purple",
   "bg-pink-500",
-  "bg-orange-500",
+  "bg-brand-orange",
   "bg-green-500",
 ];
+const CARD_COLORS = {
+  green: "bg-green-500/15",
+  blue: "bg-sky-500/15",
+  purple: "bg-brand-purple/15",
+  indigo: "bg-indigo-500/15",
+  pink: "bg-pink-500/15",
+};
 export default function AdminAnalyticsPage() {
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,7 +41,7 @@ export default function AdminAnalyticsPage() {
       <div className="flex justify-center items-center min-h-[60vh]">
         <div className="text-center">
           <Spinner size="xl" color="blue" />
-          <p className="mt-4 text-gray-500">Loading analytics...</p>
+          <p className="mt-4 text-ink-soft">Loading analytics...</p>
         </div>
       </div>
     );
@@ -43,10 +50,10 @@ export default function AdminAnalyticsPage() {
     return (
       <div className="text-center py-20">
         <p className="text-5xl mb-3">😕</p>
-        <p className="text-gray-400">Failed to load analytics</p>
+        <p className="text-ink-soft">Failed to load analytics</p>
         <button
           onClick={fetchAnalytics}
-          className="mt-4 text-blue-600 text-sm font-semibold hover:underline"
+          className="mt-4 text-brand-purple text-sm font-semibold hover:underline"
         >
           Try Again
         </button>
@@ -71,17 +78,17 @@ export default function AdminAnalyticsPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl text-ink tracking-wide">
             📊 Analytics
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-ink-soft text-sm mt-1">
             Complete business overview — bookings + orders
           </p>
         </div>
         <button
           onClick={fetchAnalytics}
-          className="flex items-center gap-2 text-sm font-semibold text-blue-600
-          border border-blue-200 px-4 py-2 rounded-xl hover:bg-blue-50 transition"
+          className="flex items-center gap-2 text-sm font-semibold text-brand-purple
+          border border-brand-purple/30 px-4 py-2 rounded-xl hover:bg-brand-purple/10 transition"
         >
           🔄 Refresh
         </button>
@@ -120,20 +127,20 @@ export default function AdminAnalyticsPage() {
         ].map((card) => (
           <div
             key={card.label}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition"
+            className="bg-surface rounded-2xl border border-line shadow-sm p-5 hover:shadow-md transition"
           >
             <div className="flex items-center gap-3 mb-3">
               <div
-                className={`w-10 h-10 rounded-xl bg-${card.color}-50
+                className={`w-10 h-10 rounded-xl ${CARD_COLORS[card.color]}
               flex items-center justify-center text-xl`}
               >
                 {card.icon}
               </div>
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <p className="text-xs font-semibold text-ink-soft uppercase tracking-wider">
                 {card.label}
               </p>
             </div>
-            <p className="text-2xl font-extrabold text-gray-800">
+            <p className="text-2xl font-display text-ink tracking-wide">
               {card.prefix}
               {card.value?.toLocaleString("en-NP")}
             </p>
@@ -147,60 +154,56 @@ export default function AdminAnalyticsPage() {
             label: "Today's Bookings",
             value: analytics.todayBookings,
             icon: "📋",
-            color: "blue",
           },
           {
             label: "Today's Orders",
             value: analytics.todayOrders,
             icon: "🛒",
-            color: "indigo",
           },
           {
             label: "This Month Bookings",
             value: analytics.monthBookings,
             icon: "📅",
-            color: "purple",
           },
           {
             label: "This Month Orders",
             value: analytics.monthOrders,
             icon: "📬",
-            color: "pink",
           },
         ].map((s) => (
           <div
             key={s.label}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 text-center"
+            className="bg-surface rounded-2xl border border-line shadow-sm p-4 text-center"
           >
             <p className="text-2xl mb-1">{s.icon}</p>
-            <p className="text-xl font-extrabold text-gray-800">
+            <p className="text-xl font-display text-ink tracking-wide">
               {s.value || 0}
             </p>
-            <p className="text-xs text-gray-400 font-medium mt-0.5">
+            <p className="text-xs text-ink-soft font-medium mt-0.5">
               {s.label}
             </p>
           </div>
         ))}
       </div>
       {/* ── Revenue Chart (Last 6 Months) ── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-base font-bold text-gray-800">
+            <h2 className="text-base font-bold text-ink">
               📈 Revenue — Last 6 Months
             </h2>
-            <p className="text-xs text-gray-400 mt-0.5">
+            <p className="text-xs text-ink-soft mt-0.5">
               Combined booking & order revenue in Rs
             </p>
           </div>
           <div className="flex items-center gap-4 text-xs font-medium">
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-blue-500" />
-              <span className="text-gray-500">Bookings</span>
+              <div className="w-3 h-3 rounded-full bg-sky-500" />
+              <span className="text-ink-soft">Bookings</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-purple-500" />
-              <span className="text-gray-500">Orders</span>
+              <div className="w-3 h-3 rounded-full bg-brand-purple" />
+              <span className="text-ink-soft">Orders</span>
             </div>
           </div>
         </div>
@@ -223,7 +226,7 @@ export default function AdminAnalyticsPage() {
                 {/* Tooltip */}
                 <div
                   className="opacity-0 group-hover:opacity-100 transition absolute
-                -mt-12 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 pointer-events-none z-10 whitespace-nowrap"
+                -mt-12 bg-surface2 border border-line text-ink text-xs rounded-lg px-2 py-1 pointer-events-none z-10 whitespace-nowrap"
                 >
                   Rs. {month.totalRevenue.toLocaleString("en-NP")}
                 </div>
@@ -231,17 +234,17 @@ export default function AdminAnalyticsPage() {
                   {/* Booking bar */}
                   <div
                     style={{ height: `${bkHeight}%` }}
-                    className="flex-1 bg-blue-500 rounded-t-lg transition-all duration-500 hover:bg-blue-600"
+                    className="flex-1 bg-sky-500 rounded-t-lg transition-all duration-500 hover:bg-sky-400"
                     title={`Booking: Rs. ${month.bookingRevenue.toLocaleString("en-NP")}`}
                   />
                   {/* Order bar */}
                   <div
                     style={{ height: `${orHeight}%` }}
-                    className="flex-1 bg-purple-500 rounded-t-lg transition-all duration-500 hover:bg-purple-600"
+                    className="flex-1 bg-brand-purple rounded-t-lg transition-all duration-500 hover:opacity-80"
                     title={`Order: Rs. ${month.orderRevenue.toLocaleString("en-NP")}`}
                   />
                 </div>
-                <p className="text-xs text-gray-400 font-medium">
+                <p className="text-xs text-ink-soft font-medium">
                   {month.label}
                 </p>
               </div>
@@ -252,7 +255,7 @@ export default function AdminAnalyticsPage() {
         <div className="mt-5 overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
-              <tr className="border-b border-gray-100">
+              <tr className="border-b border-line">
                 {[
                   "Month",
                   "Booking Rev",
@@ -263,7 +266,7 @@ export default function AdminAnalyticsPage() {
                 ].map((h) => (
                   <th
                     key={h}
-                    className="px-3 py-2 text-left font-semibold text-gray-500"
+                    className="px-3 py-2 text-left font-semibold text-ink-soft"
                   >
                     {h}
                   </th>
@@ -274,22 +277,22 @@ export default function AdminAnalyticsPage() {
               {analytics.monthlyChart?.map((m) => (
                 <tr
                   key={m.label}
-                  className="border-b border-gray-50 hover:bg-gray-50"
+                  className="border-b border-line hover:bg-surface2"
                 >
-                  <td className="px-3 py-2 font-semibold text-gray-700">
+                  <td className="px-3 py-2 font-semibold text-ink">
                     {m.label}
                   </td>
-                  <td className="px-3 py-2 text-blue-600 font-medium">
+                  <td className="px-3 py-2 text-sky-300 font-medium">
                     Rs. {m.bookingRevenue.toLocaleString("en-NP")}
                   </td>
-                  <td className="px-3 py-2 text-purple-600 font-medium">
+                  <td className="px-3 py-2 text-brand-purple font-medium">
                     Rs. {m.orderRevenue.toLocaleString("en-NP")}
                   </td>
-                  <td className="px-3 py-2 font-bold text-gray-800">
+                  <td className="px-3 py-2 font-bold text-brand-orange">
                     Rs. {m.totalRevenue.toLocaleString("en-NP")}
                   </td>
-                  <td className="px-3 py-2 text-gray-500">{m.bookingCount}</td>
-                  <td className="px-3 py-2 text-gray-500">{m.orderCount}</td>
+                  <td className="px-3 py-2 text-ink-soft">{m.bookingCount}</td>
+                  <td className="px-3 py-2 text-ink-soft">{m.orderCount}</td>
                 </tr>
               ))}
             </tbody>
@@ -298,23 +301,23 @@ export default function AdminAnalyticsPage() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ── Booking Status Breakdown ── */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-          <h2 className="text-base font-bold text-gray-800 mb-4">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+          <h2 className="text-base font-bold text-ink mb-4">
             📋 Booking Status Breakdown
           </h2>
           <div className="space-y-2.5">
             {[
               { key: "pending", label: "Pending", color: "bg-yellow-400" },
-              { key: "confirmed", label: "Confirmed", color: "bg-blue-400" },
+              { key: "confirmed", label: "Confirmed", color: "bg-sky-400" },
               {
                 key: "in_progress",
                 label: "In Progress",
-                color: "bg-indigo-400",
+                color: "bg-brand-purple",
               },
               {
                 key: "waiting_for_parts",
                 label: "Waiting Parts",
-                color: "bg-orange-400",
+                color: "bg-brand-orange",
               },
               { key: "completed", label: "Completed", color: "bg-green-500" },
               { key: "cancelled", label: "Cancelled", color: "bg-red-400" },
@@ -325,15 +328,15 @@ export default function AdminAnalyticsPage() {
               return (
                 <div key={s.key}>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-600 font-medium">{s.label}</span>
-                    <span className="font-bold text-gray-800">
+                    <span className="text-ink-soft font-medium">{s.label}</span>
+                    <span className="font-bold text-ink">
                       {count}
-                      <span className="text-gray-400 font-normal ml-1">
+                      <span className="text-ink-soft font-normal ml-1">
                         ({pct}%)
                       </span>
                     </span>
                   </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-surface2 rounded-full overflow-hidden">
                     <div
                       className={`h-full ${s.color} rounded-full transition-all duration-700`}
                       style={{ width: `${pct}%` }}
@@ -345,20 +348,20 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
         {/* ── Order Status Breakdown ── */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-          <h2 className="text-base font-bold text-gray-800 mb-4">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+          <h2 className="text-base font-bold text-ink mb-4">
             📦 Order Status Breakdown
           </h2>
           <div className="space-y-2.5">
             {[
               { key: "pending", label: "Pending", color: "bg-yellow-400" },
-              { key: "confirmed", label: "Confirmed", color: "bg-blue-400" },
+              { key: "confirmed", label: "Confirmed", color: "bg-sky-400" },
               {
                 key: "processing",
                 label: "Processing",
                 color: "bg-indigo-400",
               },
-              { key: "shipped", label: "Shipped", color: "bg-purple-400" },
+              { key: "shipped", label: "Shipped", color: "bg-brand-purple" },
               { key: "delivered", label: "Delivered", color: "bg-green-500" },
               { key: "cancelled", label: "Cancelled", color: "bg-red-400" },
             ].map((s) => {
@@ -368,15 +371,15 @@ export default function AdminAnalyticsPage() {
               return (
                 <div key={s.key}>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-600 font-medium">{s.label}</span>
-                    <span className="font-bold text-gray-800">
+                    <span className="text-ink-soft font-medium">{s.label}</span>
+                    <span className="font-bold text-ink">
                       {count}
-                      <span className="text-gray-400 font-normal ml-1">
+                      <span className="text-ink-soft font-normal ml-1">
                         ({pct}%)
                       </span>
                     </span>
                   </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-surface2 rounded-full overflow-hidden">
                     <div
                       className={`h-full ${s.color} rounded-full transition-all duration-700`}
                       style={{ width: `${pct}%` }}
@@ -388,12 +391,12 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
         {/* ── Top Repair Issues ── */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-          <h2 className="text-base font-bold text-gray-800 mb-4">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+          <h2 className="text-base font-bold text-ink mb-4">
             🔧 Top Repair Issues
           </h2>
           {analytics.topIssues?.length === 0 ? (
-            <p className="text-gray-400 text-sm text-center py-6">
+            <p className="text-ink-soft text-sm text-center py-6">
               No data yet
             </p>
           ) : (
@@ -404,14 +407,14 @@ export default function AdminAnalyticsPage() {
                 return (
                   <div key={issue._id}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-gray-600 font-medium capitalize">
+                      <span className="text-ink-soft font-medium capitalize">
                         {idx + 1}. {issue._id?.replace(/_/g, " ")}
                       </span>
-                      <span className="font-bold text-gray-700">
+                      <span className="font-bold text-ink">
                         {issue.count}
                       </span>
                     </div>
-                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-surface2 rounded-full overflow-hidden">
                       <div
                         className={`h-full ${MONTH_COLORS[idx % MONTH_COLORS.length]} rounded-full`}
                         style={{ width: `${pct}%` }}
@@ -424,12 +427,12 @@ export default function AdminAnalyticsPage() {
           )}
         </div>
         {/* ── Top Selling Products ── */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-          <h2 className="text-base font-bold text-gray-800 mb-4">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+          <h2 className="text-base font-bold text-ink mb-4">
             🏆 Top Selling Products
           </h2>
           {analytics.topProducts?.length === 0 ? (
-            <p className="text-gray-400 text-sm text-center py-6">
+            <p className="text-ink-soft text-sm text-center py-6">
               No orders yet
             </p>
           ) : (
@@ -437,22 +440,22 @@ export default function AdminAnalyticsPage() {
               {analytics.topProducts?.map((p, idx) => (
                 <div
                   key={p._id?.toString()}
-                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl"
+                  className="flex items-center gap-3 p-3 bg-surface2 rounded-xl"
                 >
                   <div
                     className={`w-8 h-8 rounded-lg flex items-center justify-center
                   text-white text-xs font-bold flex-shrink-0
-                  ${idx === 0 ? "bg-yellow-400" : idx === 1 ? "bg-gray-400" : idx === 2 ? "bg-orange-400" : "bg-blue-400"}`}
+                  ${idx === 0 ? "bg-yellow-400" : idx === 1 ? "bg-ink-soft" : idx === 2 ? "bg-brand-orange" : "bg-sky-400"}`}
                   >
                     {idx + 1}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-800 truncate">
+                    <p className="text-sm font-semibold text-ink truncate">
                       {p.name}
                     </p>
-                    <p className="text-xs text-gray-400">{p.totalSold} sold</p>
+                    <p className="text-xs text-ink-soft">{p.totalSold} sold</p>
                   </div>
-                  <p className="text-sm font-bold text-blue-700 flex-shrink-0">
+                  <p className="text-sm font-bold text-brand-orange flex-shrink-0">
                     Rs. {p.revenue?.toLocaleString("en-NP")}
                   </p>
                 </div>
@@ -464,41 +467,41 @@ export default function AdminAnalyticsPage() {
       {/* ── Recent Activity ── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Bookings */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-            <h2 className="text-sm font-bold text-gray-800">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-line">
+            <h2 className="text-sm font-bold text-ink">
               🕐 Recent Bookings
             </h2>
             <Link
               href="/admin/bookings"
-              className="text-xs text-blue-600 font-semibold hover:underline"
+              className="text-xs text-brand-purple font-semibold hover:underline"
             >
               View All →
             </Link>
           </div>
-          <div className="divide-y divide-gray-50">
+          <div className="divide-y divide-line">
             {analytics.recentBookings?.map((b) => (
               <div
                 key={b._id}
                 className="px-5 py-3 flex items-center justify-between"
               >
                 <div>
-                  <p className="text-sm font-semibold text-gray-700">
+                  <p className="text-sm font-semibold text-ink">
                     {b.user?.name || "N/A"}
                   </p>
-                  <p className="text-xs text-gray-400 capitalize">
+                  <p className="text-xs text-ink-soft capitalize">
                     {b.issueCategory?.replace(/_/g, " ")} • {b.deviceType}
                   </p>
                 </div>
                 <span
                   className={`text-xs font-semibold px-2.5 py-1 rounded-full capitalize ${
                     b.status === "completed"
-                      ? "bg-green-100 text-green-600"
+                      ? "bg-green-500/15 text-green-300"
                       : b.status === "cancelled"
-                        ? "bg-red-100 text-red-500"
+                        ? "bg-red-500/15 text-red-300"
                         : b.status === "in_progress"
-                          ? "bg-blue-100 text-blue-600"
-                          : "bg-yellow-100 text-yellow-700"
+                          ? "bg-brand-purple/15 text-brand-purple"
+                          : "bg-yellow-500/15 text-yellow-300"
                   }`}
                 >
                   {b.status?.replace(/_/g, " ")}
@@ -508,43 +511,43 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
         {/* Recent Orders */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-            <h2 className="text-sm font-bold text-gray-800">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-line">
+            <h2 className="text-sm font-bold text-ink">
               📦 Recent Orders
             </h2>
             <Link
               href="/admin/orders"
-              className="text-xs text-blue-600 font-semibold hover:underline"
+              className="text-xs text-brand-purple font-semibold hover:underline"
             >
               View All →
             </Link>
           </div>
-          <div className="divide-y divide-gray-50">
+          <div className="divide-y divide-line">
             {analytics.recentOrders?.map((o) => (
               <div
                 key={o._id}
                 className="px-5 py-3 flex items-center justify-between"
               >
                 <div>
-                  <p className="text-sm font-semibold text-gray-700">
+                  <p className="text-sm font-semibold text-ink">
                     {o.user?.name || "N/A"}
                   </p>
-                  <p className="text-xs font-mono text-gray-400">
+                  <p className="text-xs font-mono text-ink-soft">
                     {o.orderRef}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold text-blue-700">
+                  <p className="text-sm font-bold text-brand-orange">
                     Rs. {o.totalAmount?.toLocaleString("en-NP")}
                   </p>
                   <span
                     className={`text-xs font-semibold capitalize ${
                       o.status === "delivered"
-                        ? "text-green-600"
+                        ? "text-green-400"
                         : o.status === "cancelled"
-                          ? "text-red-500"
-                          : "text-yellow-600"
+                          ? "text-red-400"
+                          : "text-yellow-400"
                     }`}
                   >
                     {o.status}
@@ -556,8 +559,8 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
       {/* ── User Growth Card ── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-        <h2 className="text-base font-bold text-gray-800 mb-4">
+      <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
+        <h2 className="text-base font-bold text-ink mb-4">
           👥 User Summary
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -566,33 +569,33 @@ export default function AdminAnalyticsPage() {
               label: "Total Users",
               value: analytics.totalUsers,
               icon: "👥",
-              bg: "bg-blue-50",
-              text: "text-blue-700",
+              bg: "bg-sky-500/10",
+              text: "text-sky-300",
             },
             {
               label: "New Today",
               value: analytics.newUsersToday,
               icon: "✨",
-              bg: "bg-green-50",
-              text: "text-green-700",
+              bg: "bg-green-500/10",
+              text: "text-green-300",
             },
             {
               label: "New This Month",
               value: analytics.newUsersMonth,
               icon: "📅",
-              bg: "bg-purple-50",
-              text: "text-purple-700",
+              bg: "bg-brand-purple/10",
+              text: "text-brand-purple",
             },
           ].map((s) => (
             <div
               key={s.label}
-              className={`${s.bg} rounded-xl p-4 border border-opacity-30`}
+              className={`${s.bg} rounded-xl p-4 border border-line`}
             >
               <p className="text-2xl mb-1">{s.icon}</p>
               <p className={`text-2xl font-extrabold ${s.text}`}>
                 {s.value || 0}
               </p>
-              <p className="text-xs text-gray-500 font-medium mt-0.5">
+              <p className="text-xs text-ink-soft font-medium mt-0.5">
                 {s.label}
               </p>
             </div>

@@ -42,7 +42,7 @@ export default function BookingTable({
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
           <Spinner size="lg" color="blue" />
-          <p className="mt-3 text-sm text-gray-500">Loading bookings...</p>
+          <p className="mt-3 text-sm text-ink-soft">Loading bookings...</p>
         </div>
       </div>
     );
@@ -51,8 +51,8 @@ export default function BookingTable({
     return (
       <div className="text-center py-20">
         <p className="text-5xl mb-3">📭</p>
-        <p className="text-gray-500 font-medium">No bookings found</p>
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-ink-soft font-medium">No bookings found</p>
+        <p className="text-sm text-ink-soft/70 mt-1">
           Try adjusting your search or filter
         </p>
       </div>
@@ -64,7 +64,7 @@ export default function BookingTable({
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-50 border-b border-gray-200">
+            <tr className="bg-surface2 border-b border-line">
               {[
                 "#",
                 "Customer",
@@ -78,21 +78,21 @@ export default function BookingTable({
                 <th
                   key={h}
                   className="px-4 py-3 text-left text-xs font-semibold
-                    text-gray-500 uppercase tracking-wider"
+                    text-ink-soft uppercase tracking-wider"
                 >
                   {h}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-line">
             {bookings.map((booking, idx) => (
               <tr
                 key={booking._id}
-                className="hover:bg-gray-50 transition-colors group"
+                className="hover:bg-surface2 transition-colors group"
               >
                 {/* Index */}
-                <td className="px-4 py-3 text-gray-400 font-mono text-xs">
+                <td className="px-4 py-3 text-ink-soft/60 font-mono text-xs">
                   {idx + 1}
                 </td>
                 {/* Customer */}
@@ -100,17 +100,17 @@ export default function BookingTable({
                   <div className="flex items-center gap-2">
                     <div
                       className="w-8 h-8 bg-gradient-to-br
-                      from-blue-400 to-purple-500 rounded-full flex
+                      from-brand-purple to-brand-orange rounded-full flex
                       items-center justify-center text-white text-xs
                       font-bold flex-shrink-0"
                     >
                       {booking.user?.name?.charAt(0).toUpperCase() || "?"}
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-800 text-sm">
+                      <p className="font-semibold text-ink text-sm">
                         {booking.user?.name || "N/A"}
                       </p>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-xs text-ink-soft">
                         {booking.user?.email || ""}
                       </p>
                     </div>
@@ -118,24 +118,24 @@ export default function BookingTable({
                 </td>
                 {/* Device */}
                 <td className="px-4 py-3">
-                  <p className="font-medium text-gray-800">
+                  <p className="font-medium text-ink">
                     {booking.deviceType || "N/A"}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-ink-soft">
                     {booking.deviceModel || ""}
                   </p>
                 </td>
                 {/* Service */}
                 <td className="px-4 py-3">
                   <span
-                    className="inline-block bg-blue-50 text-blue-700
+                    className="inline-block bg-brand-purple/10 text-brand-purple
                     text-xs font-medium px-2.5 py-1 rounded-lg"
                   >
                     {booking.serviceType || "N/A"}
                   </span>
                 </td>
                 {/* Date */}
-                <td className="px-4 py-3 text-gray-600 text-xs">
+                <td className="px-4 py-3 text-ink-soft text-xs">
                   {booking.preferredDate
                     ? new Date(booking.preferredDate).toLocaleDateString(
                         "en-NP",
@@ -144,7 +144,7 @@ export default function BookingTable({
                     : "N/A"}
                 </td>
                 {/* Price */}
-                <td className="px-4 py-3 font-semibold text-gray-800">
+                <td className="px-4 py-3 font-semibold text-brand-orange">
                   Rs. {booking.estimatedCost?.toLocaleString("en-NP") || "—"}
                 </td>
                 {/* Status */}
@@ -157,9 +157,9 @@ export default function BookingTable({
                       onChange={(e) =>
                         handleStatusChange(booking._id, e.target.value)
                       }
-                      className="text-xs border border-gray-200 rounded-lg
-                        px-2 py-1.5 bg-white focus:outline-none
-                        focus:ring-2 focus:ring-blue-500 cursor-pointer
+                      className="text-xs border border-line rounded-lg
+                        px-2 py-1.5 bg-surface2 text-ink focus:outline-none
+                        focus:ring-2 focus:ring-brand-purple cursor-pointer
                         font-medium"
                     >
                       {STATUS_OPTIONS.map((s) => (
@@ -176,7 +176,7 @@ export default function BookingTable({
                     {/* View */}
                     <button
                       onClick={() => onView?.(booking)}
-                      className="p-1.5 text-blue-600 hover:bg-blue-50
+                      className="p-1.5 text-brand-purple hover:bg-brand-purple/10
                         rounded-lg transition"
                       title="View Details"
                     >
@@ -185,7 +185,7 @@ export default function BookingTable({
                     {/* Delete */}
                     <button
                       onClick={() => setConfirmId(booking._id)}
-                      className="p-1.5 text-red-500 hover:bg-red-50
+                      className="p-1.5 text-red-400 hover:bg-red-500/10
                         rounded-lg transition"
                       title="Delete Booking"
                     >
@@ -201,19 +201,19 @@ export default function BookingTable({
       {/* ── Delete Confirm Modal ── */}
       {confirmId && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm
           flex items-center justify-center z-50 p-4"
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm
+            className="bg-surface border border-line rounded-2xl shadow-2xl p-6 max-w-sm
             w-full animate-fade-in"
           >
             <div className="text-center mb-5">
               <div className="text-5xl mb-3">🗑️</div>
-              <h3 className="text-lg font-bold text-gray-800">
+              <h3 className="text-lg font-display text-ink tracking-wide">
                 Delete Booking?
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-ink-soft mt-1">
                 This action cannot be undone. The booking will be permanently
                 removed.
               </p>
@@ -221,9 +221,9 @@ export default function BookingTable({
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmId(null)}
-                className="flex-1 px-4 py-2.5 border border-gray-200
-                  text-gray-700 rounded-xl text-sm font-medium
-                  hover:bg-gray-50 transition"
+                className="flex-1 px-4 py-2.5 border border-line
+                  text-ink rounded-xl text-sm font-medium
+                  hover:bg-surface2 transition"
               >
                 Cancel
               </button>

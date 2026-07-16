@@ -6,12 +6,12 @@ import { useAuth } from "../../../context/AuthContext";
 import Link from "next/link";
 import Spinner from "../../../components/ui/Spinner";
 const STATUS_STYLES = {
-  pending: "bg-yellow-100 text-yellow-700 border-yellow-200",
-  confirmed: "bg-blue-100 text-blue-700 border-blue-200",
-  processing: "bg-indigo-100 text-indigo-700 border-indigo-200",
-  shipped: "bg-purple-100 text-purple-700 border-purple-200",
-  delivered: "bg-green-100 text-green-700 border-green-200",
-  cancelled: "bg-red-100 text-red-600 border-red-200",
+  pending: "bg-yellow-500/15 text-yellow-300 border-yellow-500/30",
+  confirmed: "bg-sky-500/15 text-sky-300 border-sky-500/30",
+  processing: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30",
+  shipped: "bg-brand-purple/15 text-brand-purple border-brand-purple/30",
+  delivered: "bg-green-500/15 text-green-300 border-green-500/30",
+  cancelled: "bg-red-500/15 text-red-300 border-red-500/30",
 };
 const STATUS_ICONS = {
   pending: "⏳",
@@ -53,44 +53,44 @@ export default function MyOrdersPage() {
   };
   if (pageLoading) {
     return (
-      <div className="min-h-screen flex justify-center items-center bg-gray-50">
+      <div className="min-h-screen flex justify-center items-center bg-bg">
         <Spinner size="xl" color="blue" />
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-bg py-8 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-extrabold text-gray-800">
+            <h1 className="text-2xl text-ink tracking-wide">
               📦 My Orders
             </h1>
-            <p className="text-gray-400 text-sm mt-1">
+            <p className="text-ink-soft text-sm mt-1">
               {orders.length} order{orders.length !== 1 ? "s" : ""}
             </p>
           </div>
           <Link
             href="/products"
-            className="text-sm text-blue-600 font-semibold hover:underline"
+            className="text-sm text-brand-purple font-semibold hover:underline"
           >
             🛒 Shop More
           </Link>
         </div>
         {orders.length === 0 ? (
-          <div className="text-center py-24 bg-white rounded-2xl border border-gray-100 shadow-sm">
+          <div className="text-center py-24 bg-surface rounded-2xl border border-line shadow-sm">
             <p className="text-7xl mb-4">📭</p>
-            <h2 className="text-xl font-bold text-gray-700 mb-2">
+            <h2 className="text-xl text-ink mb-2 tracking-wide">
               No orders yet
             </h2>
-            <p className="text-gray-400 text-sm mb-6">
+            <p className="text-ink-soft text-sm mb-6">
               Your placed orders will appear here
             </p>
             <Link
               href="/products"
-              className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm
-              font-semibold hover:bg-blue-700 shadow-md shadow-blue-200 transition"
+              className="bg-gradient-to-r from-brand-purple to-brand-orange text-white px-6 py-3 rounded-xl text-sm
+              font-semibold hover:scale-105 shadow-md shadow-brand-purple/20 transition"
             >
               Start Shopping →
             </Link>
@@ -100,28 +100,28 @@ export default function MyOrdersPage() {
             {orders.map((order) => (
               <div
                 key={order._id}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
+                className="bg-surface rounded-2xl border border-line shadow-sm overflow-hidden"
               >
                 {/* Order Header */}
                 <div
                   className="px-5 py-4 flex flex-wrap items-center justify-between gap-3
-                border-b border-gray-50"
+                border-b border-line"
                 >
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-mono font-bold text-sm text-gray-800">
+                      <span className="font-mono font-bold text-sm text-ink">
                         {order.orderRef}
                       </span>
                       <span
                         className={`text-xs font-semibold px-2.5 py-1 rounded-full border
-                      ${STATUS_STYLES[order.status] || "bg-gray-100 text-gray-600"}`}
+                      ${STATUS_STYLES[order.status] || "bg-ink-soft/15 text-ink-soft border-ink-soft/30"}`}
                       >
                         {STATUS_ICONS[order.status]}{" "}
                         {order.status?.charAt(0).toUpperCase() +
                           order.status?.slice(1)}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-ink-soft">
                       {new Date(order.createdAt).toLocaleDateString("en-NP", {
                         year: "numeric",
                         month: "short",
@@ -133,10 +133,10 @@ export default function MyOrdersPage() {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-extrabold text-blue-700">
+                    <p className="text-lg font-display text-brand-orange tracking-wide">
                       Rs. {order.totalAmount?.toLocaleString("en-NP")}
                     </p>
-                    <p className="text-xs text-gray-400 capitalize">
+                    <p className="text-xs text-ink-soft capitalize">
                       {order.paymentMethod?.replace("_", " ")}
                     </p>
                   </div>
@@ -147,8 +147,8 @@ export default function MyOrdersPage() {
                     {order.items?.slice(0, 3).map((item) => (
                       <div
                         key={item._id}
-                        className="w-10 h-10 rounded-lg overflow-hidden bg-gray-50
-                        border border-gray-100 flex-shrink-0"
+                        className="w-10 h-10 rounded-lg overflow-hidden bg-surface2
+                        border border-line flex-shrink-0"
                       >
                         {item.image ? (
                           <img
@@ -164,7 +164,7 @@ export default function MyOrdersPage() {
                       </div>
                     ))}
                     {order.items?.length > 3 && (
-                      <span className="text-xs text-gray-400 font-medium ml-1">
+                      <span className="text-xs text-ink-soft font-medium ml-1">
                         +{order.items.length - 3} more
                       </span>
                     )}
@@ -174,7 +174,7 @@ export default function MyOrdersPage() {
                           expandedId === order._id ? null : order._id,
                         )
                       }
-                      className="ml-auto text-xs text-blue-600 font-semibold hover:underline"
+                      className="ml-auto text-xs text-brand-purple font-semibold hover:underline"
                     >
                       {expandedId === order._id
                         ? "Hide Details ▲"
@@ -184,14 +184,14 @@ export default function MyOrdersPage() {
                 </div>
                 {/* Expanded Details */}
                 {expandedId === order._id && (
-                  <div className="px-5 pb-5 border-t border-gray-50 pt-4 space-y-4">
+                  <div className="px-5 pb-5 border-t border-line pt-4 space-y-4">
                     {/* All Items */}
                     <div className="space-y-2">
                       {order.items?.map((item) => (
                         <div key={item._id} className="flex items-center gap-3">
                           <div
-                            className="w-12 h-12 rounded-xl overflow-hidden bg-gray-50
-                          border border-gray-100 flex-shrink-0"
+                            className="w-12 h-12 rounded-xl overflow-hidden bg-surface2
+                          border border-line flex-shrink-0"
                           >
                             {item.image ? (
                               <img
@@ -206,14 +206,14 @@ export default function MyOrdersPage() {
                             )}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-gray-800 truncate">
+                            <p className="text-sm font-semibold text-ink truncate">
                               {item.name}
                             </p>
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-ink-soft">
                               Qty: {item.quantity}
                             </p>
                           </div>
-                          <p className="text-sm font-bold text-blue-700">
+                          <p className="text-sm font-bold text-brand-orange">
                             Rs.{" "}
                             {(item.priceAtOrder * item.quantity).toLocaleString(
                               "en-NP",
@@ -223,8 +223,8 @@ export default function MyOrdersPage() {
                       ))}
                     </div>
                     {/* Shipping Info */}
-                    <div className="bg-gray-50 rounded-xl p-3 text-xs text-gray-600">
-                      <p className="font-semibold text-gray-700 mb-1">
+                    <div className="bg-surface2 rounded-xl p-3 text-xs text-ink-soft">
+                      <p className="font-semibold text-ink mb-1">
                         📍 Shipped To
                       </p>
                       <p>
@@ -238,14 +238,14 @@ export default function MyOrdersPage() {
                       </p>
                     </div>
                     {/* Pricing Breakdown */}
-                    <div className="bg-blue-50 rounded-xl p-3 text-xs space-y-1">
-                      <div className="flex justify-between text-gray-600">
+                    <div className="bg-brand-purple/10 rounded-xl p-3 text-xs space-y-1">
+                      <div className="flex justify-between text-ink-soft">
                         <span>Subtotal</span>
                         <span>
                           Rs. {order.subtotal?.toLocaleString("en-NP")}
                         </span>
                       </div>
-                      <div className="flex justify-between text-gray-600">
+                      <div className="flex justify-between text-ink-soft">
                         <span>Delivery</span>
                         <span>
                           {order.deliveryCharge === 0
@@ -253,7 +253,7 @@ export default function MyOrdersPage() {
                             : `Rs. ${order.deliveryCharge}`}
                         </span>
                       </div>
-                      <div className="flex justify-between font-bold text-blue-700 text-sm pt-1 border-t border-blue-200">
+                      <div className="flex justify-between font-bold text-brand-purple text-sm pt-1 border-t border-brand-purple/20">
                         <span>Total</span>
                         <span>
                           Rs. {order.totalAmount?.toLocaleString("en-NP")}
@@ -263,17 +263,17 @@ export default function MyOrdersPage() {
                     {/* Status History */}
                     {order.statusHistory?.length > 0 && (
                       <div>
-                        <p className="text-xs font-semibold text-gray-600 mb-2">
+                        <p className="text-xs font-semibold text-ink-soft mb-2">
                           🕐 Status History
                         </p>
                         <div className="space-y-1.5">
                           {order.statusHistory.map((h, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center gap-2 text-xs text-gray-500"
+                              className="flex items-center gap-2 text-xs text-ink-soft"
                             >
                               <span>{STATUS_ICONS[h.status] || "•"}</span>
-                              <span className="capitalize font-medium text-gray-700">
+                              <span className="capitalize font-medium text-ink">
                                 {h.status}
                               </span>
                               <span>—</span>
@@ -296,8 +296,8 @@ export default function MyOrdersPage() {
                     {["pending", "confirmed"].includes(order.status) && (
                       <button
                         onClick={() => setCancelId(order._id)}
-                        className="w-full py-2.5 border border-red-200 text-red-500
-                        rounded-xl text-sm font-semibold hover:bg-red-50 transition"
+                        className="w-full py-2.5 border border-red-500/25 text-red-400
+                        rounded-xl text-sm font-semibold hover:bg-red-500/10 transition"
                       >
                         ❌ Cancel Order
                       </button>
@@ -312,14 +312,14 @@ export default function MyOrdersPage() {
       {/* ── Cancel Confirm Modal ── */}
       {cancelId && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center
         justify-center z-50 p-4"
         >
-          <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full">
+          <div className="bg-surface border border-line rounded-2xl shadow-2xl p-6 max-w-sm w-full">
             <div className="text-center mb-4">
               <div className="text-5xl mb-3">⚠️</div>
-              <h3 className="text-lg font-bold text-gray-800">Cancel Order?</h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <h3 className="text-lg text-ink tracking-wide">Cancel Order?</h3>
+              <p className="text-sm text-ink-soft mt-1">
                 Are you sure you want to cancel this order?
               </p>
             </div>
@@ -328,14 +328,14 @@ export default function MyOrdersPage() {
               onChange={(e) => setCancelReason(e.target.value)}
               placeholder="Reason for cancellation (optional)..."
               rows={3}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
+              className="w-full border border-line rounded-xl px-3 py-2.5 text-sm bg-surface2 text-ink
               focus:outline-none focus:ring-2 focus:ring-red-400 resize-none mb-4"
             />
             <div className="flex gap-3">
               <button
                 onClick={() => setCancelId(null)}
-                className="flex-1 py-2.5 border border-gray-200 text-gray-700
-                rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+                className="flex-1 py-2.5 border border-line text-ink
+                rounded-xl text-sm font-medium hover:bg-surface2 transition"
               >
                 Keep Order
               </button>

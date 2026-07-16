@@ -73,7 +73,7 @@ function StarRating({ rating }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
-          className={`text-base ${i < rating ? "text-amber-400" : "text-gray-200"}`}
+          className={`text-base ${i < rating ? "text-amber-400" : "text-ink-soft/30"}`}
         >
           ★
         </span>
@@ -106,14 +106,14 @@ export default function TestimonialCarousel() {
     <div className="relative">
       {/* Main Card */}
       <div
-        className="bg-white rounded-3xl shadow-xl border border-gray-100
+        className="bg-surface rounded-3xl shadow-xl border border-line
           p-8 md:p-10 relative overflow-hidden"
         onMouseEnter={() => setIsPlaying(false)}
         onMouseLeave={() => setIsPlaying(true)}
       >
         {/* Decorative quote mark */}
         <div
-          className="absolute top-6 right-8 text-8xl font-serif text-blue-50
+          className="absolute top-6 right-8 text-8xl font-serif text-brand-purple/10
             leading-none pointer-events-none select-none"
         >
           "
@@ -129,30 +129,30 @@ export default function TestimonialCarousel() {
             {t.avatar}
           </div>
           <div>
-            <h3 className="font-bold text-gray-900 text-lg">{t.name}</h3>
-            <p className="text-gray-500 text-sm">📍 {t.location}</p>
+            <h3 className="font-bold text-ink text-lg">{t.name}</h3>
+            <p className="text-ink-soft text-sm">📍 {t.location}</p>
             <div className="flex items-center gap-2 mt-1">
               <StarRating rating={t.rating} />
-              <span className="text-xs text-gray-400">{t.date}</span>
+              <span className="text-xs text-ink-soft/70">{t.date}</span>
             </div>
           </div>
           {/* Device Tag */}
           <div className="ml-auto hidden sm:block">
-            <div className="bg-blue-50 border border-blue-100 rounded-xl px-3 py-2 text-right">
-              <p className="text-xs text-blue-400 font-medium">Device</p>
-              <p className="text-xs font-semibold text-blue-700">{t.device}</p>
-              <p className="text-xs text-blue-500 capitalize">{t.issue}</p>
+            <div className="bg-brand-purple/10 border border-brand-purple/20 rounded-xl px-3 py-2 text-right">
+              <p className="text-xs text-brand-purple/70 font-medium">Device</p>
+              <p className="text-xs font-semibold text-brand-purple">{t.device}</p>
+              <p className="text-xs text-brand-orange capitalize">{t.issue}</p>
             </div>
           </div>
         </div>
         {/* Review Text */}
-        <blockquote className="text-gray-700 text-base leading-relaxed relative z-10">
+        <blockquote className="text-ink-soft text-base leading-relaxed relative z-10">
           "{t.review}"
         </blockquote>
         {/* Verified badge */}
         <div className="flex items-center gap-1.5 mt-5">
-          <span className="text-emerald-500 text-sm">✅</span>
-          <span className="text-xs text-gray-400 font-medium">
+          <span className="text-emerald-400 text-sm">✅</span>
+          <span className="text-xs text-ink-soft font-medium">
             Verified Customer Review
           </span>
         </div>
@@ -168,8 +168,8 @@ export default function TestimonialCarousel() {
               className={`rounded-full transition-all duration-300
                 ${
                   i === current
-                    ? "w-7 h-2.5 bg-blue-600"
-                    : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
+                    ? "w-7 h-2.5 bg-gradient-to-r from-brand-purple to-brand-orange"
+                    : "w-2.5 h-2.5 bg-surface2 hover:bg-line"
                 }`}
             />
           ))}
@@ -178,19 +178,19 @@ export default function TestimonialCarousel() {
         <div className="flex gap-2">
           <button
             onClick={prev}
-            className="w-10 h-10 rounded-xl border-2 border-gray-200
-              flex items-center justify-center text-gray-600
-              hover:border-blue-500 hover:text-blue-600
-              hover:bg-blue-50 transition-all"
+            className="w-10 h-10 rounded-xl border-2 border-line
+              flex items-center justify-center text-ink-soft
+              hover:border-brand-purple hover:text-brand-purple
+              hover:bg-brand-purple/10 transition-all"
           >
             ←
           </button>
           <button
             onClick={next}
-            className="w-10 h-10 rounded-xl border-2 border-gray-200
-              flex items-center justify-center text-gray-600
-              hover:border-blue-500 hover:text-blue-600
-              hover:bg-blue-50 transition-all"
+            className="w-10 h-10 rounded-xl border-2 border-line
+              flex items-center justify-center text-ink-soft
+              hover:border-brand-purple hover:text-brand-purple
+              hover:bg-brand-purple/10 transition-all"
           >
             →
           </button>

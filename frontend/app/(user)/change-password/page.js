@@ -100,29 +100,29 @@ export default function ChangePasswordPage() {
     "bg-green-500",
   ];
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-bg py-8 px-4">
       <div className="max-w-md mx-auto space-y-6">
         {/* Header */}
         <div>
           <Link
             href="/profile"
-            className="text-xs text-blue-600 font-semibold hover:underline flex items-center gap-1 mb-3"
+            className="text-xs text-brand-purple font-semibold hover:underline flex items-center gap-1 mb-3"
           >
             ← Back to Profile
           </Link>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl text-ink tracking-wide">
             🔒 Change Password
           </h1>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-ink-soft text-sm mt-1">
             Keep your account secure with a strong password
           </p>
         </div>
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             {fields.map((f) => (
               <div key={f.key}>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                <label className="block text-xs font-semibold text-ink-soft mb-1">
                   {f.label} *
                 </label>
                 <div className="relative">
@@ -135,8 +135,9 @@ export default function ChangePasswordPage() {
                     }}
                     placeholder={f.placeholder}
                     className={`w-full border rounded-xl px-3 py-2.5 pr-10 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 transition
-                    ${errors[f.key] ? "border-red-400" : "border-gray-200"}`}
+                    bg-surface2 text-ink placeholder-ink-soft/50
+                    focus:outline-none focus:ring-2 focus:ring-brand-purple transition
+                    ${errors[f.key] ? "border-red-400" : "border-line"}`}
                   />
                   {/* Show/hide toggle */}
                   <button
@@ -147,14 +148,14 @@ export default function ChangePasswordPage() {
                         [f.showKey]: !showPwd[f.showKey],
                       })
                     }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400
-                    hover:text-gray-600 text-sm transition"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-soft
+                    hover:text-ink text-sm transition"
                   >
                     {showPwd[f.showKey] ? "🙈" : "👁️"}
                   </button>
                 </div>
                 {errors[f.key] && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red-400 text-xs mt-1">
                     ⚠️ {errors[f.key]}
                   </p>
                 )}
@@ -168,7 +169,7 @@ export default function ChangePasswordPage() {
                           className={`h-1 flex-1 rounded-full transition-all ${
                             i <= strength
                               ? strengthColor[strength]
-                              : "bg-gray-200"
+                              : "bg-surface2"
                           }`}
                         />
                       ))}
@@ -176,10 +177,10 @@ export default function ChangePasswordPage() {
                     <p
                       className={`text-xs font-semibold ${
                         strength === 4
-                          ? "text-green-600"
+                          ? "text-green-400"
                           : strength === 3
-                            ? "text-yellow-600"
-                            : "text-red-500"
+                            ? "text-yellow-400"
+                            : "text-red-400"
                       }`}
                     >
                       {strengthLabel[strength]}
@@ -191,8 +192,8 @@ export default function ChangePasswordPage() {
                   <p
                     className={`text-xs mt-1 font-medium ${
                       form.newPassword === form.confirmPassword
-                        ? "text-green-600"
-                        : "text-red-500"
+                        ? "text-green-400"
+                        : "text-red-400"
                     }`}
                   >
                     {form.newPassword === form.confirmPassword
@@ -203,11 +204,11 @@ export default function ChangePasswordPage() {
               </div>
             ))}
             {/* Tips */}
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3">
-              <p className="text-xs font-semibold text-blue-700 mb-1">
+            <div className="bg-brand-purple/10 border border-brand-purple/20 rounded-xl p-3">
+              <p className="text-xs font-semibold text-brand-purple mb-1">
                 💡 Strong Password Tips
               </p>
-              <ul className="text-xs text-blue-600 space-y-0.5 list-disc pl-4">
+              <ul className="text-xs text-ink-soft space-y-0.5 list-disc pl-4">
                 <li>At least 8 characters long</li>
                 <li>Include uppercase & lowercase letters</li>
                 <li>Include numbers and special characters (!@#$)</li>
@@ -217,8 +218,8 @@ export default function ChangePasswordPage() {
             <button
               type="submit"
               disabled={saving}
-              className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold
-              text-sm hover:bg-blue-700 transition shadow-md shadow-blue-200
+              className="w-full py-3 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl font-bold
+              text-sm hover:scale-[1.02] transition shadow-md shadow-brand-purple/20
               disabled:opacity-60 disabled:cursor-not-allowed
               flex items-center justify-center gap-2"
             >

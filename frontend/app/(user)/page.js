@@ -1,7 +1,7 @@
 import Link from "next/link";
-import StatsCounter from "../components/ui/StatsCounter";
-import TestimonialCarousel from "../components/ui/TestimonialCarousel";
-import FAQAccordion from "../components/ui/FAQAccordion";
+import StatsCounter from "../../components/ui/StatsCounter";
+import TestimonialCarousel from "../../components/ui/TestimonialCarousel";
+import FAQAccordion from "../../components/ui/FAQAccordion";
 // ── SEO Metadata ───────────────────────────────────────────
 export const metadata = {
   title: "OM Mobile Repair Center — Expert Phone & Device Repair",
@@ -34,7 +34,7 @@ const SERVICES = [
     time: "30–60 min",
     price: "From Rs. 800",
     popular: true,
-    color: "blue",
+    color: "sky",
   },
   {
     icon: "🔋",
@@ -61,7 +61,7 @@ const SERVICES = [
     time: "30–60 min",
     price: "From Rs. 300",
     popular: false,
-    color: "amber",
+    color: "orange",
   },
   {
     icon: "📷",
@@ -101,53 +101,45 @@ const SERVICES = [
   },
 ];
 const SERVICE_COLORS = {
-  blue: {
-    bg: "bg-blue-50",
-    icon: "bg-blue-100",
-    text: "text-blue-700",
-    border: "hover:border-blue-300",
+  sky: {
+    icon: "bg-sky-500/15",
+    text: "text-sky-300",
+    border: "hover:border-sky-500/40",
   },
   emerald: {
-    bg: "bg-emerald-50",
-    icon: "bg-emerald-100",
-    text: "text-emerald-700",
-    border: "hover:border-emerald-300",
+    icon: "bg-emerald-500/15",
+    text: "text-emerald-300",
+    border: "hover:border-emerald-500/40",
   },
   cyan: {
-    bg: "bg-cyan-50",
-    icon: "bg-cyan-100",
-    text: "text-cyan-700",
-    border: "hover:border-cyan-300",
+    icon: "bg-cyan-500/15",
+    text: "text-cyan-300",
+    border: "hover:border-cyan-500/40",
   },
-  amber: {
-    bg: "bg-amber-50",
-    icon: "bg-amber-100",
-    text: "text-amber-700",
-    border: "hover:border-amber-300",
+  orange: {
+    icon: "bg-brand-orange/15",
+    text: "text-brand-orange",
+    border: "hover:border-brand-orange/40",
   },
   purple: {
-    bg: "bg-purple-50",
-    icon: "bg-purple-100",
-    text: "text-purple-700",
-    border: "hover:border-purple-300",
+    icon: "bg-brand-purple/15",
+    text: "text-brand-purple",
+    border: "hover:border-brand-purple/40",
   },
   indigo: {
-    bg: "bg-indigo-50",
-    icon: "bg-indigo-100",
-    text: "text-indigo-700",
-    border: "hover:border-indigo-300",
+    icon: "bg-indigo-500/15",
+    text: "text-indigo-300",
+    border: "hover:border-indigo-500/40",
   },
   rose: {
-    bg: "bg-rose-50",
-    icon: "bg-rose-100",
-    text: "text-rose-700",
-    border: "hover:border-rose-300",
+    icon: "bg-rose-500/15",
+    text: "text-rose-300",
+    border: "hover:border-rose-500/40",
   },
   gray: {
-    bg: "bg-gray-50",
-    icon: "bg-gray-100",
-    text: "text-gray-700",
-    border: "hover:border-gray-300",
+    icon: "bg-ink-soft/15",
+    text: "text-ink-soft",
+    border: "hover:border-ink-soft/40",
   },
 };
 const STEPS = [
@@ -156,35 +148,30 @@ const STEPS = [
     icon: "📱",
     title: "Choose Your Device",
     desc: "Select your device type, brand, and describe the issue you're facing.",
-    color: "blue",
   },
   {
     step: "02",
     icon: "📅",
     title: "Pick a Time Slot",
     desc: "Browse available dates and time slots that fit your schedule perfectly.",
-    color: "indigo",
   },
   {
     step: "03",
     icon: "🚗",
     title: "Drop It Off",
     desc: "Visit our center at your scheduled time. No waiting in long queues.",
-    color: "purple",
   },
   {
     step: "04",
     icon: "🔧",
     title: "Expert Repair",
     desc: "Our certified technicians diagnose and fix your device with genuine parts.",
-    color: "emerald",
   },
   {
     step: "05",
     icon: "🎉",
     title: "Pick It Up",
     desc: "Collect your perfectly repaired device. Pay only after you're satisfied.",
-    color: "amber",
   },
 ];
 const WHY_US = [
@@ -236,13 +223,12 @@ const BRANDS = [
 // ── Main Component ─────────────────────────────────────────
 export default function HomePage() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden bg-bg">
       {/* ════════════════════════════════════════
           SECTION 1 — HERO
       ════════════════════════════════════════ */}
       <section
-        className="relative min-h-screen bg-gradient-to-br
-          from-blue-950 via-blue-900 to-indigo-900
+        className="relative min-h-screen bg-bg
           flex items-center overflow-hidden"
       >
         {/* Animated background blobs */}
@@ -252,29 +238,22 @@ export default function HomePage() {
         >
           <div
             className="absolute top-20 left-10 w-96 h-96
-            bg-blue-500/15 rounded-full blur-3xl animate-blob"
+            bg-brand-purple/20 rounded-full blur-3xl animate-blob"
           />
           <div
             className="absolute bottom-20 right-10 w-96 h-96
-            bg-indigo-500/15 rounded-full blur-3xl animate-blob
+            bg-brand-orange/15 rounded-full blur-3xl animate-blob
             animation-delay-2000"
           />
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2
             -translate-y-1/2 w-[600px] h-[600px]
-            bg-purple-500/10 rounded-full blur-3xl animate-blob
+            bg-brand-purple/10 rounded-full blur-3xl animate-blob
             animation-delay-4000"
           />
         </div>
         {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="absolute inset-0 grid-overlay" />
         {/* Hero Content */}
         <div
           className="relative max-w-7xl mx-auto px-6 py-24
@@ -285,34 +264,29 @@ export default function HomePage() {
             {/* Badge */}
             <div
               className="inline-flex items-center gap-2
-              bg-blue-500/20 border border-blue-400/30
-              text-blue-200 text-sm font-medium
+              bg-brand-purple/15 border border-brand-purple/30
+              text-brand-purple text-sm font-medium
               px-4 py-2 rounded-full mb-6 animate-fade-up"
             >
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
               Open Today · Sun–Friday 8 AM – 9 PM
             </div>
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold
-                text-white leading-tight mb-6 animate-fade-up"
+              className="text-5xl md:text-6xl lg:text-7xl font-display
+                text-ink leading-[1.05] tracking-wide mb-6 animate-fade-up"
               style={{ animationDelay: "0.1s" }}
             >
               Your Device,{" "}
-              <span
-                className="bg-gradient-to-r from-blue-300 via-cyan-300
-                  to-indigo-300 bg-clip-text text-transparent"
-              >
-                Repaired Right
-              </span>
+              <span className="gradient-text">Repaired Right</span>
             </h1>
             <p
-              className="text-blue-100 text-lg md:text-xl leading-relaxed
+              className="text-ink-soft text-lg md:text-xl leading-relaxed
                 mb-8 max-w-lg mx-auto lg:mx-0 animate-fade-up"
               style={{ animationDelay: "0.2s" }}
             >
               Professional repair services for all devices — smartphones,
               tablets & laptops. Genuine parts, certified technicians, and a{" "}
-              <span className="text-cyan-300 font-semibold">
+              <span className="text-brand-orange font-semibold">
                 3 month upto1-year warranty
               </span>{" "}
               on every repair.
@@ -326,9 +300,10 @@ export default function HomePage() {
               <Link
                 href="/book"
                 className="group inline-flex items-center justify-center gap-2
-                  px-8 py-4 bg-white text-blue-700 font-bold text-base
-                  rounded-2xl shadow-2xl shadow-blue-900/40
-                  hover:shadow-white/20 hover:scale-105
+                  px-8 py-4 bg-gradient-to-r from-brand-purple to-brand-orange
+                  text-white font-bold text-base
+                  rounded-2xl shadow-2xl shadow-brand-purple/30
+                  hover:shadow-brand-orange/30 hover:scale-105
                   active:scale-100 transition-all duration-200"
               >
                 📅 Book a Repair
@@ -339,9 +314,9 @@ export default function HomePage() {
               <Link
                 href="/my-repairs"
                 className="inline-flex items-center justify-center gap-2
-                  px-8 py-4 bg-white/10 border border-white/30
-                  text-white font-semibold text-base rounded-2xl
-                  hover:bg-white/20 hover:border-white/50
+                  px-8 py-4 bg-white/5 border border-white/15
+                  text-ink font-semibold text-base rounded-2xl
+                  hover:bg-white/10 hover:border-white/25
                   transition-all duration-200"
               >
                 🔍 Track My Repair
@@ -360,7 +335,7 @@ export default function HomePage() {
               ].map((item) => (
                 <span
                   key={item}
-                  className="text-blue-200 text-sm font-medium
+                  className="text-ink-soft text-sm font-medium
                     flex items-center gap-1"
                 >
                   {item}
@@ -376,22 +351,19 @@ export default function HomePage() {
           >
             <div className="relative">
               {/* Main card */}
-              <div
-                className="w-80 bg-white/10 backdrop-blur-xl
-                  border border-white/20 rounded-3xl p-6 shadow-2xl"
-              >
+              <div className="w-80 glass-card p-6">
                 {/* Booking reference preview */}
                 <div className="flex items-center gap-3 mb-5">
                   <div
-                    className="w-12 h-12 bg-gradient-to-br from-blue-400
-                      to-indigo-400 rounded-xl flex items-center justify-center
+                    className="w-12 h-12 bg-gradient-to-br from-brand-purple
+                      to-brand-orange rounded-xl flex items-center justify-center
                       text-2xl shadow-lg"
                   >
                     📱
                   </div>
                   <div>
-                    <p className="text-white font-bold">Samsung Galaxy S24</p>
-                    <p className="text-blue-300 text-sm">Screen Replacement</p>
+                    <p className="text-ink font-bold">Samsung Galaxy S24</p>
+                    <p className="text-brand-purple text-sm">Screen Replacement</p>
                   </div>
                 </div>
                 <div className="space-y-3 mb-5">
@@ -399,12 +371,12 @@ export default function HomePage() {
                     {
                       label: "Status",
                       value: "In Progress 🔧",
-                      color: "text-purple-300",
+                      color: "text-brand-purple",
                     },
                     {
                       label: "Tech",
                       value: "Ravi Sharma",
-                      color: "text-white",
+                      color: "text-ink",
                     },
                     {
                       label: "Est. Cost",
@@ -414,7 +386,7 @@ export default function HomePage() {
                     {
                       label: "Ready By",
                       value: "Today, 4:00 PM",
-                      color: "text-cyan-300",
+                      color: "text-brand-orange",
                     },
                   ].map(({ label, value, color }) => (
                     <div
@@ -422,7 +394,7 @@ export default function HomePage() {
                       className="flex justify-between items-center
                         bg-white/5 rounded-xl px-4 py-2.5"
                     >
-                      <span className="text-blue-300 text-xs font-medium">
+                      <span className="text-ink-soft text-xs font-medium">
                         {label}
                       </span>
                       <span className={`text-sm font-semibold ${color}`}>
@@ -435,14 +407,14 @@ export default function HomePage() {
                 <div>
                   <div
                     className="flex justify-between text-xs
-                    text-blue-300 mb-2"
+                    text-ink-soft mb-2"
                   >
                     <span>Repair Progress</span>
                     <span>65%</span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-2">
                     <div
-                      className="bg-gradient-to-r from-blue-400 to-indigo-400
+                      className="bg-gradient-to-r from-brand-purple to-brand-orange
                         h-2 rounded-full"
                       style={{ width: "65%" }}
                     />
@@ -458,12 +430,12 @@ export default function HomePage() {
                 ✅ 98% Success Rate
               </div>
               <div
-                className="absolute -bottom-4 -left-4 bg-white
-                  text-gray-800 text-xs font-bold px-3 py-2
-                  rounded-xl shadow-xl flex items-center gap-1.5"
+                className="absolute -bottom-4 -left-4 bg-surface
+                  text-ink text-xs font-bold px-3 py-2
+                  rounded-xl shadow-xl flex items-center gap-1.5 border border-line"
               >
                 ⭐⭐⭐⭐⭐
-                <span className="text-gray-500 font-normal">4.9/5</span>
+                <span className="text-ink-soft font-normal">4.9/5</span>
               </div>
             </div>
           </div>
@@ -471,16 +443,16 @@ export default function HomePage() {
         {/* Scroll indicator */}
         <div
           className="absolute bottom-8 left-1/2 -translate-x-1/2
-            flex flex-col items-center gap-2 text-blue-300
+            flex flex-col items-center gap-2 text-ink-soft
             animate-bounce"
         >
           <span className="text-xs font-medium">Scroll to explore</span>
           <div
-            className="w-6 h-9 border-2 border-blue-400/50 rounded-full
+            className="w-6 h-9 border-2 border-brand-purple/50 rounded-full
               flex justify-center pt-1.5"
           >
             <div
-              className="w-1.5 h-1.5 bg-blue-300 rounded-full
+              className="w-1.5 h-1.5 bg-brand-purple rounded-full
                 animate-bounce"
             />
           </div>
@@ -489,7 +461,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           SECTION 2 — STATS COUNTER
       ════════════════════════════════════════ */}
-      <section className="bg-gradient-to-r from-blue-500 to-gray-600 py-16 px-6">
+      <section className="bg-gradient-to-r from-brand-purple to-brand-orange py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <StatsCounter />
         </div>
@@ -497,21 +469,21 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           SECTION 3 — SERVICES
       ════════════════════════════════════════ */}
-      <section className="py-24 px-6 bg-white" id="services">
+      <section className="py-24 px-6 bg-bg" id="services">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <span
-              className="inline-block text-blue-600 font-semibold text-sm
-                uppercase tracking-widest bg-blue-50 px-4 py-1.5
+              className="inline-block text-brand-purple font-semibold text-sm
+                uppercase tracking-widest bg-brand-purple/10 px-4 py-1.5
                 rounded-full mb-4"
             >
               What We Fix
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl text-ink mb-4 tracking-wide">
               Our Repair Services
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-ink-soft max-w-2xl mx-auto text-lg leading-relaxed">
               From cracked screens to complex motherboard repairs — our
               certified technicians handle every issue with precision, care, and
               genuine parts.
@@ -525,16 +497,16 @@ export default function HomePage() {
                 <Link
                   key={service.title}
                   href="/book"
-                  className={`group relative p-6 rounded-2xl border-2 border-gray-100
-                    ${colors.border} bg-white
-                    hover:shadow-xl transition-all duration-300
+                  className={`group relative p-6 rounded-2xl border-2 border-line
+                    ${colors.border} bg-surface
+                    hover:shadow-xl hover:shadow-brand-purple/10 transition-all duration-300
                     hover:-translate-y-1 cursor-pointer`}
                 >
                   {/* Popular badge */}
                   {service.popular && (
                     <div
                       className="absolute -top-3 left-4 bg-gradient-to-r
-                        from-blue-600 to-indigo-600 text-white text-[10px]
+                        from-brand-purple to-brand-orange text-white text-[10px]
                         font-bold px-3 py-1 rounded-full shadow-md"
                     >
                       🔥 Most Popular
@@ -548,21 +520,21 @@ export default function HomePage() {
                   >
                     {service.icon}
                   </div>
-                  <h3 className="font-bold text-gray-900 text-base mb-2">
+                  <h3 className="font-bold text-ink text-base mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                  <p className="text-ink-soft text-sm leading-relaxed mb-5">
                     {service.desc}
                   </p>
                   {/* Meta row */}
                   <div className="flex items-center justify-between mt-auto">
                     <span
                       className={`text-xs font-semibold ${colors.text}
-                        ${colors.bg} px-2.5 py-1 rounded-full`}
+                        ${colors.icon} px-2.5 py-1 rounded-full`}
                     >
                       🕐 {service.time}
                     </span>
-                    <span className="text-sm font-bold text-gray-700">
+                    <span className="text-sm font-bold text-ink">
                       {service.price}
                     </span>
                   </div>
@@ -583,8 +555,8 @@ export default function HomePage() {
             <Link
               href="/book"
               className="inline-flex items-center gap-2 px-8 py-3
-                bg-gray-900 text-white font-semibold rounded-xl
-                hover:bg-blue-700 transition-all shadow-lg text-sm"
+                bg-gradient-to-r from-brand-purple to-brand-orange text-white font-semibold rounded-xl
+                hover:scale-105 transition-all shadow-lg shadow-brand-purple/20 text-sm"
             >
               Book Any Repair Online →
             </Link>
@@ -595,22 +567,22 @@ export default function HomePage() {
           SECTION 4 — HOW IT WORKS
       ════════════════════════════════════════ */}
       <section
-        className="py-24 px-6 bg-gradient-to-br from-slate-50 to-blue-50"
+        className="py-24 px-6 bg-surface"
         id="how-it-works"
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <span
-              className="inline-block text-blue-600 font-semibold text-sm
-                uppercase tracking-widest bg-blue-50 px-4 py-1.5
+              className="inline-block text-brand-purple font-semibold text-sm
+                uppercase tracking-widest bg-brand-purple/10 px-4 py-1.5
                 rounded-full mb-4"
             >
               Simple Process
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl text-ink mb-4 tracking-wide">
               How It Works
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-lg">
+            <p className="text-ink-soft max-w-xl mx-auto text-lg">
               Getting your device repaired has never been this easy. Five simple
               steps to a perfectly working device.
             </p>
@@ -620,7 +592,7 @@ export default function HomePage() {
             {/* Connecting line */}
             <div
               className="hidden lg:block absolute top-10 left-[10%]
-                right-[10%] h-0.5 border-t-2 border-dashed border-blue-200
+                right-[10%] h-0.5 border-t-2 border-dashed border-line
                 z-0"
             />
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 relative z-10">
@@ -631,26 +603,26 @@ export default function HomePage() {
                 >
                   {/* Step circle */}
                   <div
-                    className="relative w-20 h-20 bg-white border-2
-                      border-blue-100 rounded-2xl shadow-lg flex items-center
+                    className="relative w-20 h-20 bg-bg border-2
+                      border-line rounded-2xl shadow-lg flex items-center
                       justify-center text-4xl mb-5 hover:scale-110
-                      hover:border-blue-400 hover:shadow-blue-100
+                      hover:border-brand-purple/60 hover:shadow-brand-purple/10
                       transition-all duration-300"
                   >
                     {step.icon}
                     <div
                       className="absolute -top-3 -right-3 w-7 h-7
-                        bg-gradient-to-br from-blue-600 to-indigo-600
+                        bg-gradient-to-br from-brand-purple to-brand-orange
                         text-white text-xs font-bold rounded-full
                         flex items-center justify-center shadow-md"
                     >
                       {step.step}
                     </div>
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-2 text-base">
+                  <h3 className="font-bold text-ink mb-2 text-base">
                     {step.title}
                   </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">
+                  <p className="text-ink-soft text-sm leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
@@ -662,9 +634,9 @@ export default function HomePage() {
             <Link
               href="/book"
               className="inline-flex items-center gap-2 px-10 py-4
-                bg-gradient-to-r from-blue-600 to-indigo-600 text-white
+                bg-gradient-to-r from-brand-purple to-brand-orange text-white
                 font-bold text-base rounded-2xl shadow-xl
-                shadow-blue-200 hover:shadow-blue-300
+                shadow-brand-purple/20 hover:shadow-brand-orange/30
                 hover:scale-105 transition-all"
             >
               📅 Start Your Repair Booking
@@ -675,31 +647,26 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           SECTION 5 — WHY CHOOSE US
       ════════════════════════════════════════ */}
-      <section className="py-24 px-6 bg-white" id="why-us">
+      <section className="py-24 px-6 bg-bg" id="why-us">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left — Content */}
             <div>
               <span
-                className="inline-block text-blue-600 font-semibold text-sm
-                  uppercase tracking-widest bg-blue-50 px-4 py-1.5
+                className="inline-block text-brand-purple font-semibold text-sm
+                  uppercase tracking-widest bg-brand-purple/10 px-4 py-1.5
                   rounded-full mb-5"
               >
                 Why OM Mobile?
               </span>
               <h2
-                className="text-4xl md:text-5xl font-bold text-gray-900
-                  mb-6 leading-tight"
+                className="text-4xl md:text-5xl text-ink
+                  mb-6 leading-tight tracking-wide"
               >
                 Repair Experience{" "}
-                <span
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600
-                    bg-clip-text text-transparent"
-                >
-                  You Can Trust
-                </span>
+                <span className="gradient-text">You Can Trust</span>
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-8">
+              <p className="text-ink-soft text-lg leading-relaxed mb-8">
                 With 4+ years in the device repair industry, we've built a
                 reputation on quality, transparency, and customer satisfaction.
                 Here's why thousands choose us.
@@ -710,10 +677,10 @@ export default function HomePage() {
                   <div
                     key={item.title}
                     className="flex items-start gap-4 p-4 rounded-2xl
-                      hover:bg-blue-50 transition-colors group"
+                      hover:bg-brand-purple/5 transition-colors group"
                   >
                     <div
-                      className="w-11 h-11 bg-blue-100 rounded-xl
+                      className="w-11 h-11 bg-brand-purple/15 rounded-xl
                         flex items-center justify-center text-2xl
                         flex-shrink-0 group-hover:scale-110
                         transition-transform"
@@ -721,10 +688,10 @@ export default function HomePage() {
                       {item.icon}
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 text-sm mb-1">
+                      <h3 className="font-bold text-ink text-sm mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-gray-500 text-xs leading-relaxed">
+                      <p className="text-ink-soft text-xs leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -735,10 +702,10 @@ export default function HomePage() {
             {/* Right — Visual */}
             <div className="relative">
               <div
-                className="bg-gradient-to-br from-blue-500 to-indigo-800
-                  rounded-3xl p-8 text-white shadow-2xl"
+                className="bg-gradient-to-br from-brand-purple to-bg
+                  rounded-3xl p-8 text-white shadow-2xl border border-brand-purple/20"
               >
-                <h3 className="text-2xl font-bold mb-6">Our Repair Promise</h3>
+                <h3 className="text-2xl mb-6 tracking-wide">Our Repair Promise</h3>
                 <div className="space-y-4">
                   {[
                     {
@@ -766,14 +733,14 @@ export default function HomePage() {
                       key={promise.label}
                       className="flex items-start gap-4 bg-white/10
                         backdrop-blur-sm rounded-2xl p-4
-                        border border-white/20"
+                        border border-white/10"
                     >
-                      <span className="text-2xl flex-shrink-0">
+                      <span className="text-2xl flex-shrink-0 text-brand-orange">
                         {promise.icon}
                       </span>
                       <div>
                         <p className="font-semibold text-sm">{promise.label}</p>
-                        <p className="text-blue-200 text-xs mt-0.5">
+                        <p className="text-white/70 text-xs mt-0.5">
                           {promise.desc}
                         </p>
                       </div>
@@ -784,7 +751,7 @@ export default function HomePage() {
               {/* Decorative blob */}
               <div
                 className="absolute -top-4 -right-4 -z-10 w-72 h-72
-                  bg-blue-100 rounded-3xl"
+                  bg-brand-orange/10 rounded-3xl"
               />
             </div>
           </div>
@@ -793,10 +760,10 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           SECTION 6 — SUPPORTED BRANDS
       ════════════════════════════════════════ */}
-      <section className="py-16 px-6 bg-gray-50 border-y border-gray-100">
+      <section className="py-16 px-6 bg-surface border-y border-line">
         <div className="max-w-5xl mx-auto">
           <p
-            className="text-center text-gray-500 text-sm font-semibold
+            className="text-center text-ink-soft text-sm font-semibold
             uppercase tracking-widest mb-10"
           >
             We Repair All Major Brands
@@ -808,14 +775,14 @@ export default function HomePage() {
                 className="flex flex-col items-center gap-2 group cursor-default"
               >
                 <div
-                  className="w-12 h-12 bg-white rounded-xl border border-gray-200
+                  className="w-12 h-12 bg-surface2 rounded-xl border border-line
                     flex items-center justify-center text-2xl shadow-sm
-                    group-hover:border-blue-300 group-hover:shadow-md
+                    group-hover:border-brand-purple/40 group-hover:shadow-md
                     group-hover:scale-110 transition-all duration-200"
                 >
                   {brand.icon}
                 </div>
-                <span className="text-xs text-gray-500 font-medium">
+                <span className="text-xs text-ink-soft font-medium">
                   {brand.name}
                 </span>
               </div>
@@ -827,28 +794,28 @@ export default function HomePage() {
           SECTION 7 — TESTIMONIALS
       ════════════════════════════════════════ */}
       <section
-        className="py-24 px-6 bg-gradient-to-br from-blue-50 to-indigo-50"
+        className="py-24 px-6 bg-bg"
         id="reviews"
       >
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <span
-              className="inline-block text-blue-600 font-semibold text-sm
-                uppercase tracking-widest bg-blue-100 px-4 py-1.5
+              className="inline-block text-brand-purple font-semibold text-sm
+                uppercase tracking-widest bg-brand-purple/10 px-4 py-1.5
                 rounded-full mb-4"
             >
               Customer Reviews
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl text-ink mb-4 tracking-wide">
               What Our Customers Say
             </h2>
             <div className="flex items-center justify-center gap-2 mb-3">
               <div className="flex text-amber-400 text-2xl">{"★★★★★"}</div>
-              <span className="text-gray-700 font-bold text-lg">4.9/5</span>
+              <span className="text-ink font-bold text-lg">4.9/5</span>
             </div>
-            <p className="text-gray-500">
+            <p className="text-ink-soft">
               Based on{" "}
-              <span className="font-semibold text-gray-700">5,000+</span>{" "}
+              <span className="font-semibold text-ink">5,000+</span>{" "}
               verified customer reviews
             </p>
           </div>
@@ -858,25 +825,25 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           SECTION 8 — FAQ
       ════════════════════════════════════════ */}
-      <section className="py-24 px-6 bg-white" id="faq">
+      <section className="py-24 px-6 bg-bg" id="faq">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <span
-              className="inline-block text-blue-600 font-semibold text-sm
-                uppercase tracking-widest bg-blue-50 px-4 py-1.5
+              className="inline-block text-brand-purple font-semibold text-sm
+                uppercase tracking-widest bg-brand-purple/10 px-4 py-1.5
                 rounded-full mb-4"
             >
               FAQ
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl text-ink mb-4 tracking-wide">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-500 text-lg">
+            <p className="text-ink-soft text-lg">
               Everything you need to know about our repair services. Can't find
               an answer?{" "}
               <a
                 href="tel:+9779800000000"
-                className="text-blue-600 font-medium hover:underline"
+                className="text-brand-purple font-medium hover:underline"
               >
                 Call us directly.
               </a>
@@ -889,41 +856,27 @@ export default function HomePage() {
           SECTION 9 — FINAL CTA BANNER
       ════════════════════════════════════════ */}
       <section
-        className="py-24 px-6 bg-gradient-to-br from-blue-900
-          via-blue-800 to-indigo-900 relative overflow-hidden"
+        className="py-24 px-6 bg-bg relative overflow-hidden"
       >
         {/* Background elements */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: "radial-gradient(white 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
-          }}
-        />
+        <div className="absolute inset-0 grid-overlay opacity-50" />
         <div
           className="absolute top-0 right-0 w-96 h-96
-            bg-blue-500/20 rounded-full blur-3xl animate-blob"
+            bg-brand-orange/15 rounded-full blur-3xl animate-blob"
         />
         <div
           className="absolute bottom-0 left-0 w-80 h-80
-            bg-indigo-500/20 rounded-full blur-3xl animate-blob
+            bg-brand-purple/20 rounded-full blur-3xl animate-blob
             animation-delay-2000"
         />
         <div className="relative max-w-4xl mx-auto text-center">
           <span className="text-5xl mb-6 block animate-bounce">🔧</span>
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold
-              text-white mb-6 leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl text-ink mb-6 leading-tight tracking-wide"
           >
-            Ready to Fix Your{" "}
-            <span
-              className="bg-gradient-to-r from-blue-300 to-cyan-300
-                bg-clip-text text-transparent"
-            >
-              Device?
-            </span>
+            Ready to Fix Your <span className="gradient-text">Device?</span>
           </h2>
-          <p className="text-blue-200 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+          <p className="text-ink-soft text-lg md:text-xl mb-10 max-w-2xl mx-auto">
             Book your repair in under 2 minutes. No queues, no hassle. Just drop
             it off and we'll handle the rest.
           </p>
@@ -932,9 +885,10 @@ export default function HomePage() {
             <Link
               href="/book"
               className="group inline-flex items-center justify-center gap-2
-                px-10 py-5 bg-white text-blue-700 font-extrabold
-                text-lg rounded-2xl shadow-2xl
-                hover:shadow-white/20 hover:scale-105
+                px-10 py-5 bg-gradient-to-r from-brand-purple to-brand-orange
+                text-white font-extrabold
+                text-lg rounded-2xl shadow-2xl shadow-brand-purple/30
+                hover:shadow-brand-orange/30 hover:scale-105
                 active:scale-100 transition-all duration-200"
             >
               📅 Book a Repair Now
@@ -945,9 +899,9 @@ export default function HomePage() {
             <a
               href="tel:+9779800000000"
               className="inline-flex items-center justify-center gap-2
-                px-10 py-5 bg-white/10 border border-white/30
-                text-white font-bold text-lg rounded-2xl
-                hover:bg-white/20 hover:border-white/50
+                px-10 py-5 bg-white/5 border border-white/15
+                text-ink font-bold text-lg rounded-2xl
+                hover:bg-white/10 hover:border-white/25
                 transition-all duration-200"
             >
               📞 Call Us Now
@@ -963,8 +917,8 @@ export default function HomePage() {
             ].map((info) => (
               <span
                 key={info}
-                className="bg-white/10 border border-white/20
-                  text-blue-200 text-sm font-medium
+                className="bg-white/5 border border-white/10
+                  text-ink-soft text-sm font-medium
                   px-4 py-2 rounded-full"
               >
                 {info}

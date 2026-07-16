@@ -42,26 +42,27 @@ export default function LoginPage() {
   };
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900
-      to-purple-900 flex items-center justify-center px-4 py-12 relative overflow-hidden"
+      className="min-h-screen bg-bg
+      flex items-center justify-center px-4 py-12 relative overflow-hidden"
     >
       {/* Animated blobs — matching register page */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full filter blur-3xl animate-blob" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-blob animation-delay-2000" />
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-indigo-500/20 rounded-full filter blur-3xl animate-blob animation-delay-4000" />
+      <div className="absolute inset-0 grid-overlay" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-purple/20 rounded-full filter blur-3xl animate-blob" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-orange/15 rounded-full filter blur-3xl animate-blob animation-delay-2000" />
+      <div className="absolute top-1/2 left-0 w-64 h-64 bg-brand-purple/10 rounded-full filter blur-3xl animate-blob animation-delay-4000" />
       <div className="relative w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-20 h-20
-            bg-white rounded-2xl shadow-2xl mb-4 hover:scale-110 transition-transform"
+            bg-gradient-to-br from-brand-purple to-brand-orange rounded-2xl shadow-2xl shadow-brand-purple/30 mb-4 hover:scale-110 transition-transform"
           >
             <span className="text-4xl">{role === "admin" ? "🛡️" : "🔧"}</span>
           </div>
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-3xl text-ink tracking-wide">
             {role === "admin" ? "Admin Login" : "Welcome Back"}
           </h1>
-          <p className="text-blue-200 mt-1 text-sm">
+          <p className="text-ink-soft mt-1 text-sm">
             {role === "admin"
               ? "Access the OM Mobile admin panel"
               : "Sign in to your OM Mobile account"}
@@ -71,8 +72,8 @@ export default function LoginPage() {
         <div className="glass-card p-8">
           {/* ✅ Role Toggle */}
           <div
-            className="flex items-center bg-white/10 rounded-xl p-1 mb-6
-            border border-white/20"
+            className="flex items-center bg-white/5 rounded-xl p-1 mb-6
+            border border-white/10"
           >
             <button
               type="button"
@@ -84,8 +85,8 @@ export default function LoginPage() {
                 text-sm font-semibold transition-all duration-200
                 ${
                   role === "user"
-                    ? "bg-blue-500 text-white shadow-lg"
-                    : "text-blue-200 hover:text-white"
+                    ? "bg-brand-purple text-white shadow-lg"
+                    : "text-ink-soft hover:text-ink"
                 }`}
             >
               👤 User Login
@@ -100,8 +101,8 @@ export default function LoginPage() {
                 text-sm font-semibold transition-all duration-200
                 ${
                   role === "admin"
-                    ? "bg-indigo-600 text-white shadow-lg"
-                    : "text-blue-200 hover:text-white"
+                    ? "bg-brand-orange text-white shadow-lg"
+                    : "text-ink-soft hover:text-ink"
                 }`}
             >
               🛡️ Admin Login
@@ -110,7 +111,7 @@ export default function LoginPage() {
           {/* Error */}
           {error && (
             <div
-              className="mb-5 p-3 bg-red-500/20 border border-red-400/40
+              className="mb-5 p-3 bg-red-500/15 border border-red-400/30
               rounded-xl text-red-300 text-sm text-center font-medium"
             >
               {error}
@@ -120,7 +121,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
             <div>
-              <label className="block text-sm font-semibold text-blue-100 mb-1.5">
+              <label className="block text-sm font-semibold text-ink-soft mb-1.5">
                 Email Address
               </label>
               <div className="relative">
@@ -133,16 +134,16 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/10
-                    border border-white/30 text-white placeholder-blue-300
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-400
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5
+                    border border-white/15 text-ink placeholder-ink-soft/50
+                    text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple
                     transition"
                 />
               </div>
             </div>
             {/* Password */}
             <div>
-              <label className="block text-sm font-semibold text-blue-100 mb-1.5">
+              <label className="block text-sm font-semibold text-ink-soft mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -155,16 +156,16 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   required
-                  className="w-full pl-10 pr-14 py-3 rounded-xl bg-white/10
-                    border border-white/30 text-white placeholder-blue-300
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-400
+                  className="w-full pl-10 pr-14 py-3 rounded-xl bg-white/5
+                    border border-white/15 text-ink placeholder-ink-soft/50
+                    text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple
                     transition"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2
-                    text-blue-300 hover:text-white transition text-xs font-medium"
+                    text-ink-soft hover:text-ink transition text-xs font-medium"
                 >
                   {showPass ? "Hide" : "Show"}
                 </button>
@@ -173,8 +174,8 @@ export default function LoginPage() {
             {/* Admin notice */}
             {role === "admin" && (
               <div
-                className="p-3 bg-indigo-500/20 border border-indigo-400/40
-                rounded-xl text-indigo-200 text-xs text-center"
+                className="p-3 bg-brand-orange/10 border border-brand-orange/30
+                rounded-xl text-brand-orange text-xs text-center"
               >
                 🛡️ Admin accounts are created by the system only.
               </div>
@@ -189,8 +190,8 @@ export default function LoginPage() {
                 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98]
                 ${
                   role === "admin"
-                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-indigo-500/30"
-                    : "bg-gradient-to-r from-blue-500 to-indigo-500 hover:shadow-blue-500/30"
+                    ? "bg-gradient-to-r from-brand-orange to-brand-purple hover:shadow-brand-orange/30"
+                    : "bg-gradient-to-r from-brand-purple to-brand-orange hover:shadow-brand-purple/30"
                 }`}
             >
               {loading ? (
@@ -223,11 +224,11 @@ export default function LoginPage() {
           </form>
           {/* Register Link — only for users */}
           {role === "user" && (
-            <p className="text-center text-blue-200 mt-6 text-sm">
+            <p className="text-center text-ink-soft mt-6 text-sm">
               Don't have an account?{" "}
               <Link
                 href="/register"
-                className="text-white font-semibold hover:underline"
+                className="text-ink font-semibold hover:underline"
               >
                 Create one
               </Link>
@@ -235,7 +236,7 @@ export default function LoginPage() {
           )}
           {/* Admin: no self-register hint */}
           {role === "admin" && (
-            <p className="text-center text-blue-300/70 mt-6 text-xs">
+            <p className="text-center text-ink-soft/60 mt-6 text-xs">
               Admin access is granted by the system administrator only.
             </p>
           )}

@@ -22,11 +22,11 @@ export default function AdminLayout({ children }) {
     return (
       <div
         className="min-h-screen flex items-center justify-center
-        bg-gray-50"
+        bg-bg"
       >
         <div className="text-center">
           <Spinner size="xl" color="blue" />
-          <p className="mt-4 text-gray-500 font-medium">
+          <p className="mt-4 text-ink-soft font-medium">
             Loading admin panel...
           </p>
         </div>
@@ -38,14 +38,14 @@ export default function AdminLayout({ children }) {
     return (
       <div
         className="min-h-screen flex items-center justify-center
-        bg-gray-50"
+        bg-bg"
       >
         <div className="text-center">
           <p className="text-6xl mb-4">🔒</p>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
+          <h2 className="text-xl text-ink mb-2 tracking-wide">
             Access Denied
           </h2>
-          <p className="text-gray-500 text-sm">
+          <p className="text-ink-soft text-sm">
             You don't have permission to view this page.
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function AdminLayout({ children }) {
     );
   }
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-bg">
       {/* Sidebar */}
       <AdminSidebar />
       {/* Main Content */}

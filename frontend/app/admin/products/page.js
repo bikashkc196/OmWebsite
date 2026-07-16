@@ -195,21 +195,21 @@ export default function AdminProductsPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">🛒 Products</h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <h1 className="text-2xl text-ink tracking-wide">🛒 Products</h1>
+          <p className="text-ink-soft text-sm mt-1">
             Manage products — {total} total
           </p>
         </div>
         <button
           onClick={openCreate}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5
-          rounded-xl text-sm font-semibold hover:bg-blue-700 shadow-md shadow-blue-200 transition"
+          className="flex items-center gap-2 bg-gradient-to-r from-brand-purple to-brand-orange text-white px-4 py-2.5
+          rounded-xl text-sm font-semibold hover:scale-105 shadow-md shadow-brand-purple/20 transition"
         >
           ＋ Add Product
         </button>
       </div>
       {/* ── Filters ── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-wrap gap-3">
+      <div className="bg-surface rounded-2xl border border-line shadow-sm p-4 flex flex-wrap gap-3">
         <input
           type="text"
           placeholder="🔍 Search products..."
@@ -218,8 +218,8 @@ export default function AdminProductsPage() {
             setSearch(e.target.value);
             setPage(1);
           }}
-          className="flex-1 min-w-[200px] border border-gray-200 rounded-xl px-4 py-2.5 text-sm
-          focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 min-w-[200px] border border-line rounded-xl px-4 py-2.5 text-sm
+          bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
         />
         <select
           value={categoryFilter}
@@ -227,8 +227,8 @@ export default function AdminProductsPage() {
             setCategoryFilter(e.target.value);
             setPage(1);
           }}
-          className="border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white
-          focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-line rounded-xl px-4 py-2.5 text-sm bg-surface2 text-ink
+          focus:outline-none focus:ring-2 focus:ring-brand-purple"
         >
           <option value="">All Categories</option>
           {CATEGORIES.map((c) => (
@@ -244,22 +244,22 @@ export default function AdminProductsPage() {
           <Spinner size="xl" color="blue" />
         </div>
       ) : products.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100">
+        <div className="text-center py-20 bg-surface rounded-2xl border border-line">
           <p className="text-5xl mb-3">📭</p>
-          <p className="text-gray-400">No products found</p>
+          <p className="text-ink-soft">No products found</p>
           <button
             onClick={openCreate}
-            className="mt-3 text-blue-600 text-sm font-semibold hover:underline"
+            className="mt-3 text-brand-purple text-sm font-semibold hover:underline"
           >
             + Add your first product
           </button>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 border-b border-gray-100">
+                <tr className="bg-surface2 border-b border-line">
                   {[
                     "Image",
                     "Product",
@@ -273,22 +273,22 @@ export default function AdminProductsPage() {
                     <th
                       key={h}
                       className="px-4 py-3 text-left text-xs font-semibold
-                      text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                      text-ink-soft uppercase tracking-wider whitespace-nowrap"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-line">
                 {products.map((product) => (
                   <tr
                     key={product._id}
-                    className="hover:bg-gray-50 transition-colors"
+                    className="hover:bg-surface2 transition-colors"
                   >
                     {/* Image */}
                     <td className="px-4 py-3">
-                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-gray-100 border border-gray-100">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-surface2 border border-line">
                         {product.images?.[0]?.url ? (
                           <img
                             src={product.images[0].url}
@@ -304,19 +304,19 @@ export default function AdminProductsPage() {
                     </td>
                     {/* Product Name */}
                     <td className="px-4 py-3">
-                      <p className="font-semibold text-gray-800 max-w-[180px] truncate">
+                      <p className="font-semibold text-ink max-w-[180px] truncate">
                         {product.name}
                       </p>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-xs text-ink-soft">
                         {product.brand || "—"}
                       </p>
-                      <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded font-medium">
+                      <span className="text-xs bg-surface2 text-ink-soft px-1.5 py-0.5 rounded font-medium">
                         {product.quality}
                       </span>
                     </td>
                     {/* Category */}
                     <td className="px-4 py-3">
-                      <span className="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-lg font-medium capitalize">
+                      <span className="text-xs bg-brand-purple/10 text-brand-purple px-2.5 py-1 rounded-lg font-medium capitalize">
                         {product.category === "android"
                           ? "📱 Android"
                           : product.category === "iphone"
@@ -326,7 +326,7 @@ export default function AdminProductsPage() {
                     </td>
                     {/* Price */}
                     <td className="px-4 py-3">
-                      <p className="font-bold text-blue-700">
+                      <p className="font-bold text-brand-orange">
                         Rs.{" "}
                         {(product.discountPrice &&
                         product.discountPrice < product.price
@@ -336,7 +336,7 @@ export default function AdminProductsPage() {
                       </p>
                       {product.discountPrice > 0 &&
                         product.discountPrice < product.price && (
-                          <p className="text-xs text-gray-400 line-through">
+                          <p className="text-xs text-ink-soft line-through">
                             Rs. {product.price.toLocaleString("en-NP")}
                           </p>
                         )}
@@ -346,10 +346,10 @@ export default function AdminProductsPage() {
                       <span
                         className={`font-bold ${
                           product.stock === 0
-                            ? "text-red-500"
+                            ? "text-red-400"
                             : product.stock <= 5
-                              ? "text-orange-500"
-                              : "text-gray-800"
+                              ? "text-brand-orange"
+                              : "text-ink"
                         }`}
                       >
                         {product.stock}
@@ -361,8 +361,8 @@ export default function AdminProductsPage() {
                         onClick={() => handleToggleFeatured(product._id)}
                         className={`text-xs px-2.5 py-1 rounded-full font-semibold border transition ${
                           product.isFeatured
-                            ? "bg-yellow-100 text-yellow-700 border-yellow-200"
-                            : "bg-gray-100 text-gray-500 border-gray-200 hover:bg-yellow-50"
+                            ? "bg-yellow-500/15 text-yellow-300 border-yellow-500/30"
+                            : "bg-surface2 text-ink-soft border-line hover:bg-yellow-500/10"
                         }`}
                       >
                         {product.isFeatured ? "⭐ Featured" : "☆ Set Featured"}
@@ -373,8 +373,8 @@ export default function AdminProductsPage() {
                       <span
                         className={`text-xs px-2.5 py-1 rounded-full font-semibold ${
                           product.isActive
-                            ? "bg-green-100 text-green-600"
-                            : "bg-red-100 text-red-500"
+                            ? "bg-green-500/15 text-green-300"
+                            : "bg-red-500/15 text-red-300"
                         }`}
                       >
                         {product.isActive ? "✅ Active" : "❌ Hidden"}
@@ -385,14 +385,14 @@ export default function AdminProductsPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => openEdit(product)}
-                          className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                          className="p-1.5 text-brand-purple hover:bg-brand-purple/10 rounded-lg transition"
                           title="Edit"
                         >
                           ✏️
                         </button>
                         <button
                           onClick={() => setConfirmDeleteId(product._id)}
-                          className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition"
+                          className="p-1.5 text-red-400 hover:bg-red-500/10 rounded-lg transition"
                           title="Delete"
                         >
                           🗑️
@@ -406,24 +406,24 @@ export default function AdminProductsPage() {
           </div>
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100">
-              <p className="text-xs text-gray-400">
+            <div className="flex items-center justify-between px-5 py-3 border-t border-line">
+              <p className="text-xs text-ink-soft">
                 Page {page} of {totalPages}
               </p>
               <div className="flex gap-2">
                 <button
                   disabled={page === 1}
                   onClick={() => setPage((p) => p - 1)}
-                  className="px-3 py-1.5 text-xs border border-gray-200 rounded-lg
-                  hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-3 py-1.5 text-xs border border-line rounded-lg
+                  text-ink-soft hover:bg-surface2 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   ← Prev
                 </button>
                 <button
                   disabled={page === totalPages}
                   onClick={() => setPage((p) => p + 1)}
-                  className="px-3 py-1.5 text-xs border border-gray-200 rounded-lg
-                  hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-3 py-1.5 text-xs border border-line rounded-lg
+                  text-ink-soft hover:bg-surface2 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Next →
                 </button>
@@ -435,18 +435,18 @@ export default function AdminProductsPage() {
       {/* ── Add / Edit Modal ── */}
       {showModal && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center
         justify-center z-50 p-4"
         >
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-surface border border-line rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
-              <h2 className="text-lg font-bold text-gray-800">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-line sticky top-0 bg-surface z-10">
+              <h2 className="text-lg font-bold text-ink">
                 {editProduct ? "✏️ Edit Product" : "➕ Add New Product"}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-400 hover:text-gray-600 text-xl transition"
+                className="text-ink-soft hover:text-ink text-xl transition"
               >
                 ✕
               </button>
@@ -455,7 +455,7 @@ export default function AdminProductsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Name */}
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Product Name *
                   </label>
                   <input
@@ -464,13 +464,13 @@ export default function AdminProductsPage() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g. iPhone 14 OLED Screen"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Description */}
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Description *
                   </label>
                   <textarea
@@ -481,13 +481,13 @@ export default function AdminProductsPage() {
                     }
                     rows={3}
                     placeholder="Describe the product..."
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple resize-none"
                   />
                 </div>
                 {/* Category */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Category *
                   </label>
                   <select
@@ -496,8 +496,8 @@ export default function AdminProductsPage() {
                     onChange={(e) =>
                       setForm({ ...form, category: e.target.value })
                     }
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>
@@ -508,7 +508,7 @@ export default function AdminProductsPage() {
                 </div>
                 {/* Quality */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Quality *
                   </label>
                   <select
@@ -517,8 +517,8 @@ export default function AdminProductsPage() {
                     onChange={(e) =>
                       setForm({ ...form, quality: e.target.value })
                     }
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
                   >
                     {QUALITIES.map((q) => (
                       <option key={q} value={q}>
@@ -529,7 +529,7 @@ export default function AdminProductsPage() {
                 </div>
                 {/* Brand */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Brand
                   </label>
                   <input
@@ -539,13 +539,13 @@ export default function AdminProductsPage() {
                       setForm({ ...form, brand: e.target.value })
                     }
                     placeholder="e.g. Samsung, Apple"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Stock */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Stock *
                   </label>
                   <input
@@ -557,13 +557,13 @@ export default function AdminProductsPage() {
                       setForm({ ...form, stock: e.target.value })
                     }
                     placeholder="e.g. 25"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Price */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Price (Rs) *
                   </label>
                   <input
@@ -575,15 +575,15 @@ export default function AdminProductsPage() {
                       setForm({ ...form, price: e.target.value })
                     }
                     placeholder="e.g. 5000"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Discount Price */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Discount Price (Rs)
-                    <span className="font-normal text-gray-400 ml-1">
+                    <span className="font-normal text-ink-soft/70 ml-1">
                       (optional)
                     </span>
                   </label>
@@ -595,13 +595,13 @@ export default function AdminProductsPage() {
                       setForm({ ...form, discountPrice: e.target.value })
                     }
                     placeholder="e.g. 4500"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Compatibility */}
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Compatible With
                   </label>
                   <input
@@ -611,15 +611,15 @@ export default function AdminProductsPage() {
                       setForm({ ...form, compatibility: e.target.value })
                     }
                     placeholder="e.g. iPhone 14, iPhone 14 Pro, iPhone 14 Plus"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Tags */}
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Tags
-                    <span className="font-normal text-gray-400 ml-1">
+                    <span className="font-normal text-ink-soft/70 ml-1">
                       (comma separated)
                     </span>
                   </label>
@@ -628,8 +628,8 @@ export default function AdminProductsPage() {
                     value={form.tags}
                     onChange={(e) => setForm({ ...form, tags: e.target.value })}
                     placeholder="e.g. screen, iphone, oled, replacement"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5 text-sm
+                    bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Featured Toggle */}
@@ -641,9 +641,9 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setForm({ ...form, isFeatured: e.target.checked })
                       }
-                      className="w-4 h-4 accent-blue-600"
+                      className="w-4 h-4 accent-brand-purple"
                     />
-                    <span className="text-sm font-semibold text-gray-700">
+                    <span className="text-sm font-semibold text-ink">
                       ⭐ Mark as Featured Product
                     </span>
                   </label>
@@ -652,13 +652,13 @@ export default function AdminProductsPage() {
               {/* ── Product Images (Cloudinary Upload) ── */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-semibold text-gray-600">
+                  <label className="text-xs font-semibold text-ink-soft">
                     🖼️ Product Images
                   </label>
                   <button
                     type="button"
                     onClick={addImageField}
-                    className="text-xs text-blue-600 font-semibold hover:underline"
+                    className="text-xs text-brand-purple font-semibold hover:underline"
                   >
                     + Add Image
                   </button>
@@ -669,8 +669,8 @@ export default function AdminProductsPage() {
                       {/* Preview / Upload dropzone */}
                       <label
                         className="w-14 h-14 rounded-xl overflow-hidden border border-dashed
-                        border-gray-300 flex-shrink-0 flex items-center justify-center
-                        cursor-pointer bg-gray-50 hover:bg-gray-100 transition relative"
+                        border-line flex-shrink-0 flex items-center justify-center
+                        cursor-pointer bg-surface2 hover:bg-line transition relative"
                       >
                         <input
                           type="file"
@@ -692,11 +692,11 @@ export default function AdminProductsPage() {
                             }}
                           />
                         ) : (
-                          <span className="text-lg text-gray-400">📤</span>
+                          <span className="text-lg text-ink-soft">📤</span>
                         )}
                       </label>
                       <div className="flex-1 space-y-1.5">
-                        <p className="text-xs text-gray-400 truncate">
+                        <p className="text-xs text-ink-soft truncate">
                           {img.url ? "✅ Uploaded" : "No image uploaded yet"}
                         </p>
                         <input
@@ -706,15 +706,15 @@ export default function AdminProductsPage() {
                             handleImageChange(idx, "alt", e.target.value)
                           }
                           placeholder="Image description (optional)"
-                          className="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs
-                          focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-line rounded-xl px-3 py-2 text-xs
+                          bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                         />
                       </div>
                       {form.images.length > 1 && (
                         <button
                           type="button"
                           onClick={() => removeImageField(idx)}
-                          className="text-red-400 hover:text-red-600 text-xs mt-2 transition"
+                          className="text-red-400 hover:text-red-300 text-xs mt-2 transition"
                         >
                           ✕
                         </button>
@@ -728,16 +728,16 @@ export default function AdminProductsPage() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 py-2.5 border border-gray-200 text-gray-700 rounded-xl
-                  text-sm font-medium hover:bg-gray-50 transition"
+                  className="flex-1 py-2.5 border border-line text-ink rounded-xl
+                  text-sm font-medium hover:bg-surface2 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving || uploadingIdx !== null}
-                  className="flex-1 py-2.5 bg-blue-600 text-white rounded-xl text-sm
-                  font-semibold hover:bg-blue-700 transition disabled:opacity-60
+                  className="flex-1 py-2.5 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl text-sm
+                  font-semibold hover:scale-[1.02] transition disabled:opacity-60
                   disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {saving ? (
@@ -757,22 +757,22 @@ export default function AdminProductsPage() {
       )}
       {/* ── Confirm Delete Modal ── */}
       {confirmDeleteId && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-surface border border-line rounded-2xl shadow-2xl p-6 max-w-sm w-full">
             <div className="text-center mb-5">
               <div className="text-5xl mb-3">⚠️</div>
-              <h3 className="text-lg font-bold text-gray-800">
+              <h3 className="text-lg text-ink tracking-wide">
                 Delete Product?
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-ink-soft mt-1">
                 The product will be hidden from users. This can be restored.
               </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmDeleteId(null)}
-                className="flex-1 px-4 py-2.5 border border-gray-200 text-gray-700
-                rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+                className="flex-1 px-4 py-2.5 border border-line text-ink
+                rounded-xl text-sm font-medium hover:bg-surface2 transition"
               >
                 Cancel
               </button>

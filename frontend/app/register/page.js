@@ -83,24 +83,25 @@ export default function RegisterPage() {
   ];
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900
+      className="min-h-screen bg-bg
       flex items-center justify-center px-4 py-12 relative overflow-hidden"
     >
       {/* Animated blobs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full filter blur-3xl animate-blob" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-blob animation-delay-2000" />
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-indigo-500/20 rounded-full filter blur-3xl animate-blob animation-delay-4000" />
+      <div className="absolute inset-0 grid-overlay" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-purple/20 rounded-full filter blur-3xl animate-blob" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-orange/15 rounded-full filter blur-3xl animate-blob animation-delay-2000" />
+      <div className="absolute top-1/2 left-0 w-64 h-64 bg-brand-purple/10 rounded-full filter blur-3xl animate-blob animation-delay-4000" />
       <div className="relative w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-20 h-20
-            bg-white rounded-2xl shadow-2xl mb-4 hover:scale-110 transition-transform"
+            bg-gradient-to-br from-brand-purple to-brand-orange rounded-2xl shadow-2xl shadow-brand-purple/30 mb-4 hover:scale-110 transition-transform"
           >
             <span className="text-4xl">🔧</span>
           </div>
-          <h1 className="text-3xl font-bold text-white">Create Account</h1>
-          <p className="text-blue-200 mt-1 text-sm">
+          <h1 className="text-3xl text-ink tracking-wide">Create Account</h1>
+          <p className="text-ink-soft mt-1 text-sm">
             Join OM Mobile Repair — Book repairs in minutes
           </p>
         </div>
@@ -109,16 +110,16 @@ export default function RegisterPage() {
           {/* ✅ Role Badge — read only, always "user" */}
           <div
             className="flex items-center justify-center gap-2 mb-5 py-2.5 px-4
-            bg-blue-500/20 border border-blue-400/30 rounded-xl"
+            bg-brand-purple/10 border border-brand-purple/25 rounded-xl"
           >
             <span>👤</span>
-            <span className="text-blue-100 text-sm font-medium">
+            <span className="text-ink-soft text-sm font-medium">
               Registering as{" "}
-              <span className="text-white font-bold">Customer</span>
+              <span className="text-ink font-bold">Customer</span>
             </span>
             <span
-              className="ml-auto text-xs bg-blue-500/40 text-blue-100
-              px-2 py-0.5 rounded-full border border-blue-400/30"
+              className="ml-auto text-xs bg-brand-purple/20 text-brand-purple
+              px-2 py-0.5 rounded-full border border-brand-purple/30"
             >
               User
             </span>
@@ -127,7 +128,7 @@ export default function RegisterPage() {
             {/* Standard Fields */}
             {inputFields.map(({ id, label, type, placeholder, icon }) => (
               <div key={id}>
-                <label htmlFor={id} className="label-style text-blue-100">
+                <label htmlFor={id} className="label-style text-ink-soft">
                   {label}
                 </label>
                 <div className="relative mt-1">
@@ -140,10 +141,10 @@ export default function RegisterPage() {
                     value={form[id]}
                     onChange={(e) => update(id, e.target.value)}
                     placeholder={placeholder}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/10
-                      border text-white placeholder-blue-300 text-sm
-                      focus:outline-none focus:ring-2 focus:ring-blue-400 transition
-                      ${errors[id] ? "border-red-400" : "border-white/30"}`}
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/5
+                      border text-ink placeholder-ink-soft/50 text-sm
+                      focus:outline-none focus:ring-2 focus:ring-brand-purple transition
+                      ${errors[id] ? "border-red-400" : "border-white/15"}`}
                   />
                 </div>
                 {errors[id] && (
@@ -155,7 +156,7 @@ export default function RegisterPage() {
             ))}
             {/* Password */}
             <div>
-              <label className="label-style text-blue-100">Password</label>
+              <label className="label-style text-ink-soft">Password</label>
               <div className="relative mt-1">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2">
                   🔑
@@ -165,16 +166,16 @@ export default function RegisterPage() {
                   value={form.password}
                   onChange={(e) => update("password", e.target.value)}
                   placeholder="Min. 6 characters"
-                  className={`w-full pl-10 pr-12 py-3 rounded-xl bg-white/10
-                    border text-white placeholder-blue-300 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-400 transition
-                    ${errors.password ? "border-red-400" : "border-white/30"}`}
+                  className={`w-full pl-10 pr-12 py-3 rounded-xl bg-white/5
+                    border text-ink placeholder-ink-soft/50 text-sm
+                    focus:outline-none focus:ring-2 focus:ring-brand-purple transition
+                    ${errors.password ? "border-red-400" : "border-white/15"}`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2
-                    text-blue-300 hover:text-white transition text-xs font-medium"
+                    text-ink-soft hover:text-ink transition text-xs font-medium"
                 >
                   {showPass ? "Hide" : "Show"}
                 </button>
@@ -194,14 +195,14 @@ export default function RegisterPage() {
                                 : lvl <= 2
                                   ? "bg-yellow-400"
                                   : lvl <= 3
-                                    ? "bg-blue-400"
+                                    ? "bg-brand-purple"
                                     : "bg-emerald-400"
-                              : "bg-white/20"
+                              : "bg-white/10"
                           }`}
                       />
                     ))}
                   </div>
-                  <p className="text-xs text-blue-300 mt-1">
+                  <p className="text-xs text-ink-soft mt-1">
                     {form.password.length < 6
                       ? "Too short"
                       : form.password.length < 9
@@ -220,7 +221,7 @@ export default function RegisterPage() {
             </div>
             {/* Confirm Password */}
             <div>
-              <label className="label-style text-blue-100">
+              <label className="label-style text-ink-soft">
                 Confirm Password
               </label>
               <div className="relative mt-1">
@@ -232,10 +233,10 @@ export default function RegisterPage() {
                   value={form.confirmPassword}
                   onChange={(e) => update("confirmPassword", e.target.value)}
                   placeholder="Repeat your password"
-                  className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/10
-                    border text-white placeholder-blue-300 text-sm
-                    focus:outline-none focus:ring-2 focus:ring-blue-400 transition
-                    ${errors.confirmPassword ? "border-red-400" : "border-white/30"}`}
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/5
+                    border text-ink placeholder-ink-soft/50 text-sm
+                    focus:outline-none focus:ring-2 focus:ring-brand-purple transition
+                    ${errors.confirmPassword ? "border-red-400" : "border-white/15"}`}
                 />
                 {form.confirmPassword && (
                   <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-sm">
@@ -250,13 +251,13 @@ export default function RegisterPage() {
               )}
             </div>
             {/* Terms */}
-            <p className="text-xs text-blue-200/80 text-center pt-1">
+            <p className="text-xs text-ink-soft/80 text-center pt-1">
               By registering, you agree to our{" "}
-              <span className="text-blue-300 underline cursor-pointer">
+              <span className="text-brand-purple underline cursor-pointer">
                 Terms of Service
               </span>{" "}
               and{" "}
-              <span className="text-blue-300 underline cursor-pointer">
+              <span className="text-brand-purple underline cursor-pointer">
                 Privacy Policy
               </span>
             </p>
@@ -264,9 +265,9 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-gradient-to-r from-blue-500 to-indigo-500
+              className="w-full py-3.5 bg-gradient-to-r from-brand-purple to-brand-orange
                 text-white font-semibold rounded-xl shadow-lg
-                hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98]
+                hover:shadow-brand-purple/30 hover:scale-[1.02] active:scale-[0.98]
                 transition-all duration-200 disabled:opacity-60
                 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
             >
@@ -279,11 +280,11 @@ export default function RegisterPage() {
               )}
             </button>
           </form>
-          <p className="text-center text-blue-200 mt-6 text-sm">
+          <p className="text-center text-ink-soft mt-6 text-sm">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="text-white font-semibold hover:underline"
+              className="text-ink font-semibold hover:underline"
             >
               Sign in
             </Link>

@@ -98,14 +98,14 @@ export default function ProductsPage() {
     await addToCart(productId);
   };
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-bg">
       {/* ── Hero Banner ── */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 px-4">
+      <div className="bg-gradient-to-r from-brand-purple to-brand-orange text-white py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-2">
+          <h1 className="text-3xl md:text-4xl tracking-wide mb-2">
             🛒 Our Products
           </h1>
-          <p className="text-blue-100 text-sm md:text-base">
+          <p className="text-white/80 text-sm md:text-base">
             Genuine parts & accessories — All prices in Nepali Rupees (Rs)
           </p>
         </div>
@@ -121,13 +121,13 @@ export default function ProductsPage() {
             placeholder="🔍 Search products..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm
-            focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm"
+            className="flex-1 border border-line rounded-xl px-4 py-3 text-sm
+            focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface text-ink shadow-sm"
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-5 py-3 rounded-xl text-sm
-            font-semibold hover:bg-blue-700 transition shadow-md shadow-blue-200"
+            className="bg-gradient-to-r from-brand-purple to-brand-orange text-white px-5 py-3 rounded-xl text-sm
+            font-semibold hover:scale-[1.02] transition shadow-md shadow-brand-purple/20"
           >
             Search
           </button>
@@ -140,8 +140,8 @@ export default function ProductsPage() {
               onClick={() => setCategory(cat.value)}
               className={`px-4 py-2 rounded-full text-sm font-semibold border transition ${
                 category === cat.value
-                  ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-blue-300 hover:text-blue-600"
+                  ? "bg-gradient-to-r from-brand-purple to-brand-orange text-white border-transparent shadow-md"
+                  : "bg-surface text-ink-soft border-line hover:border-brand-purple/40 hover:text-brand-purple"
               }`}
             >
               {cat.label}
@@ -149,14 +149,14 @@ export default function ProductsPage() {
           ))}
         </div>
         {/* ── Filter Row ── */}
-        <div className="flex flex-wrap gap-3 mb-6 items-center justify-between bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <div className="flex flex-wrap gap-3 mb-6 items-center justify-between bg-surface rounded-2xl border border-line shadow-sm p-4">
           <div className="flex flex-wrap gap-3">
             {/* Quality Filter */}
             <select
               value={quality}
               onChange={(e) => setQuality(e.target.value)}
-              className="border border-gray-200 rounded-xl px-3 py-2 text-sm
-              focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="border border-line rounded-xl px-3 py-2 text-sm
+              focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
             >
               {QUALITY_OPTIONS.map((q) => (
                 <option key={q.value} value={q.value}>
@@ -168,8 +168,8 @@ export default function ProductsPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="border border-gray-200 rounded-xl px-3 py-2 text-sm
-              focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="border border-line rounded-xl px-3 py-2 text-sm
+              focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
             >
               {SORT_OPTIONS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -178,7 +178,7 @@ export default function ProductsPage() {
               ))}
             </select>
           </div>
-          <p className="text-xs text-gray-400 font-medium">
+          <p className="text-xs text-ink-soft font-medium">
             {total} product{total !== 1 ? "s" : ""} found
           </p>
         </div>
@@ -186,15 +186,15 @@ export default function ProductsPage() {
         {pageLoading ? (
           <div className="flex flex-col items-center justify-center py-24">
             <Spinner size="xl" color="blue" />
-            <p className="mt-4 text-gray-400">Loading products...</p>
+            <p className="mt-4 text-ink-soft">Loading products...</p>
           </div>
         ) : products.length === 0 ? (
-          <div className="text-center py-24 bg-white rounded-2xl border border-gray-100">
+          <div className="text-center py-24 bg-surface rounded-2xl border border-line">
             <p className="text-6xl mb-3">📭</p>
-            <p className="text-gray-400 font-medium text-lg">
+            <p className="text-ink-soft font-medium text-lg">
               No products found
             </p>
-            <p className="text-gray-300 text-sm mt-1">
+            <p className="text-ink-soft/60 text-sm mt-1">
               Try changing your filters or search term
             </p>
           </div>
@@ -215,8 +215,8 @@ export default function ProductsPage() {
             <button
               disabled={page === 1}
               onClick={() => setPage((p) => p - 1)}
-              className="px-4 py-2 rounded-xl border border-gray-200 text-sm
-              font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40
+              className="px-4 py-2 rounded-xl border border-line text-sm
+              font-medium text-ink-soft hover:bg-surface2 disabled:opacity-40
               disabled:cursor-not-allowed transition"
             >
               ← Prev
@@ -227,8 +227,8 @@ export default function ProductsPage() {
                 onClick={() => setPage(p)}
                 className={`w-9 h-9 rounded-xl text-sm font-semibold transition ${
                   p === page
-                    ? "bg-blue-600 text-white shadow-md"
-                    : "border border-gray-200 text-gray-600 hover:bg-gray-50"
+                    ? "bg-gradient-to-r from-brand-purple to-brand-orange text-white shadow-md"
+                    : "border border-line text-ink-soft hover:bg-surface2"
                 }`}
               >
                 {p}
@@ -237,8 +237,8 @@ export default function ProductsPage() {
             <button
               disabled={page === totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="px-4 py-2 rounded-xl border border-gray-200 text-sm
-              font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40
+              className="px-4 py-2 rounded-xl border border-line text-sm
+              font-medium text-ink-soft hover:bg-surface2 disabled:opacity-40
               disabled:cursor-not-allowed transition"
             >
               Next →

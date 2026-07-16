@@ -132,12 +132,12 @@ export default function BookRepairPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4">
+    <div className="min-h-screen bg-bg py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10 animate-fade-up">
-          <h1 className="text-4xl font-bold text-gray-900">Book a Repair</h1>
-          <p className="text-gray-500 mt-2">
+          <h1 className="text-4xl text-ink tracking-wide">Book a Repair</h1>
+          <p className="text-ink-soft mt-2">
             Quick, easy, and hassle-free device repair booking
           </p>
         </div>
@@ -151,15 +151,15 @@ export default function BookRepairPage() {
                 text-sm transition-all duration-300
                 ${
                   i <= step
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-200 scale-100"
-                    : "bg-gray-200 text-gray-500"
+                    ? "bg-gradient-to-br from-brand-purple to-brand-orange text-white shadow-lg shadow-brand-purple/20 scale-100"
+                    : "bg-surface2 text-ink-soft"
                 }`}
               >
                 {i < step ? <CheckCircle2 size={18} /> : i + 1}
               </div>
               <div
                 className={`flex-1 h-1 mx-2 rounded-full transition-all duration-500
-                ${i < step ? "bg-blue-600" : "bg-gray-200"}
+                ${i < step ? "bg-brand-purple" : "bg-surface2"}
                 ${i === steps.length - 1 ? "hidden" : ""}`}
               />
             </div>
@@ -167,16 +167,16 @@ export default function BookRepairPage() {
         </div>
 
         {/* Step Card */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-surface rounded-3xl shadow-xl p-8 border border-line">
           {/* STEP 0 — Device Info */}
           {step === 0 && (
             <div className="space-y-5 animate-fade-in">
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-ink">
                 Tell us about your device
               </h2>
               <div>
                 <label className="label-style">
-                  Device Type <span className="text-red-500">*</span>
+                  Device Type <span className="text-red-400">*</span>
                 </label>
                 <div className="grid grid-cols-3 gap-3 mt-2">
                   {deviceTypes.map((d) => {
@@ -189,8 +189,8 @@ export default function BookRepairPage() {
                         className={`flex flex-col items-center gap-1.5 py-3 px-3 rounded-xl border-2 text-sm font-medium
                           transition-all hover-lift ${
                             form.deviceType === d.value
-                              ? "border-blue-500 bg-blue-50 text-blue-700"
-                              : "border-gray-200 text-gray-600 hover:border-blue-300"
+                              ? "border-brand-purple bg-brand-purple/10 text-brand-purple"
+                              : "border-line text-ink-soft hover:border-brand-purple/40"
                           }`}
                       >
                         <Icon size={20} />
@@ -200,7 +200,7 @@ export default function BookRepairPage() {
                   })}
                 </div>
                 {errors.deviceType && (
-                  <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                  <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
                     <AlertCircle size={13} /> {errors.deviceType}
                   </p>
                 )}
@@ -208,7 +208,7 @@ export default function BookRepairPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="label-style">
-                    Brand <span className="text-red-500">*</span>
+                    Brand <span className="text-red-400">*</span>
                   </label>
                   <input
                     value={form.deviceBrand}
@@ -217,14 +217,14 @@ export default function BookRepairPage() {
                     placeholder="e.g. Samsung"
                   />
                   {errors.deviceBrand && (
-                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                    <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
                       <AlertCircle size={13} /> {errors.deviceBrand}
                     </p>
                   )}
                 </div>
                 <div>
                   <label className="label-style">
-                    Model <span className="text-red-500">*</span>
+                    Model <span className="text-red-400">*</span>
                   </label>
                   <input
                     value={form.deviceModel}
@@ -233,7 +233,7 @@ export default function BookRepairPage() {
                     placeholder="e.g. Galaxy S23"
                   />
                   {errors.deviceModel && (
-                    <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                    <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
                       <AlertCircle size={13} /> {errors.deviceModel}
                     </p>
                   )}
@@ -245,12 +245,12 @@ export default function BookRepairPage() {
           {/* STEP 1 — Issue Details */}
           {step === 1 && (
             <div className="space-y-5 animate-fade-in">
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-ink">
                 Describe the issue
               </h2>
               <div>
                 <label className="label-style">
-                  Issue Category <span className="text-red-500">*</span>
+                  Issue Category <span className="text-red-400">*</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   {issueCategories.map((cat) => {
@@ -263,8 +263,8 @@ export default function BookRepairPage() {
                         className={`flex items-center gap-2 py-3 px-4 rounded-xl border-2 text-sm font-medium text-left
                           transition-all hover-lift ${
                             form.issueCategory === cat.value
-                              ? "border-blue-500 bg-blue-50 text-blue-700"
-                              : "border-gray-200 text-gray-600 hover:border-blue-300"
+                              ? "border-brand-purple bg-brand-purple/10 text-brand-purple"
+                              : "border-line text-ink-soft hover:border-brand-purple/40"
                           }`}
                       >
                         <Icon size={18} />
@@ -274,14 +274,14 @@ export default function BookRepairPage() {
                   })}
                 </div>
                 {errors.issueCategory && (
-                  <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                  <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
                     <AlertCircle size={13} /> {errors.issueCategory}
                   </p>
                 )}
               </div>
               <div>
                 <label className="label-style">
-                  Detailed Description <span className="text-red-500">*</span>
+                  Detailed Description <span className="text-red-400">*</span>
                 </label>
                 <textarea
                   value={form.issueDescription}
@@ -292,13 +292,13 @@ export default function BookRepairPage() {
                 />
                 <div className="flex items-center justify-between mt-1.5">
                   {errors.issueDescription ? (
-                    <p className="text-red-500 text-xs flex items-center gap-1">
+                    <p className="text-red-400 text-xs flex items-center gap-1">
                       <AlertCircle size={13} /> {errors.issueDescription}
                     </p>
                   ) : (
                     <span />
                   )}
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-ink-soft">
                     {form.issueDescription.trim().length}/10 min
                   </span>
                 </div>
@@ -309,13 +309,13 @@ export default function BookRepairPage() {
           {/* STEP 2 — Date & Time */}
           {step === 2 && (
             <div className="space-y-5 animate-fade-in">
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-ink">
                 Pick your preferred slot
               </h2>
               <div>
                 <label className="label-style flex items-center gap-1.5">
                   <Calendar size={15} /> Repair Date{" "}
-                  <span className="text-red-500">*</span>
+                  <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="date"
@@ -325,7 +325,7 @@ export default function BookRepairPage() {
                   className={`input-style mt-1 ${errors.bookingDate ? "input-error" : ""}`}
                 />
                 {errors.bookingDate && (
-                  <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                  <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
                     <AlertCircle size={13} /> {errors.bookingDate}
                   </p>
                 )}
@@ -333,7 +333,7 @@ export default function BookRepairPage() {
               <div>
                 <label className="label-style flex items-center gap-1.5">
                   <Clock size={15} /> Time Slot{" "}
-                  <span className="text-red-500">*</span>
+                  <span className="text-red-400">*</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   {timeSlots.map((slot) => (
@@ -344,8 +344,8 @@ export default function BookRepairPage() {
                       className={`flex items-center justify-center gap-2 py-3 rounded-xl border-2 font-medium text-sm transition-all hover-lift
                         ${
                           form.timeSlot === slot
-                            ? "border-blue-500 bg-blue-50 text-blue-700"
-                            : "border-gray-200 text-gray-600 hover:border-blue-300"
+                            ? "border-brand-purple bg-brand-purple/10 text-brand-purple"
+                            : "border-line text-ink-soft hover:border-brand-purple/40"
                         }`}
                     >
                       <Clock size={14} /> {slot}
@@ -353,7 +353,7 @@ export default function BookRepairPage() {
                   ))}
                 </div>
                 {errors.timeSlot && (
-                  <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                  <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
                     <AlertCircle size={13} /> {errors.timeSlot}
                   </p>
                 )}
@@ -364,10 +364,10 @@ export default function BookRepairPage() {
           {/* STEP 3 — Confirm */}
           {step === 3 && (
             <div className="space-y-4 animate-fade-in">
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-ink">
                 Confirm your booking
               </h2>
-              <div className="bg-blue-50 rounded-2xl p-5 space-y-3 text-sm">
+              <div className="bg-surface2 rounded-2xl p-5 space-y-3 text-sm">
                 {[
                   [
                     "Device",
@@ -379,10 +379,10 @@ export default function BookRepairPage() {
                   ["Time Slot", form.timeSlot],
                 ].map(([label, value]) => (
                   <div key={label} className="flex justify-between gap-4">
-                    <span className="font-medium text-gray-600 shrink-0">
+                    <span className="font-medium text-ink-soft shrink-0">
                       {label}
                     </span>
-                    <span className="text-gray-800 capitalize text-right">
+                    <span className="text-ink capitalize text-right">
                       {value}
                     </span>
                   </div>
@@ -397,8 +397,8 @@ export default function BookRepairPage() {
               <button
                 type="button"
                 onClick={goBack}
-                className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl border border-gray-300 text-gray-600
-                  hover:bg-gray-50 transition font-medium"
+                className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl border border-line text-ink-soft
+                  hover:bg-surface2 transition font-medium"
               >
                 <ChevronLeft size={16} /> Back
               </button>
@@ -408,8 +408,8 @@ export default function BookRepairPage() {
                 <button
                   type="button"
                   onClick={goNext}
-                  className="flex items-center gap-1.5 px-8 py-2.5 bg-blue-600 text-white rounded-xl font-medium
-                    hover:bg-blue-700 transition shadow-md shadow-blue-200 hover:scale-[1.02] active:scale-[0.98]"
+                  className="flex items-center gap-1.5 px-8 py-2.5 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl font-medium
+                    hover:scale-[1.02] transition shadow-md shadow-brand-purple/20 active:scale-[0.98]"
                 >
                   Continue <ChevronRight size={16} />
                 </button>

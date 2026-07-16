@@ -8,6 +8,23 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        // Stored as "r g b" CSS variables so opacity modifiers (bg-brand-purple/15) work.
+        bg: "rgb(var(--bg) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        surface2: "rgb(var(--surface-2) / <alpha-value>)",
+        line: "rgb(var(--line) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        "ink-soft": "rgb(var(--ink-soft) / <alpha-value>)",
+        brand: {
+          purple: "rgb(var(--brand-purple) / <alpha-value>)",
+          orange: "rgb(var(--brand-orange) / <alpha-value>)",
+        },
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+      },
       animation: {
         "fade-in": "fadeIn 0.4s ease-out",
         "slide-in": "slideIn 0.3s ease-out",

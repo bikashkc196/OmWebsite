@@ -3,40 +3,40 @@
 const STATUS_CONFIG = {
   pending: {
     label: "Pending",
-    classes: "bg-yellow-100 text-yellow-800 border-yellow-200",
-    dot: "bg-yellow-500",
+    classes: "bg-yellow-500/15 text-yellow-300 border-yellow-500/30",
+    dot: "bg-yellow-400",
   },
   confirmed: {
     label: "Confirmed",
-    classes: "bg-blue-100 text-blue-800 border-blue-200",
-    dot: "bg-blue-500",
+    classes: "bg-sky-500/15 text-sky-300 border-sky-500/30",
+    dot: "bg-sky-400",
   },
   in_progress: {
     label: "In Progress",
-    classes: "bg-purple-100 text-purple-800 border-purple-200",
-    dot: "bg-purple-500",
+    classes: "bg-brand-purple/15 text-brand-purple border-brand-purple/30",
+    dot: "bg-brand-purple",
   },
   waiting_for_parts: {
     label: "Waiting for Parts",
-    classes: "bg-orange-100 text-orange-800 border-orange-200",
-    dot: "bg-orange-500",
+    classes: "bg-brand-orange/15 text-brand-orange border-brand-orange/30",
+    dot: "bg-brand-orange",
   },
   completed: {
     label: "Completed",
-    classes: "bg-green-100 text-green-800 border-green-200",
-    dot: "bg-green-500",
+    classes: "bg-green-500/15 text-green-300 border-green-500/30",
+    dot: "bg-green-400",
   },
   cancelled: {
     label: "Cancelled",
-    classes: "bg-red-100 text-red-800 border-red-200",
-    dot: "bg-red-500",
+    classes: "bg-red-500/15 text-red-300 border-red-500/30",
+    dot: "bg-red-400",
   },
 };
 export default function StatusBadge({ status }) {
   const config = STATUS_CONFIG[status?.toLowerCase()] || {
     label: status || "Unknown",
-    classes: "bg-gray-100 text-gray-800 border-gray-200",
-    dot: "bg-gray-500",
+    classes: "bg-ink-soft/15 text-ink-soft border-ink-soft/30",
+    dot: "bg-ink-soft",
   };
   return (
     <span

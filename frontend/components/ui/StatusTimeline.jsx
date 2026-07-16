@@ -51,12 +51,12 @@ export default function StatusTimeline({ status }) {
     return (
       <div
         className="flex items-center gap-3 py-4 px-5
-        bg-red-50 border border-red-100 rounded-2xl"
+        bg-red-500/10 border border-red-500/20 rounded-2xl"
       >
         <span className="text-2xl">❌</span>
         <div>
-          <p className="font-semibold text-red-700">Booking Cancelled</p>
-          <p className="text-sm text-red-500 mt-0.5">
+          <p className="font-semibold text-red-300">Booking Cancelled</p>
+          <p className="text-sm text-red-400/80 mt-0.5">
             This repair booking has been cancelled.
           </p>
         </div>
@@ -78,10 +78,10 @@ export default function StatusTimeline({ status }) {
                   justify-center text-lg flex-shrink-0 transition-all duration-500
                   ${
                     state === "done"
-                      ? "bg-emerald-500 shadow-lg shadow-emerald-200"
+                      ? "bg-emerald-500 shadow-lg shadow-emerald-900/30"
                       : state === "active"
-                        ? "bg-blue-600 shadow-lg shadow-blue-200 ring-4 ring-blue-100"
-                        : "bg-gray-100"
+                        ? "bg-gradient-to-br from-brand-purple to-brand-orange shadow-lg shadow-brand-purple/30 ring-4 ring-brand-purple/15"
+                        : "bg-surface2"
                   }`}
               >
                 {state === "done" ? (
@@ -96,7 +96,7 @@ export default function StatusTimeline({ status }) {
               {!isLast && (
                 <div
                   className={`w-0.5 h-8 mt-1 rounded-full transition-all duration-700
-                    ${state === "done" ? "bg-emerald-400" : "bg-gray-200"}`}
+                    ${state === "done" ? "bg-emerald-400" : "bg-line"}`}
                 />
               )}
             </div>
@@ -106,16 +106,16 @@ export default function StatusTimeline({ status }) {
                 className={`font-semibold text-sm transition-colors
                   ${
                     state === "done"
-                      ? "text-emerald-700"
+                      ? "text-emerald-300"
                       : state === "active"
-                        ? "text-blue-700"
-                        : "text-gray-400"
+                        ? "text-brand-purple"
+                        : "text-ink-soft/60"
                   }`}
               >
                 {step.label}
                 {state === "active" && (
                   <span
-                    className="ml-2 text-xs bg-blue-100 text-blue-600
+                    className="ml-2 text-xs bg-brand-purple/15 text-brand-purple
                     px-2 py-0.5 rounded-full font-medium"
                   >
                     Current
@@ -124,7 +124,7 @@ export default function StatusTimeline({ status }) {
               </p>
               <p
                 className={`text-xs mt-0.5
-                  ${state === "upcoming" ? "text-gray-300" : "text-gray-500"}`}
+                  ${state === "upcoming" ? "text-ink-soft/40" : "text-ink-soft"}`}
               >
                 {step.desc}
               </p>

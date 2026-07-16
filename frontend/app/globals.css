@@ -1,6 +1,19 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+/* ── Design Tokens ──
+   Stored as "r g b" triplets so Tailwind's opacity modifiers (e.g. bg-brand-purple/15)
+   can compose them as rgb(var(--x) / <alpha-value>) — see tailwind.config.js. */
+:root {
+  --bg: 10 8 18;
+  --surface: 21 15 34;
+  --surface-2: 29 23 48;
+  --line: 44 36 68;
+  --ink: 245 242 251;
+  --ink-soft: 169 159 196;
+  --brand-purple: 168 85 247;
+  --brand-orange: 249 115 22;
+}
 /* ── Custom Base Styles ── */
 @layer base {
   * {
@@ -12,49 +25,51 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply text-gray-800 bg-gray-50;
-    font-family:
-      "Inter",
-      system-ui,
-      -apple-system,
-      sans-serif;
+    @apply text-ink bg-bg;
+    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), sans-serif;
+    letter-spacing: 0.01em;
   }
 }
 /* ── Reusable Component Classes ── */
 @layer components {
   /* Input Fields */
   .input-style {
-    @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white
-    text-gray-800 placeholder-gray-400
-    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+    @apply w-full px-4 py-3 rounded-xl border border-line bg-surface
+    text-ink placeholder-ink-soft/60
+    focus:outline-none focus:ring-2 focus:ring-brand-purple focus:border-transparent
     transition-all duration-200 text-sm;
   }
   /* Labels */
   .label-style {
-    @apply block text-sm font-medium text-gray-700 mb-1;
+    @apply block text-sm font-medium text-ink-soft mb-1;
   }
-  /* Primary Button */
+  /* Primary Button — the signature purple-to-orange gradient */
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600
-    text-white font-semibold rounded-xl shadow-lg
-    hover:shadow-blue-300 hover:scale-[1.02] active:scale-[0.98]
+    @apply px-6 py-3 bg-gradient-to-r from-brand-purple to-brand-orange
+    text-white font-bold rounded-xl shadow-lg shadow-brand-purple/20
+    hover:shadow-brand-orange/30 hover:scale-[1.02] active:scale-[0.98]
     transition-all duration-200 disabled:opacity-60
     disabled:cursor-not-allowed disabled:scale-100;
   }
   /* Secondary Button */
   .btn-secondary {
-    @apply px-6 py-3 border-2 border-gray-200 text-gray-700
-    font-semibold rounded-xl hover:border-blue-400 hover:text-blue-600
+    @apply px-6 py-3 border-2 border-line text-ink
+    font-semibold rounded-xl hover:border-brand-purple hover:text-brand-purple
     transition-all duration-200;
   }
   /* Card */
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
+    @apply bg-surface rounded-2xl shadow-sm border border-line p-6;
   }
   /* Glass Card */
   .glass-card {
-    @apply bg-white/10 backdrop-blur-xl rounded-3xl
-    border border-white/20 shadow-2xl;
+    @apply bg-white/5 backdrop-blur-xl rounded-3xl
+    border border-white/10 shadow-2xl;
   }
   /* Badge */
   .badge {
@@ -71,11 +86,23 @@
   }
   /* Input with a validation error */
   .input-error {
-    @apply border-red-400 focus:ring-red-400 bg-red-50/40;
+    @apply border-red-400 focus:ring-red-400 bg-red-500/10;
   }
-  /* Admin shell background — subtle, professional, not distracting */
+  /* Admin shell background — same dark identity, kept calmer for data-heavy screens */
   .admin-shell {
-    @apply bg-gradient-to-br from-slate-50 via-white to-slate-100;
+    @apply bg-bg;
+  }
+  /* Gradient text — the signature purple-to-orange headline highlight */
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-purple to-brand-orange
+    bg-clip-text text-transparent;
+  }
+  /* Faint grid overlay, used on dark hero/CTA sections */
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(245, 242, 251, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245, 242, 251, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 }
 /* ── Custom Animations ── */
@@ -228,10 +255,10 @@
 @keyframes glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 8px rgba(168, 85, 247, 0);
   }
 }
 @keyframes gradientX {
@@ -248,12 +275,12 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: rgb(var(--bg));
 }
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8;
+  background: rgb(var(--line));
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: rgb(var(--brand-purple));
 }

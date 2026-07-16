@@ -18,7 +18,7 @@ export default function SlotPicker({ selectedDate, selectedSlot, onSelect }) {
   }, [selectedDate]);
   if (!selectedDate) {
     return (
-      <div className="text-center py-8 text-gray-400 text-sm">
+      <div className="text-center py-8 text-ink-soft text-sm">
         <p className="text-2xl mb-2">📅</p>
         <p>Select a date to see available time slots</p>
       </div>
@@ -26,7 +26,7 @@ export default function SlotPicker({ selectedDate, selectedSlot, onSelect }) {
   }
   if (fetching) {
     return (
-      <div className="flex items-center justify-center py-8 gap-3 text-gray-500">
+      <div className="flex items-center justify-center py-8 gap-3 text-ink-soft">
         <Spinner size="sm" />
         <span className="text-sm">Checking availability...</span>
       </div>
@@ -37,18 +37,18 @@ export default function SlotPicker({ selectedDate, selectedSlot, onSelect }) {
     <div className="space-y-3">
       {/* Summary */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-ink-soft">
           {availableCount > 0 ? (
-            <span className="text-emerald-600 font-medium">
+            <span className="text-emerald-400 font-medium">
               ✅ {availableCount} slot{availableCount > 1 ? "s" : ""} available
             </span>
           ) : (
-            <span className="text-red-500 font-medium">
+            <span className="text-red-400 font-medium">
               ❌ No slots available for this date
             </span>
           )}
         </p>
-        <p className="text-xs text-gray-400">Max 3 bookings/slot</p>
+        <p className="text-xs text-ink-soft/70">Max 3 bookings/slot</p>
       </div>
       {/* Slot Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -63,17 +63,17 @@ export default function SlotPicker({ selectedDate, selectedSlot, onSelect }) {
                 font-medium transition-all duration-200 text-center
                 ${
                   isFull
-                    ? "border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed"
+                    ? "border-line bg-surface2 text-ink-soft/40 cursor-not-allowed"
                     : isSelected
-                      ? "border-blue-500 bg-blue-50 text-blue-700 shadow-md shadow-blue-100"
-                      : "border-gray-200 text-gray-700 hover:border-blue-300 hover:bg-blue-50/50"
+                      ? "border-brand-purple bg-brand-purple/10 text-brand-purple shadow-md shadow-brand-purple/20"
+                      : "border-line text-ink-soft hover:border-brand-purple/50 hover:bg-brand-purple/5"
                 }`}
             >
               {/* Full badge */}
               {isFull && (
                 <span
                   className="absolute -top-2 left-1/2 -translate-x-1/2
-                  text-[10px] bg-red-100 text-red-500 font-semibold
+                  text-[10px] bg-red-500/15 text-red-300 font-semibold
                   px-2 py-0.5 rounded-full whitespace-nowrap"
                 >
                   Full
@@ -90,9 +90,9 @@ export default function SlotPicker({ selectedDate, selectedSlot, onSelect }) {
                         ${
                           i < available
                             ? isSelected
-                              ? "bg-blue-800"
+                              ? "bg-brand-orange"
                               : "bg-emerald-400"
-                            : "bg-gray-200"
+                            : "bg-line"
                         }`}
                     />
                   ))}
@@ -101,7 +101,7 @@ export default function SlotPicker({ selectedDate, selectedSlot, onSelect }) {
               {!isFull && (
                 <p
                   className={`text-xs mt-1
-                  ${isSelected ? "text-blue-900" : "text-gray-400"}`}
+                  ${isSelected ? "text-brand-purple" : "text-ink-soft/60"}`}
                 >
                   {available} left
                 </p>

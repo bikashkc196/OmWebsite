@@ -35,7 +35,7 @@ function StatItem({ value, suffix, label, icon, duration, startCounting }) {
         {count.toLocaleString("en-IN")}
         {suffix}
       </div>
-      <p className="text-blue-200 font-medium text-sm">{label}</p>
+      <p className="text-white/70 font-medium text-sm">{label}</p>
     </div>
   );
 }

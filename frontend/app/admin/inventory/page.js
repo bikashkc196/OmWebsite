@@ -148,31 +148,31 @@ export default function AdminInventoryPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl text-ink tracking-wide">
             📦 Inventory Management
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-ink-soft text-sm mt-1">
             Manage spare parts and stock levels
           </p>
         </div>
         <div className="flex items-center gap-3">
           {lowStockCount > 0 && (
-            <span className="flex items-center gap-1.5 text-xs font-semibold bg-red-100 text-red-600 px-3 py-1.5 rounded-full border border-red-200">
+            <span className="flex items-center gap-1.5 text-xs font-semibold bg-red-500/15 text-red-300 px-3 py-1.5 rounded-full border border-red-500/30">
               ⚠️ {lowStockCount} Low Stock
             </span>
           )}
           <button
             onClick={openCreate}
-            className="flex items-center gap-2 bg-blue-600 text-white
+            className="flex items-center gap-2 bg-gradient-to-r from-brand-purple to-brand-orange text-white
             px-4 py-2.5 rounded-xl text-sm font-semibold
-            hover:bg-blue-700 shadow-md shadow-blue-200 transition"
+            hover:scale-105 shadow-md shadow-brand-purple/20 transition"
           >
             ＋ Add Item
           </button>
         </div>
       </div>
       {/* ── Filters ── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="bg-surface rounded-2xl border border-line shadow-sm p-4">
         <div className="flex flex-wrap gap-3">
           {/* Search */}
           <input
@@ -180,16 +180,16 @@ export default function AdminInventoryPage() {
             placeholder="🔍 Search by name, code, supplier..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 min-w-[200px] border border-gray-200 rounded-xl
-            px-4 py-2.5 text-sm focus:outline-none focus:ring-2
-            focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 min-w-[200px] border border-line rounded-xl
+            px-4 py-2.5 text-sm bg-surface2 text-ink focus:outline-none focus:ring-2
+            focus:ring-brand-purple focus:border-transparent"
           />
           {/* Category Filter */}
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="border border-gray-200 rounded-xl px-4 py-2.5 text-sm
-            focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+            className="border border-line rounded-xl px-4 py-2.5 text-sm
+            focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
           >
             <option value="">All Categories</option>
             {CATEGORIES.map((c) => (
@@ -204,7 +204,7 @@ export default function AdminInventoryPage() {
             className={`px-4 py-2.5 rounded-xl text-sm font-semibold border transition ${
               showLowStock
                 ? "bg-red-500 text-white border-red-500"
-                : "bg-white text-gray-600 border-gray-200 hover:border-red-300 hover:text-red-500"
+                : "bg-surface2 text-ink-soft border-line hover:border-red-400/50 hover:text-red-400"
             }`}
           >
             ⚠️ Low Stock Only
@@ -216,26 +216,26 @@ export default function AdminInventoryPage() {
         <div className="flex justify-center py-20">
           <div className="text-center">
             <Spinner size="xl" color="blue" />
-            <p className="mt-4 text-gray-500">Loading inventory...</p>
+            <p className="mt-4 text-ink-soft">Loading inventory...</p>
           </div>
         </div>
       ) : filtered.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100">
+        <div className="text-center py-20 bg-surface rounded-2xl border border-line">
           <p className="text-5xl mb-3">📭</p>
-          <p className="text-gray-400 font-medium">No inventory items found</p>
+          <p className="text-ink-soft font-medium">No inventory items found</p>
           <button
             onClick={openCreate}
-            className="mt-4 text-blue-600 text-sm font-semibold hover:underline"
+            className="mt-4 text-brand-purple text-sm font-semibold hover:underline"
           >
             + Add your first item
           </button>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="bg-surface rounded-2xl border border-line shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 border-b border-gray-100">
+                <tr className="bg-surface2 border-b border-line">
                   {[
                     "Part Name",
                     "Code",
@@ -250,26 +250,26 @@ export default function AdminInventoryPage() {
                     <th
                       key={h}
                       className="px-4 py-3 text-left text-xs font-semibold
-                        text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                        text-ink-soft uppercase tracking-wider whitespace-nowrap"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-line">
                 {filtered.map((item) => (
                   <tr
                     key={item._id}
-                    className="hover:bg-gray-50 transition-colors"
+                    className="hover:bg-surface2 transition-colors"
                   >
                     {/* Part Name */}
                     <td className="px-4 py-3">
-                      <p className="font-semibold text-gray-800">
+                      <p className="font-semibold text-ink">
                         {item.partName}
                       </p>
                       {item.compatibleDevices?.length > 0 && (
-                        <p className="text-xs text-gray-400 mt-0.5">
+                        <p className="text-xs text-ink-soft mt-0.5">
                           {item.compatibleDevices.slice(0, 2).join(", ")}
                           {item.compatibleDevices.length > 2 && " ..."}
                         </p>
@@ -277,13 +277,13 @@ export default function AdminInventoryPage() {
                     </td>
                     {/* Code */}
                     <td className="px-4 py-3">
-                      <span className="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                      <span className="text-xs font-mono bg-surface2 text-ink-soft px-2 py-0.5 rounded">
                         {item.partCode}
                       </span>
                     </td>
                     {/* Category */}
                     <td className="px-4 py-3">
-                      <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg font-medium capitalize">
+                      <span className="text-xs bg-brand-purple/10 text-brand-purple px-2.5 py-1 rounded-lg font-medium capitalize">
                         {item.category?.replace("_", " ")}
                       </span>
                     </td>
@@ -291,32 +291,32 @@ export default function AdminInventoryPage() {
                     <td className="px-4 py-3">
                       <span
                         className={`font-bold text-base ${
-                          item.isLowStock ? "text-red-500" : "text-gray-800"
+                          item.isLowStock ? "text-red-400" : "text-ink"
                         }`}
                       >
                         {item.quantity}
                       </span>
                     </td>
                     {/* Cost Price */}
-                    <td className="px-4 py-3 text-gray-600 font-medium">
+                    <td className="px-4 py-3 text-ink-soft font-medium">
                       Rs. {item.costPrice?.toLocaleString()}
                     </td>
                     {/* Selling Price */}
-                    <td className="px-4 py-3 text-green-600 font-semibold">
+                    <td className="px-4 py-3 text-brand-orange font-semibold">
                       Rs. {item.sellingPrice?.toLocaleString()}
                     </td>
                     {/* Supplier */}
-                    <td className="px-4 py-3 text-gray-500 text-xs">
+                    <td className="px-4 py-3 text-ink-soft text-xs">
                       {item.supplier || "—"}
                     </td>
                     {/* Stock Status */}
                     <td className="px-4 py-3">
                       {item.isLowStock ? (
-                        <span className="text-xs font-semibold bg-red-100 text-red-600 px-2.5 py-1 rounded-full">
+                        <span className="text-xs font-semibold bg-red-500/15 text-red-300 px-2.5 py-1 rounded-full">
                           ⚠️ Low Stock
                         </span>
                       ) : (
-                        <span className="text-xs font-semibold bg-green-100 text-green-600 px-2.5 py-1 rounded-full">
+                        <span className="text-xs font-semibold bg-green-500/15 text-green-300 px-2.5 py-1 rounded-full">
                           ✅ In Stock
                         </span>
                       )}
@@ -326,14 +326,14 @@ export default function AdminInventoryPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => openEdit(item)}
-                          className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                          className="p-1.5 text-brand-purple hover:bg-brand-purple/10 rounded-lg transition"
                           title="Edit"
                         >
                           ✏️
                         </button>
                         <button
                           onClick={() => setConfirmDeleteId(item._id)}
-                          className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition"
+                          className="p-1.5 text-red-400 hover:bg-red-500/10 rounded-lg transition"
                           title="Delete"
                         >
                           🗑️
@@ -346,23 +346,23 @@ export default function AdminInventoryPage() {
             </table>
           </div>
           {/* Table Footer */}
-          <div className="px-5 py-3 border-t border-gray-100 bg-gray-50 text-xs text-gray-400">
+          <div className="px-5 py-3 border-t border-line bg-surface2 text-xs text-ink-soft">
             Showing {filtered.length} of {items.length} items
           </div>
         </div>
       )}
       {/* ── Add / Edit Modal ── */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-surface border border-line rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h2 className="text-lg font-bold text-gray-800">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-line">
+              <h2 className="text-lg font-bold text-ink">
                 {editItem ? "✏️ Edit Item" : "➕ Add New Item"}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-400 hover:text-gray-600 text-xl transition"
+                className="text-ink-soft hover:text-ink text-xl transition"
               >
                 ✕
               </button>
@@ -372,7 +372,7 @@ export default function AdminInventoryPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Part Name */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Part Name *
                   </label>
                   <input
@@ -383,13 +383,13 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, partName: e.target.value })
                     }
                     placeholder="e.g. iPhone 14 Screen"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Part Code */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Part Code *
                   </label>
                   <input
@@ -400,13 +400,13 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, partCode: e.target.value })
                     }
                     placeholder="e.g. SCR-IP14-001"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Category */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Category *
                   </label>
                   <select
@@ -415,8 +415,8 @@ export default function AdminInventoryPage() {
                     onChange={(e) =>
                       setForm({ ...form, category: e.target.value })
                     }
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple bg-surface2 text-ink"
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>
@@ -427,7 +427,7 @@ export default function AdminInventoryPage() {
                 </div>
                 {/* Supplier */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Supplier
                   </label>
                   <input
@@ -437,13 +437,13 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, supplier: e.target.value })
                     }
                     placeholder="e.g. TechParts Ltd"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Quantity */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Quantity *
                   </label>
                   <input
@@ -455,13 +455,13 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, quantity: e.target.value })
                     }
                     placeholder="e.g. 20"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Low Stock Threshold */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Low Stock Threshold
                   </label>
                   <input
@@ -472,13 +472,13 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, lowStockThreshold: e.target.value })
                     }
                     placeholder="e.g. 5"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Cost Price */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Cost Price (Rs) *
                   </label>
                   <input
@@ -490,13 +490,13 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, costPrice: e.target.value })
                     }
                     placeholder="e.g. 2500"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
                 {/* Selling Price */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-soft mb-1">
                     Selling Price (Rs) *
                   </label>
                   <input
@@ -508,16 +508,16 @@ export default function AdminInventoryPage() {
                       setForm({ ...form, sellingPrice: e.target.value })
                     }
                     placeholder="e.g. 3500"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-line rounded-xl px-3 py-2.5
+                    text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                 </div>
               </div>
               {/* Compatible Devices */}
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                <label className="block text-xs font-semibold text-ink-soft mb-1">
                   Compatible Devices
-                  <span className="font-normal text-gray-400 ml-1">
+                  <span className="font-normal text-ink-soft/70 ml-1">
                     (comma separated)
                   </span>
                 </label>
@@ -528,8 +528,8 @@ export default function AdminInventoryPage() {
                     setForm({ ...form, compatibleDevices: e.target.value })
                   }
                   placeholder="e.g. iPhone 14, iPhone 14 Pro, iPhone 13"
-                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5
-                  text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-line rounded-xl px-3 py-2.5
+                  text-sm bg-surface2 text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                 />
               </div>
               {/* Buttons */}
@@ -537,16 +537,16 @@ export default function AdminInventoryPage() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 py-2.5 border border-gray-200 text-gray-700
-                  rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+                  className="flex-1 py-2.5 border border-line text-ink
+                  rounded-xl text-sm font-medium hover:bg-surface2 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex-1 py-2.5 bg-blue-600 text-white rounded-xl
-                  text-sm font-semibold hover:bg-blue-700 transition
+                  className="flex-1 py-2.5 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-xl
+                  text-sm font-semibold hover:scale-[1.02] transition
                   disabled:opacity-60 disabled:cursor-not-allowed
                   flex items-center justify-center gap-2"
                 >
@@ -568,12 +568,12 @@ export default function AdminInventoryPage() {
       )}
       {/* ── Confirm Delete Modal ── */}
       {confirmDeleteId && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-surface border border-line rounded-2xl shadow-2xl p-6 max-w-sm w-full">
             <div className="text-center mb-5">
               <div className="text-5xl mb-3">⚠️</div>
-              <h3 className="text-lg font-bold text-gray-800">Delete Item?</h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <h3 className="text-lg text-ink tracking-wide">Delete Item?</h3>
+              <p className="text-sm text-ink-soft mt-1">
                 This will permanently delete the inventory item. This action
                 cannot be undone.
               </p>
@@ -581,8 +581,8 @@ export default function AdminInventoryPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmDeleteId(null)}
-                className="flex-1 px-4 py-2.5 border border-gray-200 text-gray-700
-                rounded-xl text-sm font-medium hover:bg-gray-50 transition"
+                className="flex-1 px-4 py-2.5 border border-line text-ink
+                rounded-xl text-sm font-medium hover:bg-surface2 transition"
               >
                 Cancel
               </button>

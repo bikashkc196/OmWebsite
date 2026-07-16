@@ -60,7 +60,7 @@ export default function AdminUsersPage() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <Spinner size="xl" color="blue" />
-          <p className="mt-4 text-gray-500">Loading users...</p>
+          <p className="mt-4 text-ink-soft">Loading users...</p>
         </div>
       </div>
     );
@@ -70,29 +70,29 @@ export default function AdminUsersPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl text-ink tracking-wide">
             👥 All Users
           </h1>
-          <p className="text-gray-500 text-sm mt-1">Manage registered users</p>
+          <p className="text-ink-soft text-sm mt-1">Manage registered users</p>
         </div>
         <button
           onClick={fetchUsers}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-purple to-brand-orange
             text-white text-sm font-semibold rounded-xl
-            hover:bg-blue-700 transition shadow-sm"
+            hover:scale-105 transition shadow-sm"
         >
           🔄 Refresh
         </button>
       </div>
       {/* ── Search ── */}
       <div
-        className="bg-white rounded-2xl border border-gray-100
+        className="bg-surface rounded-2xl border border-line
         shadow-sm p-4"
       >
         <div className="relative">
           <span
             className="absolute left-3 top-1/2 -translate-y-1/2
-            text-gray-400 text-sm"
+            text-ink-soft text-sm"
           >
             🔍
           </span>
@@ -101,9 +101,9 @@ export default function AdminUsersPage() {
             placeholder="Search by name, email or phone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 border border-gray-200
+            className="w-full pl-9 pr-4 py-2.5 border border-line
               rounded-xl text-sm focus:outline-none focus:ring-2
-              focus:ring-blue-500 bg-gray-50"
+              focus:ring-brand-purple bg-surface2 text-ink"
           />
         </div>
       </div>
@@ -114,32 +114,29 @@ export default function AdminUsersPage() {
             label: "Total Users",
             value: users.length,
             icon: "👥",
-            color: "blue",
           },
           {
             label: "Admins",
             value: users.filter((u) => u.role === "admin").length,
             icon: "🛡️",
-            color: "purple",
           },
           {
             label: "Regular Users",
             value: users.filter((u) => u.role !== "admin").length,
             icon: "👤",
-            color: "green",
           },
         ].map((stat) => (
           <div
             key={stat.label}
-            className="bg-white rounded-2xl border border-gray-100
+            className="bg-surface rounded-2xl border border-line
               shadow-sm p-4 flex items-center gap-4"
           >
             <span className="text-2xl">{stat.icon}</span>
             <div>
-              <p className="text-2xl font-extrabold text-gray-800">
+              <p className="text-2xl font-display text-ink tracking-wide">
                 {stat.value}
               </p>
-              <p className="text-xs text-gray-500">{stat.label}</p>
+              <p className="text-xs text-ink-soft">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -147,11 +144,11 @@ export default function AdminUsersPage() {
       {/* ── Users Grid ── */}
       {filtered.length === 0 ? (
         <div
-          className="text-center py-20 bg-white rounded-2xl
-          border border-gray-100"
+          className="text-center py-20 bg-surface rounded-2xl
+          border border-line"
         >
           <p className="text-5xl mb-3">👤</p>
-          <p className="text-gray-500 font-medium">No users found</p>
+          <p className="text-ink-soft font-medium">No users found</p>
         </div>
       ) : (
         <div
@@ -161,25 +158,25 @@ export default function AdminUsersPage() {
           {filtered.map((user) => (
             <div
               key={user._id}
-              className="bg-white rounded-2xl border border-gray-100
-                shadow-sm p-5 hover:shadow-md transition-all"
+              className="bg-surface rounded-2xl border border-line
+                shadow-sm p-5 hover:shadow-md hover:border-brand-purple/30 transition-all"
             >
               <div className="flex items-start justify-between mb-4">
                 {/* Avatar + Info */}
                 <div className="flex items-center gap-3">
                   <div
                     className="w-11 h-11 bg-gradient-to-br
-                    from-blue-400 to-purple-500 rounded-full flex
+                    from-brand-purple to-brand-orange rounded-full flex
                     items-center justify-center text-white font-bold
                     text-sm flex-shrink-0 shadow"
                   >
                     {user.name?.charAt(0).toUpperCase() || "?"}
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800 text-sm">
+                    <p className="font-semibold text-ink text-sm">
                       {user.name}
                     </p>
-                    <p className="text-xs text-gray-400">{user.email}</p>
+                    <p className="text-xs text-ink-soft">{user.email}</p>
                   </div>
                 </div>
                 {/* Role Badge */}
@@ -188,8 +185,8 @@ export default function AdminUsersPage() {
                   rounded-full border
                   ${
                     user.role === "admin"
-                      ? "bg-purple-100 text-purple-700 border-purple-200"
-                      : "bg-green-100 text-green-700 border-green-200"
+                      ? "bg-brand-purple/15 text-brand-purple border-brand-purple/30"
+                      : "bg-green-500/15 text-green-300 border-green-500/30"
                   }`}
                 >
                   {user.role === "admin" ? "🛡️ Admin" : "👤 User"}
@@ -200,14 +197,14 @@ export default function AdminUsersPage() {
                 {user.phone && (
                   <div
                     className="flex items-center gap-2 text-xs
-                    text-gray-500"
+                    text-ink-soft"
                   >
                     <span>📞</span> {user.phone}
                   </div>
                 )}
                 <div
                   className="flex items-center gap-2 text-xs
-                  text-gray-500"
+                  text-ink-soft"
                 >
                   <span>📅</span> Joined{" "}
                   {new Date(user.createdAt).toLocaleDateString("en-NP", {
@@ -220,8 +217,8 @@ export default function AdminUsersPage() {
               {user.role !== "admin" && (
                 <button
                   onClick={() => setConfirmId(user._id)}
-                  className="w-full py-2 border border-red-200 text-red-500
-                    text-xs font-semibold rounded-xl hover:bg-red-50
+                  className="w-full py-2 border border-red-500/25 text-red-400
+                    text-xs font-semibold rounded-xl hover:bg-red-500/10
                     transition"
                 >
                   🗑️ Delete User
@@ -234,17 +231,17 @@ export default function AdminUsersPage() {
       {/* ── Confirm Delete Modal ── */}
       {confirmId && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm
           flex items-center justify-center z-50 p-4"
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl p-6
+            className="bg-surface border border-line rounded-2xl shadow-2xl p-6
             max-w-sm w-full"
           >
             <div className="text-center mb-5">
               <div className="text-5xl mb-3">⚠️</div>
-              <h3 className="text-lg font-bold text-gray-800">Delete User?</h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <h3 className="text-lg text-ink tracking-wide">Delete User?</h3>
+              <p className="text-sm text-ink-soft mt-1">
                 This will permanently delete the user and all their data. This
                 action cannot be undone.
               </p>
@@ -252,9 +249,9 @@ export default function AdminUsersPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmId(null)}
-                className="flex-1 px-4 py-2.5 border border-gray-200
-                  text-gray-700 rounded-xl text-sm font-medium
-                  hover:bg-gray-50 transition"
+                className="flex-1 px-4 py-2.5 border border-line
+                  text-ink rounded-xl text-sm font-medium
+                  hover:bg-surface2 transition"
               >
                 Cancel
               </button>

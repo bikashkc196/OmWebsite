@@ -17,16 +17,16 @@ export default function AdminStatCard({
     purple: "from-purple-500 to-purple-600",
   };
   const bgMap = {
-    blue: "bg-blue-50   text-blue-700",
-    green: "bg-green-50  text-green-700",
-    yellow: "bg-yellow-50 text-yellow-700",
-    red: "bg-red-50    text-red-700",
-    purple: "bg-purple-50 text-purple-700",
+    blue: "bg-sky-500/15   text-sky-300",
+    green: "bg-green-500/15  text-green-300",
+    yellow: "bg-yellow-500/15 text-yellow-300",
+    red: "bg-red-500/15    text-red-300",
+    purple: "bg-brand-purple/15 text-brand-purple",
   };
   return (
     <div
-      className="bg-white rounded-2xl shadow-sm border border-gray-100
-      p-6 hover:shadow-md transition-all duration-300 group"
+      className="bg-surface rounded-2xl shadow-sm border border-line
+      p-6 hover:shadow-md hover:border-brand-purple/30 transition-all duration-300 group"
     >
       <div className="flex items-start justify-between mb-4">
         {/* Icon */}
@@ -43,8 +43,8 @@ export default function AdminStatCard({
             className={`text-xs font-semibold px-2.5 py-1 rounded-full
             ${
               trend >= 0
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
+                ? "bg-green-500/15 text-green-300"
+                : "bg-red-500/15 text-red-300"
             }`}
           >
             {trend >= 0 ? "▲" : "▼"} {Math.abs(trend)}%
@@ -53,14 +53,14 @@ export default function AdminStatCard({
       </div>
       {/* Value */}
       <div className="mb-1">
-        <span className="text-3xl font-extrabold text-gray-800">
+        <span className="text-3xl font-display text-ink tracking-wide">
           {prefix}
           {typeof value === "number" ? value.toLocaleString("en-NP") : value}
           {suffix}
         </span>
       </div>
       {/* Title */}
-      <p className="text-sm text-gray-500 font-medium">{title}</p>
+      <p className="text-sm text-ink-soft font-medium">{title}</p>
     </div>
   );
 }

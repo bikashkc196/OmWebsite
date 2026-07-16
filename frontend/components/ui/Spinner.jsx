@@ -6,9 +6,10 @@ export default function Spinner({ size = "md", color = "blue" }) {
     xl: "w-16 h-16 border-4",
   };
   const colors = {
-    blue: "border-blue-600",
+    blue: "border-brand-purple",
     white: "border-white",
-    gray: "border-gray-400",
+    gray: "border-ink-soft",
+    red: "border-red-400",
   };
   return (
     <div className="flex items-center justify-center">

@@ -180,32 +180,32 @@ export default function AdminBookingsPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl text-ink tracking-wide">
             📋 All Bookings
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-ink-soft text-sm mt-1">
             Manage and update all repair bookings
           </p>
         </div>
         <button
           onClick={fetchBookings}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-purple to-brand-orange
             text-white text-sm font-semibold rounded-xl
-            hover:bg-blue-700 transition shadow-sm"
+            hover:scale-105 transition shadow-sm"
         >
           🔄 Refresh
         </button>
       </div>
       {/* ── Search & Filter Bar ── */}
       <div
-        className="bg-white rounded-2xl border border-gray-100
+        className="bg-surface rounded-2xl border border-line
         shadow-sm p-4 flex flex-col sm:flex-row gap-4"
       >
         {/* Search Input */}
         <div className="relative flex-1">
           <span
             className="absolute left-3 top-1/2 -translate-y-1/2
-            text-gray-400 text-sm"
+            text-ink-soft text-sm"
           >
             🔍
           </span>
@@ -214,9 +214,9 @@ export default function AdminBookingsPage() {
             placeholder="Search by name, email, device, service..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 border border-gray-200
+            className="w-full pl-9 pr-4 py-2.5 border border-line
               rounded-xl text-sm focus:outline-none focus:ring-2
-              focus:ring-blue-500 bg-gray-50"
+              focus:ring-brand-purple bg-surface2 text-ink"
           />
         </div>
         {/* Status Filter */}
@@ -229,8 +229,8 @@ export default function AdminBookingsPage() {
                 transition border
                 ${
                   statusFilter === f.value
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-gray-50 text-gray-600 border-gray-200 hover:border-blue-300"
+                    ? "bg-gradient-to-r from-brand-purple to-brand-orange text-white border-transparent"
+                    : "bg-surface2 text-ink-soft border-line hover:border-brand-purple/40"
                 }`}
             >
               {f.label}
@@ -240,17 +240,17 @@ export default function AdminBookingsPage() {
       </div>
       {/* ── Results Count ── */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-ink-soft">
           Showing{" "}
-          <span className="font-semibold text-gray-800">{filtered.length}</span>{" "}
+          <span className="font-semibold text-ink">{filtered.length}</span>{" "}
           of{" "}
-          <span className="font-semibold text-gray-800">{bookings.length}</span>{" "}
+          <span className="font-semibold text-ink">{bookings.length}</span>{" "}
           bookings
         </p>
       </div>
       {/* ── Table ── */}
       <div
-        className="bg-white rounded-2xl border border-gray-100
+        className="bg-surface rounded-2xl border border-line
         shadow-sm overflow-hidden"
       >
         <BookingTable
@@ -264,25 +264,25 @@ export default function AdminBookingsPage() {
       {/* ── Booking Detail Modal ── */}
       {selectedBooking && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm
           flex items-center justify-center z-50 p-4"
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl w-full
+            className="bg-surface border border-line rounded-2xl shadow-2xl w-full
             max-w-lg max-h-[90vh] overflow-y-auto"
           >
             {/* Modal Header */}
             <div
               className="flex items-center justify-between px-6 py-4
-              border-b border-gray-100 sticky top-0 bg-white"
+              border-b border-line sticky top-0 bg-surface"
             >
-              <h3 className="text-lg font-bold text-gray-800">
+              <h3 className="text-lg font-bold text-ink">
                 📋 Booking Details
               </h3>
               <button
                 onClick={() => setSelectedBooking(null)}
-                className="text-gray-400 hover:text-gray-600
-                  hover:bg-gray-100 p-2 rounded-xl transition"
+                className="text-ink-soft hover:text-ink
+                  hover:bg-surface2 p-2 rounded-xl transition"
               >
                 ✕
               </button>
@@ -291,13 +291,13 @@ export default function AdminBookingsPage() {
             <div className="px-6 py-5 space-y-5">
               {/* Status */}
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">Status</span>
+                <span className="text-sm text-ink-soft">Status</span>
                 <StatusBadge status={selectedBooking.status} />
               </div>
               {/* Customer Info */}
-              <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+              <div className="bg-surface2 rounded-xl p-4 space-y-2">
                 <p
-                  className="text-xs font-semibold text-gray-400
+                  className="text-xs font-semibold text-ink-soft
                   uppercase tracking-wider mb-3"
                 >
                   Customer Info
@@ -310,9 +310,9 @@ export default function AdminBookingsPage() {
                 />
               </div>
               {/* Device Info */}
-              <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+              <div className="bg-surface2 rounded-xl p-4 space-y-2">
                 <p
-                  className="text-xs font-semibold text-gray-400
+                  className="text-xs font-semibold text-ink-soft
                   uppercase tracking-wider mb-3"
                 >
                   Device Info
@@ -325,9 +325,9 @@ export default function AdminBookingsPage() {
                 />
               </div>
               {/* Booking Info */}
-              <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+              <div className="bg-surface2 rounded-xl p-4 space-y-2">
                 <p
-                  className="text-xs font-semibold text-gray-400
+                  className="text-xs font-semibold text-ink-soft
                   uppercase tracking-wider mb-3"
                 >
                   Booking Info
@@ -352,13 +352,13 @@ export default function AdminBookingsPage() {
                 )}
               </div>
               {/* Repair Price (editable — can be set/corrected at any time, even after completion) */}
-              <div className="bg-gray-50 rounded-xl p-4 space-y-3">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <div className="bg-surface2 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-semibold text-ink-soft uppercase tracking-wider">
                   💰 Repair Price
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-medium text-gray-500 mb-1">
+                    <label className="block text-[11px] font-medium text-ink-soft mb-1">
                       Estimated Cost (Rs)
                     </label>
                     <input
@@ -372,13 +372,13 @@ export default function AdminBookingsPage() {
                         })
                       }
                       placeholder="e.g. 2500"
-                      className="w-full border border-gray-200 rounded-lg px-2.5
-                      py-1.5 text-sm bg-white focus:outline-none focus:ring-2
-                      focus:ring-blue-500"
+                      className="w-full border border-line rounded-lg px-2.5
+                      py-1.5 text-sm bg-surface text-ink focus:outline-none focus:ring-2
+                      focus:ring-brand-purple"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-medium text-gray-500 mb-1">
+                    <label className="block text-[11px] font-medium text-ink-soft mb-1">
                       Final Cost (Rs)
                     </label>
                     <input
@@ -392,17 +392,17 @@ export default function AdminBookingsPage() {
                         })
                       }
                       placeholder="e.g. 2200"
-                      className="w-full border border-gray-200 rounded-lg px-2.5
-                      py-1.5 text-sm bg-white focus:outline-none focus:ring-2
-                      focus:ring-blue-500"
+                      className="w-full border border-line rounded-lg px-2.5
+                      py-1.5 text-sm bg-surface text-ink focus:outline-none focus:ring-2
+                      focus:ring-brand-purple"
                     />
                   </div>
                 </div>
                 <button
                   onClick={handleSavePrice}
                   disabled={savingPrice}
-                  className="w-full py-2 bg-blue-600 text-white rounded-lg
-                  text-xs font-semibold hover:bg-blue-700 transition
+                  className="w-full py-2 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-lg
+                  text-xs font-semibold hover:scale-[1.02] transition
                   disabled:opacity-50 disabled:cursor-not-allowed flex
                   items-center justify-center gap-2"
                 >
@@ -416,8 +416,8 @@ export default function AdminBookingsPage() {
                 </button>
               </div>
               {/* Parts Used (deducted from Inventory) */}
-              <div className="bg-gray-50 rounded-xl p-4 space-y-3">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <div className="bg-surface2 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-semibold text-ink-soft uppercase tracking-wider">
                   🔧 Parts Used
                 </p>
                 {selectedBooking.partsUsed?.length > 0 ? (
@@ -425,14 +425,14 @@ export default function AdminBookingsPage() {
                     {selectedBooking.partsUsed.map((p) => (
                       <div
                         key={p._id}
-                        className="flex items-center justify-between bg-white
-                        rounded-lg px-3 py-2 border border-gray-100"
+                        className="flex items-center justify-between bg-surface
+                        rounded-lg px-3 py-2 border border-line"
                       >
                         <div>
-                          <p className="text-sm font-medium text-gray-800">
+                          <p className="text-sm font-medium text-ink">
                             {p.partName}
                           </p>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-ink-soft">
                             {p.partCode} · Qty {p.quantity} · Rs.{" "}
                             {p.unitPrice?.toLocaleString("en-NP")}
                           </p>
@@ -440,7 +440,7 @@ export default function AdminBookingsPage() {
                         <button
                           onClick={() => handleRemovePart(p._id)}
                           disabled={removingPartId === p._id}
-                          className="text-red-400 hover:text-red-600 text-xs
+                          className="text-red-400 hover:text-red-300 text-xs
                           font-medium disabled:opacity-50 flex items-center gap-1"
                         >
                           {removingPartId === p._id ? (
@@ -453,16 +453,16 @@ export default function AdminBookingsPage() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-xs text-gray-400">No parts used yet</p>
+                  <p className="text-xs text-ink-soft">No parts used yet</p>
                 )}
                 {/* Add a part */}
-                <div className="flex gap-2 pt-2 border-t border-gray-100">
+                <div className="flex gap-2 pt-2 border-t border-line">
                   <select
                     value={selectedPartId}
                     onChange={(e) => setSelectedPartId(e.target.value)}
-                    className="flex-1 border border-gray-200 rounded-lg px-2
-                    py-1.5 text-xs bg-white focus:outline-none focus:ring-2
-                    focus:ring-blue-500"
+                    className="flex-1 border border-line rounded-lg px-2
+                    py-1.5 text-xs bg-surface text-ink focus:outline-none focus:ring-2
+                    focus:ring-brand-purple"
                   >
                     <option value="">Select a part...</option>
                     {inventory
@@ -478,14 +478,14 @@ export default function AdminBookingsPage() {
                     min="1"
                     value={partQty}
                     onChange={(e) => setPartQty(e.target.value)}
-                    className="w-16 border border-gray-200 rounded-lg px-2
-                    py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-16 border border-line rounded-lg px-2
+                    py-1.5 text-xs bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-brand-purple"
                   />
                   <button
                     onClick={handleAddPart}
                     disabled={addingPart || !selectedPartId}
-                    className="px-3 py-1.5 bg-blue-600 text-white rounded-lg
-                    text-xs font-semibold hover:bg-blue-700 transition
+                    className="px-3 py-1.5 bg-gradient-to-r from-brand-purple to-brand-orange text-white rounded-lg
+                    text-xs font-semibold hover:scale-[1.02] transition
                     disabled:opacity-50 disabled:cursor-not-allowed flex
                     items-center gap-1.5"
                   >
@@ -499,11 +499,11 @@ export default function AdminBookingsPage() {
               </div>
             </div>
             {/* Modal Footer */}
-            <div className="px-6 py-4 border-t border-gray-100">
+            <div className="px-6 py-4 border-t border-line">
               <button
                 onClick={() => setSelectedBooking(null)}
-                className="w-full py-2.5 bg-gray-800 text-white rounded-xl
-                  text-sm font-semibold hover:bg-gray-900 transition"
+                className="w-full py-2.5 bg-surface2 text-ink rounded-xl
+                  text-sm font-semibold hover:bg-line transition"
               >
                 Close
               </button>
@@ -518,10 +518,10 @@ export default function AdminBookingsPage() {
 function DetailRow({ label, value }) {
   return (
     <div className="flex items-start justify-between gap-4">
-      <span className="text-xs text-gray-500 flex-shrink-0 pt-0.5">
+      <span className="text-xs text-ink-soft flex-shrink-0 pt-0.5">
         {label}
       </span>
-      <span className="text-sm font-medium text-gray-800 text-right">
+      <span className="text-sm font-medium text-ink text-right">
         {value || "N/A"}
       </span>
     </div>

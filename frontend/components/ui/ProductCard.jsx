@@ -16,10 +16,10 @@ import {
 import { formatNPR } from "../../lib/currency";
 
 const QUALITY_STYLES = {
-  original: "bg-yellow-100 text-yellow-700 border-yellow-200",
-  premium: "bg-purple-100 text-purple-700 border-purple-200",
-  standard: "bg-blue-100 text-blue-700 border-blue-200",
-  economy: "bg-gray-100 text-gray-600 border-gray-200",
+  original: "bg-yellow-500/15 text-yellow-300 border-yellow-500/30",
+  premium: "bg-brand-purple/15 text-brand-purple border-brand-purple/30",
+  standard: "bg-sky-500/15 text-sky-300 border-sky-500/30",
+  economy: "bg-ink-soft/15 text-ink-soft border-ink-soft/30",
 };
 const QUALITY_LABELS = {
   original: "Original",
@@ -51,12 +51,12 @@ export default function ProductCard({ product, onAddToCart }) {
   const imageUrl = product.images?.[0]?.url;
   return (
     <div
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm
-    hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group"
+      className="bg-surface rounded-2xl border border-line shadow-sm
+    hover:shadow-lg hover:border-brand-purple/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden group"
     >
       {/* ── Product Image ── */}
       <Link href={`/products/${product._id}`}>
-        <div className="relative h-52 bg-gray-50 overflow-hidden">
+        <div className="relative h-52 bg-surface2 overflow-hidden">
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -64,7 +64,7 @@ export default function ProductCard({ product, onAddToCart }) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-300">
+            <div className="w-full h-full flex items-center justify-center text-ink-soft/40">
               <Package size={56} />
             </div>
           )}
@@ -102,7 +102,7 @@ export default function ProductCard({ product, onAddToCart }) {
         {/* Category + Quality badges */}
         <div className="flex items-center gap-2 mb-2 flex-wrap">
           <span
-            className="text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5
+            className="text-xs bg-brand-purple/10 text-brand-purple px-2 py-0.5
           rounded-full font-medium capitalize flex items-center gap-1"
           >
             {product.category === "android" ? (
@@ -129,23 +129,23 @@ export default function ProductCard({ product, onAddToCart }) {
         {/* Name */}
         <Link href={`/products/${product._id}`}>
           <h3
-            className="font-bold text-gray-800 text-sm leading-snug mb-1
-          hover:text-blue-600 transition line-clamp-2"
+            className="font-bold text-ink text-sm leading-snug mb-1
+          hover:text-brand-purple transition line-clamp-2"
           >
             {product.name}
           </h3>
         </Link>
         {/* Brand */}
         {product.brand && (
-          <p className="text-xs text-gray-400 mb-2">{product.brand}</p>
+          <p className="text-xs text-ink-soft mb-2">{product.brand}</p>
         )}
         {/* Price — Nepali Rupees */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg font-extrabold text-blue-700">
+          <span className="text-lg font-display text-brand-orange tracking-wide">
             {formatNPR(effectivePrice)}
           </span>
           {discountPercent > 0 && (
-            <span className="text-xs text-gray-400 line-through">
+            <span className="text-xs text-ink-soft line-through">
               {formatNPR(product.price)}
             </span>
           )}
@@ -154,10 +154,10 @@ export default function ProductCard({ product, onAddToCart }) {
         <p
           className={`text-xs font-medium mb-3 flex items-center gap-1 ${
             product.stock === 0
-              ? "text-red-500"
+              ? "text-red-400"
               : product.stock <= 5
-                ? "text-orange-500"
-                : "text-green-600"
+                ? "text-brand-orange"
+                : "text-green-400"
           }`}
         >
           {product.stock === 0 ? (
@@ -182,10 +182,10 @@ export default function ProductCard({ product, onAddToCart }) {
           flex items-center justify-center gap-2
           ${
             product.stock === 0
-              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              ? "bg-surface2 text-ink-soft/50 cursor-not-allowed"
               : added
                 ? "bg-green-500 text-white"
-                : "bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-200 hover:scale-[1.02] active:scale-[0.98]"
+                : "bg-gradient-to-r from-brand-purple to-brand-orange text-white shadow-md shadow-brand-purple/20 hover:scale-[1.02] active:scale-[0.98]"
           }`}
         >
           {adding ? (

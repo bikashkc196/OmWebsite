@@ -49,8 +49,8 @@ export default function FAQAccordion() {
             className={`rounded-2xl border transition-all duration-300 overflow-hidden
               ${
                 isOpen
-                  ? "border-blue-200 bg-blue-50/50 shadow-sm"
-                  : "border-gray-200 bg-white hover:border-blue-200"
+                  ? "border-brand-purple/40 bg-brand-purple/5 shadow-sm"
+                  : "border-line bg-surface hover:border-brand-purple/30"
               }`}
           >
             {/* Question */}
@@ -61,7 +61,7 @@ export default function FAQAccordion() {
             >
               <span
                 className={`font-semibold text-base transition-colors
-                  ${isOpen ? "text-blue-700" : "text-gray-800"}`}
+                  ${isOpen ? "text-brand-purple" : "text-ink"}`}
               >
                 {faq.q}
               </span>
@@ -69,8 +69,8 @@ export default function FAQAccordion() {
                 className={`text-xl flex-shrink-0 transition-transform duration-300
                   ${
                     isOpen
-                      ? "rotate-45 text-blue-600"
-                      : "rotate-0 text-gray-400"
+                      ? "rotate-45 text-brand-orange"
+                      : "rotate-0 text-ink-soft"
                   }`}
               >
                 +
@@ -82,8 +82,8 @@ export default function FAQAccordion() {
                 ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
             >
               <div className="px-6 pb-5">
-                <div className="w-full h-px bg-blue-100 mb-4" />
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                <div className="w-full h-px bg-line mb-4" />
+                <p className="text-ink-soft text-sm leading-relaxed">{faq.a}</p>
               </div>
             </div>
           </div>

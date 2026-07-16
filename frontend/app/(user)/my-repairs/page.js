@@ -57,7 +57,7 @@ export default function MyRepairsPage() {
       )
     : bookings;
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-10 px-4">
+    <div className="min-h-screen bg-bg py-10 px-4">
       <div className="max-w-5xl mx-auto">
         {/* ── Page Header ── */}
         <div
@@ -65,8 +65,8 @@ export default function MyRepairsPage() {
           justify-between gap-4 mb-8"
         >
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">My Repairs</h1>
-            <p className="text-gray-500 mt-1 text-sm">
+            <h1 className="text-3xl text-ink tracking-wide">My Repairs</h1>
+            <p className="text-ink-soft mt-1 text-sm">
               {total > 0
                 ? `You have ${total} booking${total > 1 ? "s" : ""} total`
                 : "No repair bookings yet"}
@@ -75,9 +75,9 @@ export default function MyRepairsPage() {
           <Link
             href="/book"
             className="inline-flex items-center gap-2 px-5 py-2.5
-              bg-gradient-to-r from-blue-600 to-indigo-600 text-white
-              font-semibold text-sm rounded-xl shadow-md
-              hover:shadow-blue-300 hover:scale-105 transition-all"
+              bg-gradient-to-r from-brand-purple to-brand-orange text-white
+              font-semibold text-sm rounded-xl shadow-md shadow-brand-purple/20
+              hover:scale-105 transition-all"
           >
             + Book New Repair
           </Link>
@@ -85,7 +85,7 @@ export default function MyRepairsPage() {
         {/* ── Search by Ref ── */}
         <div className="mb-5">
           <div className="relative max-w-sm">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-soft">
               🔍
             </span>
             <input
@@ -93,15 +93,15 @@ export default function MyRepairsPage() {
               value={refSearch}
               onChange={(e) => setRefSearch(e.target.value)}
               placeholder="Search by booking reference..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
-                bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-300
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-line
+                bg-surface text-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple
                 transition shadow-sm"
             />
             {refSearch && (
               <button
                 onClick={() => setRefSearch("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2
-                  text-gray-400 hover:text-gray-600 text-xs"
+                  text-ink-soft hover:text-ink text-xs"
               >
                 ✕
               </button>
@@ -118,8 +118,8 @@ export default function MyRepairsPage() {
                 text-xs font-semibold border transition-all
                 ${
                   activeFilter === f.value
-                    ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-200"
-                    : "bg-white text-gray-600 border-gray-200 hover:border-blue-300"
+                    ? "bg-gradient-to-r from-brand-purple to-brand-orange text-white border-transparent shadow-md shadow-brand-purple/20"
+                    : "bg-surface text-ink-soft border-line hover:border-brand-purple/40"
                 }`}
             >
               {f.icon} {f.label}
@@ -135,12 +135,12 @@ export default function MyRepairsPage() {
           /* ── Empty State ── */
           <div className="text-center py-20">
             <div className="text-7xl mb-4">🔧</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            <h2 className="text-2xl text-ink mb-2 tracking-wide">
               {activeFilter
                 ? `No ${activeFilter.replace(/_/g, " ")} bookings`
                 : "No repair bookings yet"}
             </h2>
-            <p className="text-gray-500 text-sm mb-8 max-w-sm mx-auto">
+            <p className="text-ink-soft text-sm mb-8 max-w-sm mx-auto">
               {activeFilter
                 ? "Try selecting a different filter to view other bookings."
                 : "Book your first repair and we'll take care of the rest!"}
@@ -148,8 +148,8 @@ export default function MyRepairsPage() {
             <Link
               href="/book"
               className="inline-flex items-center gap-2 px-6 py-3
-                bg-blue-600 text-white font-semibold rounded-xl shadow-md
-                hover:bg-blue-700 transition"
+                bg-gradient-to-r from-brand-purple to-brand-orange text-white font-semibold rounded-xl shadow-md
+                hover:scale-105 transition"
             >
               📅 Book a Repair
             </Link>
@@ -172,10 +172,10 @@ export default function MyRepairsPage() {
                     <button
                       onClick={() => handleViewDetail(booking._id)}
                       disabled={modalLoading}
-                      className="flex items-center gap-1.5 text-xs bg-white
-                        border border-gray-200 text-gray-600 px-3 py-1.5
-                        rounded-full shadow-sm hover:bg-blue-50
-                        hover:border-blue-300 hover:text-blue-700 transition"
+                      className="flex items-center gap-1.5 text-xs bg-surface
+                        border border-line text-ink-soft px-3 py-1.5
+                        rounded-full shadow-sm hover:bg-brand-purple/10
+                        hover:border-brand-purple/40 hover:text-brand-purple transition"
                     >
                       🔍 Details
                     </button>
@@ -189,8 +189,8 @@ export default function MyRepairsPage() {
                 <button
                   disabled={page === 1}
                   onClick={() => setPage((p) => p - 1)}
-                  className="px-4 py-2 rounded-xl border border-gray-200
-                    text-sm font-medium text-gray-600 hover:bg-gray-50
+                  className="px-4 py-2 rounded-xl border border-line
+                    text-sm font-medium text-ink-soft hover:bg-surface2
                     disabled:opacity-40 disabled:cursor-not-allowed transition"
                 >
                   ← Prev
@@ -203,8 +203,8 @@ export default function MyRepairsPage() {
                       className={`w-9 h-9 rounded-xl text-sm font-semibold transition
                       ${
                         p === page
-                          ? "bg-blue-600 text-white shadow-md shadow-blue-200"
-                          : "border border-gray-200 text-gray-600 hover:bg-gray-50"
+                          ? "bg-gradient-to-r from-brand-purple to-brand-orange text-white shadow-md shadow-brand-purple/20"
+                          : "border border-line text-ink-soft hover:bg-surface2"
                       }`}
                     >
                       {p}
@@ -214,8 +214,8 @@ export default function MyRepairsPage() {
                 <button
                   disabled={page === totalPages}
                   onClick={() => setPage((p) => p + 1)}
-                  className="px-4 py-2 rounded-xl border border-gray-200
-                    text-sm font-medium text-gray-600 hover:bg-gray-50
+                  className="px-4 py-2 rounded-xl border border-line
+                    text-sm font-medium text-ink-soft hover:bg-surface2
                     disabled:opacity-40 disabled:cursor-not-allowed transition"
                 >
                   Next →

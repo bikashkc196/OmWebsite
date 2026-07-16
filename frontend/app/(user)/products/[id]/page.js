@@ -32,20 +32,20 @@ export default function ProductDetailPage() {
   }, [id]);
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen bg-bg">
         <Spinner size="xl" color="blue" />
       </div>
     );
   }
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-bg">
         <div className="text-center">
           <p className="text-6xl mb-4">😕</p>
-          <h2 className="text-xl font-bold text-gray-700">Product not found</h2>
+          <h2 className="text-xl text-ink tracking-wide">Product not found</h2>
           <Link
             href="/products"
-            className="text-blue-600 hover:underline text-sm mt-2 block"
+            className="text-brand-purple hover:underline text-sm mt-2 block"
           >
             ← Back to Products
           </Link>
@@ -73,27 +73,27 @@ export default function ProductDetailPage() {
     setAdding(false);
   };
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-bg py-8 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Breadcrumb */}
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-2">
-          <Link href="/" className="hover:text-blue-600">
+        <nav className="text-xs text-ink-soft mb-6 flex items-center gap-2">
+          <Link href="/" className="hover:text-brand-purple">
             Home
           </Link>
           <span>/</span>
-          <Link href="/products" className="hover:text-blue-600">
+          <Link href="/products" className="hover:text-brand-purple">
             Products
           </Link>
           <span>/</span>
-          <span className="text-gray-600 font-medium truncate max-w-[200px]">
+          <span className="text-ink font-medium truncate max-w-[200px]">
             {product.name}
           </span>
         </nav>
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-surface rounded-2xl shadow-sm border border-line overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             {/* ── Image Gallery ── */}
-            <div className="p-6 bg-gray-50">
-              <div className="relative rounded-xl overflow-hidden mb-3 aspect-square bg-white border border-gray-100">
+            <div className="p-6 bg-surface2">
+              <div className="relative rounded-xl overflow-hidden mb-3 aspect-square bg-surface border border-line">
                 {product.images?.[selectedImg]?.url ? (
                   <img
                     src={product.images[selectedImg].url}
@@ -123,8 +123,8 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedImg(idx)}
                       className={`w-16 h-16 rounded-xl border-2 overflow-hidden transition ${
                         selectedImg === idx
-                          ? "border-blue-500"
-                          : "border-gray-200 hover:border-blue-300"
+                          ? "border-brand-purple"
+                          : "border-line hover:border-brand-purple/40"
                       }`}
                     >
                       <img
@@ -142,8 +142,8 @@ export default function ProductDetailPage() {
               {/* Badges */}
               <div className="flex flex-wrap gap-2">
                 <span
-                  className="text-xs bg-indigo-50 text-indigo-600 px-3 py-1
-                rounded-full font-semibold capitalize border border-indigo-100"
+                  className="text-xs bg-brand-purple/10 text-brand-purple px-3 py-1
+                rounded-full font-semibold capitalize border border-brand-purple/20"
                 >
                   {product.category === "android"
                     ? "📱 Android"
@@ -153,16 +153,16 @@ export default function ProductDetailPage() {
                 </span>
                 {product.quality && (
                   <span
-                    className="text-xs bg-yellow-50 text-yellow-700 px-3 py-1
-                  rounded-full font-semibold border border-yellow-200"
+                    className="text-xs bg-yellow-500/10 text-yellow-300 px-3 py-1
+                  rounded-full font-semibold border border-yellow-500/25"
                   >
                     {QUALITY_LABELS[product.quality]}
                   </span>
                 )}
                 {product.isFeatured && (
                   <span
-                    className="text-xs bg-amber-100 text-amber-700 px-3 py-1
-                  rounded-full font-semibold border border-amber-200"
+                    className="text-xs bg-brand-orange/15 text-brand-orange px-3 py-1
+                  rounded-full font-semibold border border-brand-orange/25"
                   >
                     ⭐ Featured
                   </span>
@@ -170,26 +170,26 @@ export default function ProductDetailPage() {
               </div>
               {/* Name & Brand */}
               <div>
-                <h1 className="text-2xl font-extrabold text-gray-800 leading-snug">
+                <h1 className="text-2xl text-ink leading-snug tracking-wide">
                   {product.name}
                 </h1>
                 {product.brand && (
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm text-ink-soft mt-1">
                     by {product.brand}
                   </p>
                 )}
               </div>
               {/* Price */}
               <div className="flex items-end gap-3">
-                <span className="text-3xl font-extrabold text-blue-700">
+                <span className="text-3xl font-display text-brand-orange tracking-wide">
                   Rs. {effectivePrice.toLocaleString("en-NP")}
                 </span>
                 {discountPercent > 0 && (
                   <div className="flex flex-col">
-                    <span className="text-sm text-gray-400 line-through">
+                    <span className="text-sm text-ink-soft line-through">
                       Rs. {product.price.toLocaleString("en-NP")}
                     </span>
-                    <span className="text-xs font-bold text-red-500">
+                    <span className="text-xs font-bold text-red-400">
                       Save Rs.{" "}
                       {(product.price - product.discountPrice).toLocaleString(
                         "en-NP",
@@ -199,16 +199,16 @@ export default function ProductDetailPage() {
                 )}
               </div>
               {/* Description */}
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-ink-soft leading-relaxed">
                 {product.description}
               </p>
               {/* Compatibility */}
               {product.compatibility && (
-                <div className="bg-blue-50 rounded-xl px-4 py-3 border border-blue-100">
-                  <p className="text-xs font-semibold text-blue-700 mb-0.5">
+                <div className="bg-brand-purple/10 rounded-xl px-4 py-3 border border-brand-purple/20">
+                  <p className="text-xs font-semibold text-brand-purple mb-0.5">
                     📱 Compatible With
                   </p>
-                  <p className="text-sm text-blue-800">
+                  <p className="text-sm text-ink">
                     {product.compatibility}
                   </p>
                 </div>
@@ -217,10 +217,10 @@ export default function ProductDetailPage() {
               <p
                 className={`text-sm font-semibold ${
                   product.stock === 0
-                    ? "text-red-500"
+                    ? "text-red-400"
                     : product.stock <= 5
-                      ? "text-orange-500"
-                      : "text-green-600"
+                      ? "text-brand-orange"
+                      : "text-green-400"
                 }`}
               >
                 {product.stock === 0
@@ -232,18 +232,18 @@ export default function ProductDetailPage() {
               {/* Quantity Selector */}
               {product.stock > 0 && (
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold text-gray-700">
+                  <span className="text-sm font-semibold text-ink">
                     Qty:
                   </span>
-                  <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden">
+                  <div className="flex items-center border border-line rounded-xl overflow-hidden">
                     <button
                       onClick={() => setQty((q) => Math.max(1, q - 1))}
                       className="w-9 h-9 flex items-center justify-center
-                      text-gray-600 hover:bg-gray-100 transition font-bold"
+                      text-ink-soft hover:bg-surface2 transition font-bold"
                     >
                       −
                     </button>
-                    <span className="w-10 text-center text-sm font-bold">
+                    <span className="w-10 text-center text-sm font-bold text-ink">
                       {qty}
                     </span>
                     <button
@@ -251,7 +251,7 @@ export default function ProductDetailPage() {
                         setQty((q) => Math.min(product.stock, q + 1))
                       }
                       className="w-9 h-9 flex items-center justify-center
-                      text-gray-600 hover:bg-gray-100 transition font-bold"
+                      text-ink-soft hover:bg-surface2 transition font-bold"
                     >
                       +
                     </button>
@@ -266,8 +266,8 @@ export default function ProductDetailPage() {
                 flex items-center justify-center gap-2
                 ${
                   product.stock === 0
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
+                    ? "bg-surface2 text-ink-soft/50 cursor-not-allowed"
+                    : "bg-gradient-to-r from-brand-purple to-brand-orange text-white hover:scale-[1.02] shadow-lg shadow-brand-purple/20"
                 }`}
               >
                 {adding
@@ -279,7 +279,7 @@ export default function ProductDetailPage() {
               {/* Back Link */}
               <Link
                 href="/products"
-                className="text-center text-sm text-gray-400 hover:text-blue-600 transition"
+                className="text-center text-sm text-ink-soft hover:text-brand-purple transition"
               >
                 ← Back to Products
               </Link>

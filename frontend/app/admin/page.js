@@ -29,7 +29,7 @@ export default function AdminDashboard() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <Spinner size="xl" color="blue" />
-          <p className="mt-4 text-gray-500">Loading dashboard...</p>
+          <p className="mt-4 text-ink-soft">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -39,16 +39,16 @@ export default function AdminDashboard() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl text-ink tracking-wide">
             📊 Dashboard
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-ink-soft text-sm mt-1">
             Welcome back! Here's what's happening today.
           </p>
         </div>
         <div
-          className="text-sm text-gray-400 bg-white px-4 py-2
-          rounded-xl border border-gray-200 shadow-sm"
+          className="text-sm text-ink-soft bg-surface px-4 py-2
+          rounded-xl border border-line shadow-sm"
         >
           🗓️{" "}
           {new Date().toLocaleDateString("en-NP", {
@@ -116,20 +116,20 @@ export default function AdminDashboard() {
       </div>
       {/* ── Recent Bookings ── */}
       <div
-        className="bg-white rounded-2xl shadow-sm border
-        border-gray-100 overflow-hidden"
+        className="bg-surface rounded-2xl shadow-sm border
+        border-line overflow-hidden"
       >
         {/* Header */}
         <div
           className="flex items-center justify-between px-6 py-4
-          border-b border-gray-100"
+          border-b border-line"
         >
-          <h2 className="text-base font-bold text-gray-800">
+          <h2 className="text-base font-bold text-ink">
             🕐 Recent Bookings
           </h2>
           <Link
             href="/admin/bookings"
-            className="text-sm text-blue-600 font-medium hover:underline"
+            className="text-sm text-brand-purple font-medium hover:underline"
           >
             View All →
           </Link>
@@ -138,19 +138,19 @@ export default function AdminDashboard() {
         {recentBookings.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-4xl mb-2">📭</p>
-            <p className="text-gray-400 text-sm">No recent bookings</p>
+            <p className="text-ink-soft text-sm">No recent bookings</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 border-b border-gray-100">
+                <tr className="bg-surface2 border-b border-line">
                   {["Customer", "Device", "Service", "Date", "Status"].map(
                     (h) => (
                       <th
                         key={h}
                         className="px-5 py-3 text-left text-xs font-semibold
-                        text-gray-500 uppercase tracking-wider"
+                        text-ink-soft uppercase tracking-wider"
                       >
                         {h}
                       </th>
@@ -158,20 +158,20 @@ export default function AdminDashboard() {
                   )}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-line">
                 {recentBookings.map((b) => (
                   <tr
                     key={b._id}
-                    className="hover:bg-gray-50 transition-colors"
+                    className="hover:bg-surface2 transition-colors"
                   >
-                    <td className="px-5 py-3 font-medium text-gray-800">
+                    <td className="px-5 py-3 font-medium text-ink">
                       {b.user?.name || "N/A"}
                     </td>
-                    <td className="px-5 py-3 text-gray-600">
+                    <td className="px-5 py-3 text-ink-soft">
                       {b.deviceType} — {b.deviceModel}
                     </td>
-                    <td className="px-5 py-3 text-gray-600">{b.serviceType}</td>
-                    <td className="px-5 py-3 text-gray-500 text-xs">
+                    <td className="px-5 py-3 text-ink-soft">{b.serviceType}</td>
+                    <td className="px-5 py-3 text-ink-soft text-xs">
                       {b.preferredDate
                         ? new Date(b.preferredDate).toLocaleDateString(
                             "en-NP",

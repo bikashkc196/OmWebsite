@@ -17,10 +17,10 @@ export default function UserLayout({ children }) {
   // Full-page loader
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-bg">
         <div className="text-center space-y-4">
           <Spinner size="xl" color="blue" />
-          <p className="text-gray-500 text-sm font-medium">
+          <p className="text-ink-soft text-sm font-medium">
             Loading your account...
           </p>
         </div>

@@ -1,6 +1,16 @@
+import { Anton, Inter } from "next/font/google";
 import { AuthProvider } from "../context/AuthContext";
 import { ToastProvider } from "../context/ToastContext";
 import "./globals.css";
+const displayFont = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+});
+const bodyFont = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
 export const metadata = {
   title: {
     default: "OM Mobile Repair Center - Expert Phone & Device Repairs",
@@ -39,8 +49,8 @@ export const metadata = {
 };
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-gray-50 font-sans antialiased">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+      <body className="bg-bg text-ink font-sans antialiased">
         <AuthProvider>
           <ToastProvider>{children}</ToastProvider>
         </AuthProvider>
